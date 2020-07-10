@@ -1,0 +1,72 @@
+@headerHeight: 64px; //头部栏高度
+@flex-center: {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+};
+
+header.header {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  height: @headerHeight;
+  align-items: center;
+
+  .trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+    &:hover {
+      color: #1890ff;
+    }
+  }
+}
+
+aside.sider {
+  // position: fixed;
+  height: 100%;
+  background: #304156;
+  .logo {
+    height: @headerHeight;
+    background: #304156;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+    transition: width 0.2s;
+    @flex-center();
+  }
+
+  .scroller-menu {
+    height: calc(100vh - @headerHeight) !important;
+  }
+  .menu {
+    height: calc(100vh - @headerHeight);
+  }
+  .ant-menu.ant-menu-dark {
+    // 菜单背景颜色
+    background-color: #304156;
+
+    & .ant-menu-inline.ant-menu-sub {
+      background-color: #304156;
+    }
+  }
+}
+
+#toolbar-right {
+  text-align: right;
+  height: 100%;
+  width: 200px;
+  padding: 0 20px 0 0;
+  cursor: pointer;
+
+  .avatar {
+    font-size: 0;
+    &-img {
+      height: @headerHeight;
+      width: @headerHeight;
+    }
+  }
+}

@@ -24,6 +24,7 @@ module.exports = {
     contentBase: ['./'],
     publicPath: '/',
     historyApiFallback: true, //用于如果找不到界面就返回默认首页
+    // disableHostCheck: true
   },
   resolve: {
     alias: {
@@ -48,7 +49,7 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'less-loader'],
       },
       {
-        test: /\.(jpg|pang|jpeg|giff)$/,
+        test: /\.(jpg|png|jpeg|gif)$/,
         use: [
           {
             loader: 'url-loader',

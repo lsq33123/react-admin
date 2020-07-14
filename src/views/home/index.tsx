@@ -1,15 +1,11 @@
 import React from 'react'
-
+import ShowTop from './showTop'
+import EchatLine from './echatLine'
 const PageHome = (props) => {
   return (
-    <div>
-      首页，欢迎登录~3
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      232
+    <div className="content-body">
+      <ShowTop />
+      <EchatLine />
     </div>
   )
 }

@@ -107,7 +107,21 @@
   /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
 }
 
-#echartLine {
-  width: 100px;
-  height: 300px;
+// #echartLine {
+//   width: 100px;
+//   height: 300px;
+// }
+
+.other-echart {
+  display: flex;
+  margin: 40px 0 40px -20px;
+
+  &-body {
+    height: 360px;
+    flex: 1;
+    border: 1x solid #ccc;
+    background-color: #fff;
+    margin-left: 20px;
+    @flex-between();
+  }
 }

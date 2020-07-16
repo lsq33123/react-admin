@@ -1,46 +1,97 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React from 'react'
 import './index.less'
+import Chart from '@/components/Echarts'
 interface IProps {
   //props:any
 }
 
-// const PageView: React.FC<IProps> = (props) => {
-//   return <div id="echartLine"></div>
-// }
-// export default PageView
-
 const PageView: React.FC<IProps> = (props) => {
-  const [count, setCount] = useState(0)
-  const timer = useRef<any>()
-  let timer2
-
-  useEffect(() => {
-    let id = setInterval(() => {
-      setCount((count) => count + 1)
-    }, 500)
-
-    timer.current = id
-    timer2 = id
-    return () => {
-      clearInterval(timer.current)
-    }
-  }, [])
-
-  const onClickRef = useCallback(() => {
-    clearInterval(timer.current)
-  }, [])
-
-  const onClick = useCallback(() => {
-    clearInterval(timer2)
-  }, [])
+  const value1 = [120, 132, 101, 134, 90, 230, 210]
+  const value2 = [320, 332, 301, 334, 390, 330, 320]
+  const dateFeild = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+  const title = ['访客人数', '访客次数']
+  const options = {
+    title: {
+      text: '数量',
+    },
+    color: ['#FDA695', '#3DC8BD'],
+    tooltip: {
+      trigger: 'axis',
+    },
+    legend: {
+      data: title,
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: 40,
+      containLabel: true,
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: '#F1F2F3',
+        },
+      },
+      data: dateFeild, // data.data.time
+    },
+    yAxis: {
+      type: 'value',
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: '#F1F2F3',
+        },
+      },
+    },
+    series: [
+      {
+        name: title[0],
+        type: 'line',
+        smooth: true,
+        data: value1, //data.data.count
+        lineStyle: {
+          normal: {
+            shadowColor: 'rgba(253, 130, 104, 0.1)',
+            shadowBlur: 2,
+            shadowOffsetY: 10,
+          },
+        },
+      },
+      {
+        name: title[1],
+        type: 'line',
+        smooth: true,
+        data: value2,
+        lineStyle: {
+          normal: {
+            shadowColor: 'rgba(61,200,189, 0.1)',
+            shadowBlur: 2,
+            shadowOffsetY: 10,
+          },
+        },
+      },
+    ],
+  }
 
   return (
-    <div>
-      点击次数: {count}
-      <button onClick={onClick}>普通</button>
-      <button onClick={onClickRef}>useRef</button>
+    <div
+      style={{
+        width: '100%',
+        height: '360px',
+        backgroundColor: '#fff',
+        padding: '20px',
+      }}
+    >
+      <Chart
+        key="echartLine"
+        style={{ width: '100%', height: '360px' }}
+        option={options}
+      ></Chart>
     </div>
   )
 }
-
 export default PageView

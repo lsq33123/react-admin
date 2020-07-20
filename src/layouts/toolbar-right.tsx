@@ -1,26 +1,28 @@
+/** @format */
+
 import React from 'react'
-import { Menu, Dropdown } from 'antd'
+import {Menu, Dropdown} from 'antd'
 
 interface IProps {
   //props:any
 }
 
-const PageView: React.FC<IProps> = (props) => {
+const PageView: React.FC<IProps> = props => {
   const avatarMenu = (
     <Menu>
       <Menu.Item>
         <a target="_blank" rel="noopener noreferrer" href="">
-          个人中心
+          <span style={{marginLeft: 20, marginRight: 40}}>个人中心</span>
         </a>
       </Menu.Item>
       <Menu.Item>
         <a target="_blank" rel="noopener noreferrer" href="">
-          关于
+          <span style={{marginLeft: 20, marginRight: 40}}>关于</span>
         </a>
       </Menu.Item>
       <Menu.Item>
         <a target="_blank" rel="noopener noreferrer" href="">
-          注销
+          <span style={{marginLeft: 20, marginRight: 40}}>注销</span>
         </a>
       </Menu.Item>
     </Menu>
@@ -28,14 +30,11 @@ const PageView: React.FC<IProps> = (props) => {
 
   return (
     <div id="toolbar-right">
-      <Dropdown overlay={avatarMenu} placement="bottomRight">
-        <div className="avatar">
-          <img
-            src="https://photo.harsonserver.com/FkGsm-taLCgNF5DxASb2-g6XuQ2i"
-            className="avatar-img"
-          />
-        </div>
-      </Dropdown>
+      <div className="avatar">
+        <Dropdown overlay={avatarMenu} placement="bottomRight">
+          <img src="https://photo.harsonserver.com/FkGsm-taLCgNF5DxASb2-g6XuQ2i" className="avatar-img" />
+        </Dropdown>
+      </div>
     </div>
   )
 }

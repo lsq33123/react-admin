@@ -1,33 +1,41 @@
+/** @format */
+
 import React from 'react'
-import { Layout, Menu } from 'antd'
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  MenuOutlined,
-} from '@ant-design/icons'
+import {Layout, Menu} from 'antd'
+import {UserOutlined, VideoCameraOutlined, UploadOutlined, MenuOutlined} from '@ant-design/icons'
 import SubMenu from 'antd/lib/menu/SubMenu'
-import { Link } from 'react-router-dom'
-import { Scrollbars } from 'react-custom-scrollbars'
+import {Link} from 'react-router-dom'
+import {Scrollbars} from 'react-custom-scrollbars'
+import {menus} from '@/store/menus'
+import {arrayToTree} from '@/utils/array'
 interface IProps {
   //props:any
 }
 
-const PageView: React.FC<IProps> = (props) => {
+const PageView: React.FC<IProps> = props => {
+  const menusTree = arrayToTree(menus, 0)
   return (
     <Layout>
-      <Scrollbars
-        autoHide
-        autoHideTimeout={500}
-        autoHideDuration={200}
-        className="scroller-menu"
-      >
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={['1']}
-          className="menu"
-        >
+      <Scrollbars autoHide autoHideTimeout={500} autoHideDuration={200} className="scroller-menu">
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} className="menu">
+          {menusTree.map((item, index) => (
+            <SubMenu
+              key={item.name}
+              title={
+                <span>
+                  <MenuOutlined />
+                  <span>{item.title}</span>
+                </span>
+              }>
+              {item.children?.length &&
+                item.children.map(ele => (
+                  <Menu.Item key={ele.name}>
+                    <Link to={ele.path}>{ele.title}</Link>
+                  </Menu.Item>
+                ))}
+            </SubMenu>
+          ))}
+
           <SubMenu
             key="tit1"
             title={
@@ -35,8 +43,7 @@ const PageView: React.FC<IProps> = (props) => {
                 <MenuOutlined />
                 <span>统计</span>
               </span>
-            }
-          >
+            }>
             <Menu.Item key="need/test1">
               <Link to="/need/test1">测试页面1</Link>
             </Menu.Item>
@@ -47,7 +54,7 @@ const PageView: React.FC<IProps> = (props) => {
               <Link to="/need/test3">测试页面3</Link>
             </Menu.Item>
           </SubMenu>
-          <SubMenu
+          {/* <SubMenu
             key="tit2"
             title={
               <span>
@@ -111,7 +118,7 @@ const PageView: React.FC<IProps> = (props) => {
                 <span>测试</span>
               </span>
             }
-          >
+          > 
             <Menu.Item key="dataSurvey111">
               <Link to="/need/home">测试-1</Link>
             </Menu.Item>
@@ -131,7 +138,7 @@ const PageView: React.FC<IProps> = (props) => {
               <Link to="/need/home">测试-6</Link>
             </Menu.Item>
           </SubMenu>
-
+*/}
           <Menu.Item key="1" icon={<UserOutlined />}>
             nav 1
           </Menu.Item>

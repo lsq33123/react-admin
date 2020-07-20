@@ -1,3 +1,5 @@
+/** @format */
+
 @import '@/assets/css/define.less';
 
 header.header {
@@ -15,6 +17,57 @@ header.header {
     transition: color 0.3s;
     &:hover {
       color: #1890ff;
+    }
+  }
+
+  .tag-view {
+    flex: 1;
+    padding: 10px 16px;
+    overflow-x: auto;
+    .ant-tabs-nav {
+      border: 0;
+      margin: 0;
+    }
+    .ant-tabs-tab {
+      background-color: #eee;
+      &:hover {
+        // background-color: #1890ff;
+        color: #1890ff;
+      }
+    }
+
+    .ant-tabs-tab.ant-tabs-tab-with-remove {
+      border: 0;
+      border-radius: 0;
+      background-color: #eee;
+      padding-left: 23px;
+      padding-right: 23px;
+      transition: font-szie 0.3s;
+    }
+    .ant-tabs-tab.ant-tabs-tab-with-remove:hover {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .ant-tabs-tab.ant-tabs-tab-with-remove.ant-tabs-tab-active {
+      background: #1890ff;
+      color: #fff;
+    }
+    .ant-tabs-tab.ant-tabs-tab-with-remove .ant-tabs-tab-remove {
+      opacity: 0;
+      display: none;
+    }
+    .ant-tabs-tab.ant-tabs-tab-with-remove:hover .ant-tabs-tab-remove {
+      opacity: 1;
+      display: inline-block;
+    }
+
+    .ant-tabs-tab.ant-tabs-tab-with-remove.ant-tabs-tab-active {
+      border-bottom: 0px;
+    }
+
+    .ant-tabs-top > .ant-tabs-nav::before {
+      border-bottom: 0px;
     }
   }
 }

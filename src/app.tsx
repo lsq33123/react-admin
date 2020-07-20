@@ -1,5 +1,7 @@
-import React, { lazy, Suspense } from 'react'
-import { HashRouter, Switch, Route, Redirect } from 'react-router-dom'
+/** @format */
+
+import React, {lazy, Suspense} from 'react'
+import {HashRouter, Switch, Route, Redirect} from 'react-router-dom'
 import Loading from '@/components/PageLoading/loading'
 const Need = lazy(() => import('@/views/routes/need'))
 const NoNeed = lazy(() => import('@/views/routes/noneed'))

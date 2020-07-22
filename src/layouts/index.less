@@ -104,17 +104,12 @@ aside.sider {
 }
 
 #toolbar-right {
-  text-align: right;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  // text-align: right;
   height: 100%;
   width: 200px;
   padding: 0 20px 0 0;
-  cursor: pointer;
-
-  .avatar {
-    font-size: 0;
-    &-img {
-      height: @headerHeight;
-      width: @headerHeight;
-    }
-  }
+  // cursor: pointer;
 }

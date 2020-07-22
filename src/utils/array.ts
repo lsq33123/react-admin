@@ -16,3 +16,45 @@ export const arrayToTree = (data: Array<any>, pid: any): Array<any> => {
   })
   return res
 }
+
+/**
+ * 转化一棵树的vlaue field children 对应的字段
+ * children 为空数组 则删除该字段
+ */
+type opt = {
+  value?: string // 新字段
+  oldValue?: string //老字段
+  field?: string
+  oldField?: string
+  parentField: string //必要
+  oldParentField: string //必要
+}
+export const getTreeDataFormat = (data, option: opt): Array<any> => {
+  if (!(data && data.length)) {
+    return []
+  }
+  if (!option) return data
+  if (!(option.parentField && option.oldParentField)) return data
+  for (var i = 0; i < data.length; i++) {
+    if (option.value && option.oldValue) data[i][option.value] = data[i][option.oldValue]
+    if (option.field && option.oldField) data[i][option.field] = data[i][option.oldField]
+    if (data[i][option.oldParentField] && data[i][option.oldParentField].length) {
+      data[i][option.parentField] = data[i][option.oldParentField]
+      getTreeDataFormat(data[i][option.parentField], option)
+    } else {
+      delete data[i][option.oldParentField]
+    }
+  }
+  console.log('tree', data)
+  return data
+}
+
+export const formatMobile = tel => {
+  if (tel) {
+    tel = '' + tel
+    var reg = /(\d{3})\d{4}(\d{4})/
+    return tel.replace(reg, '$1****$2')
+  } else {
+    return ''
+  }
+}

@@ -4,6 +4,10 @@ const dictPath = path.join(__dirname, '../dist')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const webpack = require('webpack')
+
+const isProd = process.env.NODE_ENV === 'production'
+const env = process.env.NODE_ENV || 'development'
 module.exports = {
   mode: 'development',
   devtool: 'eval-source-map',
@@ -93,6 +97,9 @@ module.exports = {
       filename: 'css/[name].[hash:8].css',
       // allChunks: true,
     }),
+    new webpack.DefinePlugin({
+      'process.env': { NODE_ENV: `"${env}"` }
+    })
   ],
   // 核心配置
   optimization: {

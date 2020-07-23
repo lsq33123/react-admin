@@ -5,11 +5,13 @@ import {Switch, Route, Redirect, useRouteMatch, useHistory} from 'react-router-d
 import Loading from '@/components/PageLoading/loading'
 import BaseLayout from '@/layouts/basic-layout'
 import {menus} from '@/store/menus'
+import Global from '@/store/global'
 import TagStore from '@/store/tag-view'
 const PageViewNeed: React.FC = () => {
   const match = useRouteMatch()
   const history = useHistory()
   const {addView} = TagStore.useContainer()
+  const {token} = Global.useContainer()
 
   const getViewName = (pathname, menus) => {
     let title = 'new Page'
@@ -25,7 +27,7 @@ const PageViewNeed: React.FC = () => {
     // debugger
     addView({pathname: route.pathname, state: {title: getViewName(route.pathname, menus)}})
   })
-  return (
+  return token ? (
     <BaseLayout>
       <Suspense fallback={<Loading />}>
         <Switch>
@@ -43,6 +45,8 @@ const PageViewNeed: React.FC = () => {
         </Switch>
       </Suspense>
     </BaseLayout>
+  ) : (
+    <Redirect from={match.path} to="/noneed/login" />
   )
 }
 

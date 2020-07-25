@@ -7,7 +7,7 @@ interface IProps {
   //props:any
 }
 
-const PageView: React.FC<IProps> = props => {
+const PageViewShowTop: React.FC<IProps> = props => {
   return (
     <div id="showTop">
       <div className="show-top-body hvr-float-shadow">
@@ -49,4 +49,4 @@ const PageView: React.FC<IProps> = props => {
     </div>
   )
 }
-export default PageView
+export default PageViewShowTop

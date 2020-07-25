@@ -3,11 +3,23 @@
 import React from 'react'
 import {Menu, Dropdown} from 'antd'
 import './index.less'
+import Global from '@/store/global'
+import TagView from '@/store/tag-view'
+import {useHistory} from 'react-router-dom'
 interface IProps {
   //props:any
 }
 
 const PageView: React.FC<IProps> = props => {
+  const {logout} = Global.useContainer()
+  const {delAllView} = TagView.useContainer()
+  const history = useHistory()
+  const onLogout = () => {
+    history.replace('/noneed/login')
+    logout()
+    delAllView()
+  }
+
   const avatarMenu = (
     <Menu>
       <Menu.Item>
@@ -21,7 +33,7 @@ const PageView: React.FC<IProps> = props => {
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="">
+        <a href="##" onClick={onLogout}>
           <span style={{marginLeft: 20, marginRight: 40}}>注销</span>
         </a>
       </Menu.Item>

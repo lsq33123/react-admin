@@ -6,12 +6,12 @@ interface IProps {
   number: number
 }
 
-const PageView: React.FC<IProps> = props => {
+const DynamicNumber: React.FC<IProps> = props => {
   const [num, setNum] = useState<number>(0)
 
   useEffect(() => {
     show(props.number)
-  }, [])
+  }, [props.number])
 
   const show = finalNum => {
     let speedNum //增长速率
@@ -26,8 +26,7 @@ const PageView: React.FC<IProps> = props => {
     const timer = setInterval(() => {
       setNum(prev => {
         if (prev + speedNum > finalNum) {
-          console.log('prev:', prev)
-          clearInterval(timer)
+          timer && clearInterval(timer)
           return prev + remainder
         } else {
           return speedNum + prev
@@ -38,4 +37,4 @@ const PageView: React.FC<IProps> = props => {
 
   return <> {num}</>
 }
-export default PageView
+export default DynamicNumber

@@ -1,3 +1,5 @@
+/** @format */
+
 import React from 'react'
 import './index.less'
 import Chart from '@/components/Echarts'
@@ -5,7 +7,7 @@ interface IProps {
   //props:any
 }
 
-const PageView: React.FC<IProps> = (props) => {
+const PageViewBar: React.FC<IProps> = props => {
   // 指定图表的配置项和数据
   var data1 = [20, 30, 20, 30, 20, 30, 20]
   var data2 = [9, 30, 9, 60, 70, 20, 59]
@@ -101,14 +103,9 @@ const PageView: React.FC<IProps> = (props) => {
         height: '360px',
         backgroundColor: '#fff',
         padding: '20px',
-      }}
-    >
-      <Chart
-        key="echartBar"
-        style={{ width: '100%', height: '320px' }}
-        option={option}
-      ></Chart>
+      }}>
+      <Chart key="echartBar" style={{width: '100%', height: '320px'}} option={option}></Chart>
     </div>
   )
 }
-export default PageView
+export default PageViewBar

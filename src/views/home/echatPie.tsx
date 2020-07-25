@@ -1,3 +1,5 @@
+/** @format */
+
 import React from 'react'
 import './index.less'
 import Chart from '@/components/Echarts'
@@ -5,7 +7,7 @@ interface IProps {
   //props:any
 }
 
-const PageView: React.FC<IProps> = (props) => {
+const PageViewPie: React.FC<IProps> = props => {
   let bgColor = '#fff'
   let title = '总量'
   let color = ['#0E7CE2', '#FF8352', '#E271DE', '#F8456B', '#00FFFF', '#4AEAB0']
@@ -132,14 +134,8 @@ const PageView: React.FC<IProps> = (props) => {
         },
         label: {
           normal: {
-            formatter: (params) => {
-              return (
-                '{icon|●}{name|' +
-                params.name +
-                '}{value|' +
-                formatNumber(params.value) +
-                '}'
-              )
+            formatter: params => {
+              return '{icon|●}{name|' + params.name + '}{value|' + formatNumber(params.value) + '}'
             },
             padding: [0, -100, 25, -100],
             rich: {
@@ -170,14 +166,9 @@ const PageView: React.FC<IProps> = (props) => {
         height: '360px',
         backgroundColor: '#fff',
         padding: '20px',
-      }}
-    >
-      <Chart
-        key="echartLine"
-        style={{ width: '100%', height: '320px' }}
-        option={options}
-      ></Chart>
+      }}>
+      <Chart key="echartLine" style={{width: '100%', height: '320px'}} option={options}></Chart>
     </div>
   )
 }
-export default PageView
+export default PageViewPie

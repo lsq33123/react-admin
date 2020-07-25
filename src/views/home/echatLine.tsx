@@ -1,3 +1,5 @@
+/** @format */
+
 import React from 'react'
 import './index.less'
 import Chart from '@/components/Echarts'
@@ -5,7 +7,7 @@ interface IProps {
   //props:any
 }
 
-const PageView: React.FC<IProps> = (props) => {
+const PageViewLine: React.FC<IProps> = props => {
   const value1 = [120, 132, 101, 134, 90, 230, 210]
   const value2 = [320, 332, 301, 334, 390, 330, 320]
   const dateFeild = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
@@ -84,14 +86,9 @@ const PageView: React.FC<IProps> = (props) => {
         height: '360px',
         backgroundColor: '#fff',
         padding: '20px',
-      }}
-    >
-      <Chart
-        key="echartLine"
-        style={{ width: '100%', height: '360px' }}
-        option={options}
-      ></Chart>
+      }}>
+      <Chart key="echartLine" style={{width: '100%', height: '360px'}} option={options}></Chart>
     </div>
   )
 }
-export default PageView
+export default PageViewLine

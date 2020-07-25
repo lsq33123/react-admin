@@ -1,23 +1,48 @@
 /** @format */
 
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Layout, Menu} from 'antd'
-import {UserOutlined, VideoCameraOutlined, UploadOutlined, MenuOutlined} from '@ant-design/icons'
+//UserOutlined, VideoCameraOutlined, UploadOutlined,
+import {MenuOutlined} from '@ant-design/icons'
 import SubMenu from 'antd/lib/menu/SubMenu'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import {Scrollbars} from 'react-custom-scrollbars'
 import {menus} from '@/store/menus'
 import {arrayToTree} from '@/utils/array'
+import {getStore, setStore} from '@/utils/store'
 interface IProps {
   //props:any
 }
 
 const PageView: React.FC<IProps> = props => {
   const menusTree = arrayToTree(menus, 0)
+  const [activeSubMenu, setActiveSubMenu] = useState(getStore('activeSubMenu') || ['sum'])
+  const [currMenuKey, setCurrMenuKey] = useState<any>()
+  const history = useHistory()
+  const routeUrl = history.location.pathname
+  useEffect(() => {
+    setCurrMenuKey(routeUrl)
+  }, [routeUrl])
+
+  const onOpenChange = keyArr => {
+    setActiveSubMenu(keyArr)
+    setStore('activeSubMenu', keyArr)
+  }
+
+  const handleClick = e => {
+    setCurrMenuKey(e.key)
+  }
   return (
     <Layout>
       <Scrollbars autoHide autoHideTimeout={500} autoHideDuration={200} className="scroller-menu">
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} className="menu">
+        <Menu
+          theme="dark"
+          mode="inline"
+          className="menu"
+          onClick={handleClick}
+          onOpenChange={onOpenChange}
+          selectedKeys={currMenuKey}
+          openKeys={activeSubMenu}>
           {menusTree.map((item, index) => (
             <SubMenu
               key={item.name}
@@ -36,7 +61,7 @@ const PageView: React.FC<IProps> = props => {
             </SubMenu>
           ))}
 
-          <SubMenu
+          {/* <SubMenu
             key="tit1"
             title={
               <span>
@@ -53,7 +78,7 @@ const PageView: React.FC<IProps> = props => {
             <Menu.Item key="need/test3">
               <Link to="/need/test3">测试页面3</Link>
             </Menu.Item>
-          </SubMenu>
+          </SubMenu> */}
           {/* <SubMenu
             key="tit2"
             title={
@@ -139,7 +164,7 @@ const PageView: React.FC<IProps> = props => {
             </Menu.Item>
           </SubMenu>
 */}
-          <Menu.Item key="1" icon={<UserOutlined />}>
+          {/* <Menu.Item key="1" icon={<UserOutlined />}>
             nav 1
           </Menu.Item>
           <Menu.Item key="2" icon={<VideoCameraOutlined />}>
@@ -147,7 +172,7 @@ const PageView: React.FC<IProps> = props => {
           </Menu.Item>
           <Menu.Item key="3" icon={<UploadOutlined />}>
             nav 3
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu>
       </Scrollbars>
     </Layout>

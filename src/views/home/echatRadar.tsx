@@ -1,3 +1,5 @@
+/** @format */
+
 import React from 'react'
 import './index.less'
 import Chart from '@/components/Echarts'
@@ -5,7 +7,7 @@ interface IProps {
   //props:any
 }
 
-const PageView: React.FC<IProps> = (props) => {
+const PageViewRadar: React.FC<IProps> = props => {
   // 指定图表的配置项和数据
   var option = (option = {
     backgroundColor: '#fff',
@@ -15,11 +17,11 @@ const PageView: React.FC<IProps> = (props) => {
     },
     radar: {
       indicator: [
-        { text: '绩效奖金', max: 100 },
-        { text: '带薪年假', max: 100 },
-        { text: '补充医疗保险', max: 100 },
-        { text: '年底双薪', max: 100 },
-        { text: '员工旅游', max: 100 },
+        {text: '绩效奖金', max: 100},
+        {text: '带薪年假', max: 100},
+        {text: '补充医疗保险', max: 100},
+        {text: '年底双薪', max: 100},
+        {text: '员工旅游', max: 100},
       ],
       splitArea: {
         show: true,
@@ -106,14 +108,9 @@ const PageView: React.FC<IProps> = (props) => {
         height: '360px',
         backgroundColor: '#fff',
         padding: '20px',
-      }}
-    >
-      <Chart
-        key="echartBar"
-        style={{ width: '100%', height: '320px' }}
-        option={option}
-      ></Chart>
+      }}>
+      <Chart key="echartBar" style={{width: '100%', height: '320px'}} option={option}></Chart>
     </div>
   )
 }
-export default PageView
+export default PageViewRadar

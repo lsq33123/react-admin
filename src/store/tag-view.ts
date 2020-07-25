@@ -2,15 +2,15 @@
 
 import {useState, useEffect} from 'react'
 import {createContainer} from 'unstated-next'
-import {getStore, setStore} from '@/utils/store'
+import {getStore, setStore, removeStore} from '@/utils/store'
 // import {useHistory} from 'react-router-dom'
 const homeView = {
   pathname: '/need/home',
   state: {title: '首页'},
 }
 
-const defaultViewList = getStore({name: 'viewList'}) || [homeView]
-const defaultCurrView = getStore({name: 'currView'}) || homeView
+const defaultViewList = getStore('viewList') || [homeView]
+const defaultCurrView = getStore('currView') || homeView
 
 const useTabView = () => {
   // const history = useHistory()
@@ -18,10 +18,10 @@ const useTabView = () => {
   const [currView, setCurrView] = useState(defaultCurrView)
 
   useEffect(() => {
-    setStore({name: 'viewList', content: viewList})
+    setStore('viewList', viewList)
   }, [viewList])
   useEffect(() => {
-    setStore({name: 'currView', content: currView})
+    setStore('currView', currView)
   }, [currView])
 
   const addView = view => {
@@ -60,9 +60,15 @@ const useTabView = () => {
       return oldViewList
     })
     if (isDelCurrView && newCurrView) {
-      // debugger
       // setCurrView(newCurrView)
     }
+  }
+
+  const delAllView = () => {
+    removeStore('viewList')
+    removeStore('currView')
+    setCurrView(homeView)
+    setViewList([homeView])
   }
 
   return {
@@ -72,6 +78,7 @@ const useTabView = () => {
     setCurrView,
     addView,
     delView,
+    delAllView,
   }
 }
 

@@ -1,6 +1,6 @@
 /** @format */
 
-import React, {Suspense, lazy} from 'react'
+import React, {Suspense, lazy, useEffect} from 'react'
 import {Switch, Route, Redirect, useRouteMatch, useHistory} from 'react-router-dom'
 import Loading from '@/components/PageLoading/loading'
 import BaseLayout from '@/layouts/basic-layout'
@@ -22,11 +22,18 @@ const PageViewNeed: React.FC = () => {
     })
     return title
   }
+  useEffect(() => {
+    // if (menus?.length) {
+    const unHistory = history.listen(route => {
+      console.log('route', route)
+      addView({pathname: route.pathname, state: {title: getViewName(route.pathname, menus)}})
+    })
+    return () => {
+      unHistory()
+    }
+    // }
+  }, [menus])
 
-  history.listen(route => {
-    // debugger
-    addView({pathname: route.pathname, state: {title: getViewName(route.pathname, menus)}})
-  })
   return token ? (
     <BaseLayout>
       <Suspense fallback={<Loading />}>
@@ -46,7 +53,7 @@ const PageViewNeed: React.FC = () => {
       </Suspense>
     </BaseLayout>
   ) : (
-    <Redirect from={match.path} to="/noneed/login" />
+    <Redirect to="/noneed/login" />
   )
 }
 

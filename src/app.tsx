@@ -10,11 +10,11 @@ const App = () => {
       <Suspense fallback={<Loading />}>
         <Switch>
           {/* 需要token验证才能访问的模块 */}
-          <Route path="/need" component={lazy(() => import('@/views/routes/need'))} />
+          <Route path="/need" component={lazy(() => import('@/routes/need'))} />
           {/* 不需要token验证能访问的模块 */}
-          <Route path="/noneed" component={lazy(() => import('@/views/routes/noneed'))} />
+          <Route path="/noneed" component={lazy(() => import('@/routes/noneed'))} />
           {/* 系统模块 */}
-          <Route path="/sys" component={lazy(() => import('@/views/routes/sys'))} />
+          <Route path="/sys" component={lazy(() => import('@/routes/sys'))} />
           <Redirect from={'/'} to={'/noneed'} />
         </Switch>
       </Suspense>

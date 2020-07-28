@@ -18,7 +18,7 @@ const PageViewNoNeed: React.FC = () => {
   return (
     <Suspense fallback={<Loading />}>
       <Switch>
-        <Route path={`${match.path}/login`} component={lazy(() => import('@/views/login'))} />
+        <Route path={`${match.path}/login`} component={lazy(() => import('@/views/sys/login'))} />
         <Redirect from={match.path} to={`${match.path}/login`} />
       </Switch>
     </Suspense>

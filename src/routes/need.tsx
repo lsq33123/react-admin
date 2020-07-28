@@ -38,7 +38,7 @@ const PageViewNeed: React.FC = () => {
     <BaseLayout>
       <Suspense fallback={<Loading />}>
         <Switch>
-          <Route path={`${match.path}/home`} component={lazy(() => import('@/views/home'))} />
+          <Route path={`${match.path}/home`} component={lazy(() => import('@/views/sys/home'))} />
           <Route path={`${match.path}/test1`} component={lazy(() => import('@/views/test'))} />
           <Route path={`${match.path}/test2`} component={lazy(() => import('@/views/test'))} />
           <Route path={`${match.path}/test3`} component={lazy(() => import('@/views/test'))} />
@@ -48,6 +48,7 @@ const PageViewNeed: React.FC = () => {
           <Route path={`${match.path}/test34`} component={lazy(() => import('@/views/test/index4'))} />
           <Route path={`${match.path}/test35`} component={lazy(() => import('@/views/test/index5'))} />
           <Route path={`${match.path}/test36`} component={lazy(() => import('@/views/test/index6'))} />
+          <Route path={`${match.path}/my`} component={lazy(() => import('@/views/sys/my'))} />
           <Redirect from={match.path} to={'/sys/404'} />
         </Switch>
       </Suspense>

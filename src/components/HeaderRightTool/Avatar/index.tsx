@@ -23,7 +23,11 @@ const PageView: React.FC<IProps> = props => {
   const avatarMenu = (
     <Menu>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="">
+        <a
+          href="##"
+          onClick={() => {
+            history.replace('/need/my')
+          }}>
           <span style={{marginLeft: 20, marginRight: 40}}>个人中心</span>
         </a>
       </Menu.Item>

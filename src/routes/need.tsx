@@ -48,7 +48,9 @@ const PageViewNeed: React.FC = () => {
           <Route path={`${match.path}/test34`} component={lazy(() => import('@/views/test/index4'))} />
           <Route path={`${match.path}/test35`} component={lazy(() => import('@/views/test/index5'))} />
           <Route path={`${match.path}/test36`} component={lazy(() => import('@/views/test/index6'))} />
-          <Route path={`${match.path}/my`} component={lazy(() => import('@/views/sys/my'))} />
+          <Route path={`${match.path}/sys/my`} component={lazy(() => import('@/views/sys/my'))} />
+          <Route path={`${match.path}/sys/notice`} component={lazy(() => import('@/views/sys/notice'))} />
+          <Route path={`${match.path}/sys/dict`} component={lazy(() => import('@/views/sys/dict'))} />
           <Redirect from={match.path} to={'/sys/404'} />
         </Switch>
       </Suspense>

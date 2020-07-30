@@ -1,12 +1,14 @@
+/** @format */
+
 import React from 'react'
 import ShowTop from './showTop'
 import EchatLine from './echatLine'
 import EchatPie from './echatPie'
 import EchatBar from './echatBar'
 import EchatRadar from './echatRadar'
-const PageHome = (props) => {
+const PageHome = props => {
   return (
-    <div className="content-body">
+    <div className="container-body">
       <ShowTop />
       <EchatLine />
       <div className="other-echart">

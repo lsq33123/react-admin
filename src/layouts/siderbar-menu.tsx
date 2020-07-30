@@ -43,23 +43,37 @@ const PageView: React.FC<IProps> = props => {
           onOpenChange={onOpenChange}
           selectedKeys={currMenuKey}
           openKeys={activeSubMenu}>
-          {menusTree.map((item, index) => (
-            <SubMenu
-              key={item.name}
-              title={
-                <span>
-                  <MenuOutlined />
-                  <span>{item.title}</span>
-                </span>
-              }>
-              {item.children?.length &&
-                item.children.map(ele => (
-                  <Menu.Item key={ele.name}>
-                    <Link to={ele.path}>{ele.title}</Link>
-                  </Menu.Item>
-                ))}
-            </SubMenu>
-          ))}
+          {menusTree.map((item, index) => {
+            if (!item.hidden && item.children?.length) {
+              return (
+                <SubMenu
+                  key={item.name}
+                  title={
+                    <span>
+                      <MenuOutlined />
+                      <span>{item.title}</span>
+                    </span>
+                  }>
+                  {item.children.map(
+                    ele =>
+                      !ele.hidden && (
+                        <Menu.Item key={ele.name}>
+                          <Link to={ele.path}>{ele.title}</Link>
+                        </Menu.Item>
+                      ),
+                  )}
+                </SubMenu>
+              )
+            }
+            if (!item.hidden && !item.children?.length) {
+              return (
+                <Menu.Item key={item.name} icon={<MenuOutlined />}>
+                  <Link to={item.path}>{item.title}</Link>
+                </Menu.Item>
+              )
+            }
+            return ''
+          })}
 
           {/* <SubMenu
             key="tit1"

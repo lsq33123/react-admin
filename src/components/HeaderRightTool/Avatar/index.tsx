@@ -6,11 +6,12 @@ import './index.less'
 import Global from '@/store/global'
 import TagView from '@/store/tag-view'
 import {useHistory} from 'react-router-dom'
+import {UserOutlined, LogoutOutlined, QuestionCircleOutlined} from '@ant-design/icons'
 interface IProps {
   //props:any
 }
 
-const PageView: React.FC<IProps> = props => {
+const PageViewAvatarMenu: React.FC<IProps> = props => {
   const {logout} = Global.useContainer()
   const {delAllView} = TagView.useContainer()
   const history = useHistory()
@@ -22,24 +23,18 @@ const PageView: React.FC<IProps> = props => {
 
   const avatarMenu = (
     <Menu>
-      <Menu.Item>
-        <a
-          href="##"
-          onClick={() => {
-            history.replace('/need/my')
-          }}>
-          <span style={{marginLeft: 20, marginRight: 40}}>个人中心</span>
-        </a>
+      <Menu.Item icon={<UserOutlined />}>
+        <span style={{marginLeft: 0, marginRight: 40}} onClick={() => history.replace('/need/sys/my')}>
+          个人中心
+        </span>
       </Menu.Item>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="">
-          <span style={{marginLeft: 20, marginRight: 40}}>关于</span>
-        </a>
+      <Menu.Item icon={<QuestionCircleOutlined />}>
+        <span style={{marginLeft: 0, marginRight: 40}}>关于</span>
       </Menu.Item>
-      <Menu.Item>
-        <a href="##" onClick={onLogout}>
-          <span style={{marginLeft: 20, marginRight: 40}}>注销</span>
-        </a>
+      <Menu.Item icon={<LogoutOutlined />}>
+        <span style={{marginLeft: 0, marginRight: 40}} onClick={onLogout}>
+          注销
+        </span>
       </Menu.Item>
     </Menu>
   )
@@ -52,4 +47,4 @@ const PageView: React.FC<IProps> = props => {
     </div>
   )
 }
-export default PageView
+export default PageViewAvatarMenu

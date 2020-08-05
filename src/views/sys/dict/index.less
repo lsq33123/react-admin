@@ -1,13 +1,27 @@
 /** @format */
 
-#page-view-my {
-  // .info-bar-bofy {
-  //   width: 100%;
-  // }
+#page-view-dict {
+  .custom-tree-node {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding-right: 8px;
+    line-height: 28px;
+    width: 100%;
+    .tree-edit-btn {
+      display: none;
+    }
 
-  .page-view-my-avatar {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
+    &:hover {
+      .tree-edit-btn {
+        display: block;
+      }
+    }
+  }
+
+  .scroller-menu {
+    height: calc(100vh - 210px) !important;
   }
 }

@@ -42,11 +42,10 @@ export const setStore = (name: string, content: any, type: 'session' | 'local' =
 }
 
 export const getStore = (name: string, type: 'session' | 'local' = DEFAULTPOSITION) => {
-  let tname = KEYNAME + name
   let data
   let obj
   if (hasStore(name, type)) {
-    data = window[type + 'Storage'].getItem(tname)
+    data = window[type + 'Storage'].getItem(KEYNAME + name)
   }
 
   if (isEmpty(data)) return
@@ -75,14 +74,12 @@ export const isExpired = (params: IStore) => {
 }
 /**判断是否有效  有效则返回该对象*/
 export const isAvailable = (name: string, type: 'session' | 'local' = DEFAULTPOSITION) => {
-  name = KEYNAME + name
-
   let data
   let obj: IStore
   if (hasStore(name, type)) {
-    data = window[type + 'Storage'].getItem(name)
+    data = window[type + 'Storage'].getItem(KEYNAME + name)
     obj = JSON.parse(data)
-    if (!isExpired(obj)) return obj
+    if (!isExpired(obj)) return obj.content
     else {
       removeStore(name, type) //删除
       return false

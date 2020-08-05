@@ -1,70 +1,46 @@
 /** @format */
 
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Modal from 'antd/lib/modal/Modal'
 import {Form, Input, InputNumber, Radio, TreeSelect, Button, Row, Col} from 'antd'
 import {useBoolean} from 'ahooks'
-
-const treeData = [
-  {
-    title: 'Node1',
-    value: '0-0',
-    children: [
-      {
-        title: 'Child Node1',
-        value: '0-0-1',
-      },
-      {
-        title: 'Child Node2',
-        value: '0-0-2',
-      },
-      {
-        title: 'Child Node3',
-        value: '0-0-3',
-      },
-      {
-        title: 'Child Node4',
-        value: '0-0-4',
-      },
-      {
-        title: 'Child Node5',
-        value: '0-0-5',
-      },
-      {
-        title: 'Child Node6',
-        value: '0-0-6',
-      },
-      {
-        title: 'Child Node7',
-        value: '0-0-7',
-      },
-      {
-        title: 'Child Node8',
-        value: '0-0-8',
-      },
-    ],
-  },
-  {
-    title: 'Node2',
-    value: '0-1',
-  },
-]
+import * as api from '@/api'
+import {useForm} from 'antd/lib/form/util'
 
 interface IProps {
   //props:any
   visible: boolean
-  onOk: () => void
+  isEdit: boolean
+  isType: boolean
+  formData: object
+  onOk: (form) => void
   onCancel: () => void
 }
 
 const PageViewDictAdd: React.FC<IProps> = props => {
   const [showExtra, showExtraAct] = useBoolean(false)
+  const [treeData, setTreeData] = useState([])
+  const [form] = useForm()
   // const onOk = props => {
   //   //console.log(props)
   // }
   // const onCancel = props => {
   //   //console.log(props)
   // }
+
+  useEffect(() => {
+    getTypeTree() //加载父节点
+    if (JSON.stringify(props.formData) !== '{}') {
+      form.setFieldsValue({...props.formData})
+    }
+  }, [])
+
+  const getTypeTree = () => {
+    api.getDictTypeTree({cache: true, is_disable: 0}).then(res => {
+      // console.log('res:', res)
+      setTreeData(res.data)
+    })
+  }
 
   const formOptions = {
     labelCol: {
@@ -77,39 +53,51 @@ const PageViewDictAdd: React.FC<IProps> = props => {
     validateMessages: {
       required: '${label} 为必填字段!',
     },
+    form: form,
+    initialValues: {
+      is_disabled: !props.isEdit ? 0 : '',
+    },
+  }
+
+  const onOk = () => {
+    const data = (form.getFieldValue as any)()
+    props.onOk(data)
   }
 
   return (
     <Modal
       visible={props.visible}
-      title="新增"
+      title={props.isEdit ? '编辑数据字典' : '新增数据字典'}
       // centered
       maskClosable={false}
-      onOk={props.onOk}
+      onOk={onOk}
       onCancel={props.onCancel}
       okText="确定"
       cancelText="取消">
       <Form {...formOptions}>
-        <Form.Item label="父节点：">
+        <Form.Item name="pid" label="父节点：">
           <TreeSelect
             // style={{ width: '100%' }}
             // value={this.state.value}
             dropdownStyle={{maxHeight: 400, overflow: 'auto'}}
             treeData={treeData}
-            placeholder="Please select"
+            placeholder="请选择父节点"
             treeDefaultExpandAll
             // onChange={this.onChange}
           />
         </Form.Item>
-        <Form.Item label="名称：">
+        <Form.Item name="name" label="名称：">
           <Input></Input>
         </Form.Item>
-        <Form.Item label="编码：">
+        <Form.Item name="code" label="编码：">
+          <Input disabled={props.isEdit}></Input>
+        </Form.Item>
+        <Form.Item name="remark" label="备注：">
           <Input></Input>
         </Form.Item>
         <Row>
           <Col span={18}>
-            <Form.Item label="排序：">
+            <Form.Item name="sort" label="排序：">
               <InputNumber min={1} max={999} style={{width: '200px'}} />
             </Form.Item>
           </Col>
@@ -121,22 +109,22 @@ const PageViewDictAdd: React.FC<IProps> = props => {
         </Row>
         {showExtra && (
           <>
-            <Form.Item label="扩展1：">
+            <Form.Item name="extra1" label="扩展1：">
               <Input></Input>
             </Form.Item>
-            <Form.Item label="扩展2：">
+            <Form.Item name="extra2" label="扩展2：">
               <Input></Input>
             </Form.Item>
-            <Form.Item label="扩展3：">
+            <Form.Item name="extra3" label="扩展3：">
               <Input></Input>
             </Form.Item>
           </>
         )}
 
-        <Form.Item label="状态：">
+        <Form.Item name="is_disabled" label="状态：">
           <Radio.Group>
-            <Radio value={1}>启用</Radio>
-            <Radio value={2}>禁用</Radio>
+            <Radio value={0}>启用</Radio>
+            <Radio value={1}>禁用</Radio>
           </Radio.Group>
         </Form.Item>
       </Form>

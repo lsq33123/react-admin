@@ -103,4 +103,13 @@ export const menus = [
     title: '数据字典',
     sort: '1',
   },
+  {
+    id: 553,
+    parentId: 551,
+    name: 'user',
+    path: '/need/sys/user',
+    component: 'views/sys/user',
+    title: '用户管理',
+    sort: '1',
+  },
 ]

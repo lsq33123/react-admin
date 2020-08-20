@@ -48,13 +48,3 @@ export const getTreeDataFormat = (data, option: opt): Array<any> => {
   console.log('tree', data)
   return data
 }
-
-export const formatMobile = tel => {
-  if (tel) {
-    tel = '' + tel
-    var reg = /(\d{3})\d{4}(\d{4})/
-    return tel.replace(reg, '$1****$2')
-  } else {
-    return ''
-  }
-}

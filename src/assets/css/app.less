@@ -1,4 +1,5 @@
 /** @format */
+@import './define.less';
 
 * {
   box-sizing: border-box;
@@ -9,12 +10,21 @@
   // background-color: white;
 }
 .flex-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @flex-between();
 }
 .flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @flex-center();
+}
+
+.tool-input-w-200 {
+  width: 200px !important;
+}
+.tool-input-w-150 {
+  width: 150px !important;
+}
+.tool-input-w-100 {
+  width: 100px !important;
+}
+.tool-datepacker-w-230 {
+  width: 230px !important;
 }

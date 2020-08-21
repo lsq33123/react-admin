@@ -199,7 +199,7 @@ const PageViewDict: React.FC<IProps> = props => {
   return (
     <div id="page-view-dict" className="container-body ">
       <Row gutter={20}>
-        <Col span={8}>
+        <Col span={7}>
           <Card
             title=" "
             extra={
@@ -230,7 +230,7 @@ const PageViewDict: React.FC<IProps> = props => {
             </Scrollbars>
           </Card>
         </Col>
-        <Col span={16}>
+        <Col span={17}>
           <Card
             title=" "
             extra={

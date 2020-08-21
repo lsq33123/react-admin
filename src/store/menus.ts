@@ -112,4 +112,13 @@ export const menus = [
     title: '用户管理',
     sort: '1',
   },
+  {
+    id: 554,
+    parentId: 551,
+    name: 'role',
+    path: '/need/sys/role',
+    component: 'views/sys/role',
+    title: '角色管理',
+    sort: '2',
+  },
 ]

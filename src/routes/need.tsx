@@ -52,6 +52,7 @@ const PageViewNeed: React.FC = () => {
           <Route path={`${match.path}/sys/notice`} component={lazy(() => import('@/views/sys/notice'))} />
           <Route path={`${match.path}/sys/dict`} component={lazy(() => import('@/views/sys/dict'))} />
           <Route path={`${match.path}/sys/user`} component={lazy(() => import('@/views/sys/user'))} />
+          <Route path={`${match.path}/sys/role`} component={lazy(() => import('@/views/sys/role'))} />
           <Redirect from={match.path} to={'/sys/404'} />
         </Switch>
       </Suspense>

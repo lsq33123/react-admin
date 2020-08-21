@@ -60,7 +60,7 @@ const PageViewUserEdit: React.FC<IProps> = props => {
 
   return (
     <Modal
-      title="新增账号"
+      title="编辑"
       destroyOnClose
       centered
       maskClosable={false}

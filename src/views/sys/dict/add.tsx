@@ -44,17 +44,19 @@ const PageViewDictAdd: React.FC<IProps> = props => {
 
   const formOptions = {
     labelCol: {
-      flex: '100px',
+      flex: '80px',
       // xs: {span: 6},
       // lg: {span: 4},
       // xxl: {span: 3},
     },
+    wrapperCol: {span: 17},
     colon: false,
     validateMessages: {
       required: '${label} 为必填字段!',
     },
     form: form,
     initialValues: {
+      sort: !props.isEdit ? 0 : '',
       is_disabled: !props.isEdit ? 0 : '',
     },
   }
@@ -75,7 +77,7 @@ const PageViewDictAdd: React.FC<IProps> = props => {
       okText="确定"
       cancelText="取消">
       <Form {...formOptions}>
-        <Form.Item name="pid" label="父节点：">
+        <Form.Item name="pid" label="父节点">
           <TreeSelect
             // style={{ width: '100%' }}
             // value={this.state.value}
@@ -86,22 +88,22 @@ const PageViewDictAdd: React.FC<IProps> = props => {
             // onChange={this.onChange}
           />
         </Form.Item>
-        <Form.Item name="name" label="名称：">
+        <Form.Item name="name" label="名称">
           <Input></Input>
         </Form.Item>
-        <Form.Item name="code" label="编码：">
+        <Form.Item name="code" label="编码">
           <Input disabled={props.isEdit}></Input>
         </Form.Item>
-        <Form.Item name="remark" label="备注：">
+        <Form.Item name="remark" label="备注">
           <Input></Input>
         </Form.Item>
         <Row>
-          <Col span={18}>
-            <Form.Item name="sort" label="排序：">
-              <InputNumber min={1} max={999} style={{width: '200px'}} />
+          <Col span={15}>
+            <Form.Item name="sort" label="排序">
+              <InputNumber min={0} max={999} style={{width: '100px'}} />
             </Form.Item>
           </Col>
-          <Col span={6}>
+          <Col flex="120px">
             <Button type="link" onClick={() => showExtraAct.toggle()}>
               {showExtra ? '隐藏扩展信息' : '显示扩展信息'}
             </Button>
@@ -109,19 +111,19 @@ const PageViewDictAdd: React.FC<IProps> = props => {
         </Row>
         {showExtra && (
           <>
-            <Form.Item name="extra1" label="扩展1：">
+            <Form.Item name="extra1" label="扩展1">
               <Input></Input>
             </Form.Item>
-            <Form.Item name="extra2" label="扩展2：">
+            <Form.Item name="extra2" label="扩展2">
               <Input></Input>
             </Form.Item>
-            <Form.Item name="extra3" label="扩展3：">
+            <Form.Item name="extra3" label="扩展3">
               <Input></Input>
             </Form.Item>
           </>
         )}
 
-        <Form.Item name="is_disabled" label="状态：">
+        <Form.Item name="is_disabled" label="状态">
           <Radio.Group>
             <Radio value={0}>启用</Radio>
             <Radio value={1}>禁用</Radio>

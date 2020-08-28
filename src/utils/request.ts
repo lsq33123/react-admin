@@ -36,5 +36,6 @@ request.interceptors.response.use(
   res => res.data,
   err => {
     message.error(err.message)
+    return Promise.reject(err)
   },
 )

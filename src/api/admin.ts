@@ -54,6 +54,8 @@ export const addUersList = (params): HttpResponse<any> => request.post('/users/a
 // 更新用户账号状态
 export const updateUersStatus = (id, status): HttpResponse<any> =>
   request.put('/users/updateUserStatus/' + id, {status: status})
+// 更新用户
+export const updateUser = (id, params): HttpResponse<any> => request.put('/users/updateUser/' + id, params)
 
 //角色===========================================================
 // 获取角色列表
@@ -65,3 +67,14 @@ export const updateRoleStatus = (id, status): HttpResponse<any> =>
   request.put('/role/updateRoleStatus/' + id, {status: status})
 // 更新角色
 export const updateRole = (id, params): HttpResponse<any> => request.put('/role/updateRole/' + id, params)
+
+//菜单===========================================================
+// 获取菜单列表
+export const getMenuList = (params): HttpResponse<any> => request.get('/menu/getMenuList', {params})
+// 新增菜单列表
+export const addMenuList = (params): HttpResponse<any> => request.post('/menu/addMenu', params)
+// // 更新菜单状态
+// export const updateRoleStatus = (id, status): HttpResponse<any> =>
+// request.put('/role/updateRoleStatus/' + id, {status: status})
+// 更新菜单
+export const updateMenu = (id, params): HttpResponse<any> => request.put('/menu/updateMenu/' + id, params)

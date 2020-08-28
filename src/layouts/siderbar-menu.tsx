@@ -7,21 +7,31 @@ import {MenuOutlined} from '@ant-design/icons'
 import SubMenu from 'antd/lib/menu/SubMenu'
 import {Link, useHistory} from 'react-router-dom'
 import {Scrollbars} from 'react-custom-scrollbars'
-import {menus} from '@/store/menus'
+// import {menus} from '@/store/menus'
 import {arrayToTree} from '@/utils/array'
 import {getStore, setStore} from '@/utils/store'
+import Global from '@/store/global'
 interface IProps {
   //props:any
 }
 
 const PageView: React.FC<IProps> = props => {
-  const menusTree = arrayToTree(menus, 0)
-  const [activeSubMenu, setActiveSubMenu] = useState(getStore('activeSubMenu') || ['sum'])
-  const [currMenuKey, setCurrMenuKey] = useState<any>()
+  // const menusTree = arrayToTree(menus, 0)
+  const {menuList, getMenuPath} = Global.useContainer()
+  const [menusTree, setMenusTree] = useState<Array<any>>([])
+  const [activeSubMenu, setActiveSubMenu] = useState(getStore('activeSubMenu') || ['nav'])
+  const [currMenuKey, setCurrMenuKey] = useState<any>('home')
   const history = useHistory()
   const routeUrl = history.location.pathname
+
   useEffect(() => {
-    setCurrMenuKey(routeUrl)
+    setMenusTree(arrayToTree(menuList, 0, 'id', 'parent_id'))
+  }, [menuList])
+
+  useEffect(() => {
+    console.log('routeUrl:', routeUrl)
+    const temp: any = menuList.find((item: any) => getMenuPath(item.is_frame, item.path) === routeUrl)
+    setCurrMenuKey(temp.code)
   }, [routeUrl])
 
   const onOpenChange = keyArr => {
@@ -30,11 +40,17 @@ const PageView: React.FC<IProps> = props => {
   }
 
   const handleClick = e => {
+    console.log('e:', e)
+    console.log('e.key:', e.key)
     setCurrMenuKey(e.key)
+    // setStore('currMenuKey', e.key)
   }
+
   return (
     <Layout>
       <Scrollbars autoHide autoHideTimeout={500} autoHideDuration={200} className="scroller-menu">
+        {/* {JSON.stringify(currMenuKey)}
+        {JSON.stringify(activeSubMenu)} */}
         <Menu
           theme="dark"
           mode="inline"
@@ -44,10 +60,10 @@ const PageView: React.FC<IProps> = props => {
           selectedKeys={currMenuKey}
           openKeys={activeSubMenu}>
           {menusTree.map((item, index) => {
-            if (!item.hidden && item.children?.length) {
+            if (!item.visible && item.children?.length) {
               return (
                 <SubMenu
-                  key={item.name}
+                  key={item.code}
                   title={
                     <span>
                       <MenuOutlined />
@@ -56,19 +72,19 @@ const PageView: React.FC<IProps> = props => {
                   }>
                   {item.children.map(
                     ele =>
-                      !ele.hidden && (
-                        <Menu.Item key={ele.name}>
-                          <Link to={ele.path}>{ele.title}</Link>
+                      !ele.visible && (
+                        <Menu.Item key={ele.code}>
+                          <Link to={getMenuPath(ele.is_frame, ele.path)}>{ele.title}</Link>
                         </Menu.Item>
                       ),
                   )}
                 </SubMenu>
               )
             }
-            if (!item.hidden && !item.children?.length) {
+            if (!item.visible && !item.children?.length) {
               return (
-                <Menu.Item key={item.name} icon={<MenuOutlined />}>
-                  <Link to={item.path}>{item.title}</Link>
+                <Menu.Item key={item.code} icon={<MenuOutlined />}>
+                  <Link to={getMenuPath(item.is_frame, item.path)}>{item.title}</Link>
                 </Menu.Item>
               )
             }

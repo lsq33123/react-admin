@@ -30,7 +30,7 @@ const PageLogin: React.FC<IProps> = props => {
     api.getToken({username, password}).then(res => {
       if (res.code === 0 && res.data) {
         updateToken('Bearer ' + res.data.token)
-        hisotry.replace('/need/home')
+        hisotry.replace('/need/nav/home')
       } else {
         message.error(res.msg)
       }

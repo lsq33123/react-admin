@@ -121,4 +121,13 @@ export const menus = [
     title: '角色管理',
     sort: '2',
   },
+  {
+    id: 555,
+    parentId: 551,
+    name: 'menu',
+    path: '/need/sys/menu',
+    component: 'views/sys/menu',
+    title: '菜单管理',
+    sort: '3',
+  },
 ]

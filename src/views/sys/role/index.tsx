@@ -9,6 +9,7 @@ import dayjs from 'dayjs'
 import './index.less'
 import {useForm} from 'antd/lib/form/util'
 import Edit from './edit'
+import Menu from './menu'
 import {useBoolean} from 'ahooks'
 
 interface IProps {
@@ -18,6 +19,7 @@ interface IProps {
 const PageViewRole: React.FC<IProps> = props => {
   const [tableData, setTableData] = useState<Array<any>>([])
   const [isShowEdit, setIsShowEdit] = useBoolean(false)
+  const [isShowMenu, setIsShowMenu] = useBoolean(false)
   const [isEdit, setIsEdit] = useBoolean(false)
   const [currRow, setCurrRow] = useState({})
   const [tableLoading, setTableLoading] = useBoolean(false)
@@ -111,15 +113,25 @@ const PageViewRole: React.FC<IProps> = props => {
     {
       title: '操作',
       render: (val, row, index) => (
-        <Button
-          type="link"
-          onClick={() => {
-            setIsShowEdit.setTrue()
-            setIsEdit.setTrue()
-            setCurrRow(row)
-          }}>
-          编辑
-        </Button>
+        <>
+          <Button
+            type="link"
+            onClick={() => {
+              setIsShowEdit.setTrue()
+              setIsEdit.setTrue()
+              setCurrRow(row)
+            }}>
+            编辑
+          </Button>
+          <Button
+            type="link"
+            onClick={() => {
+              setIsShowMenu.setTrue()
+              setCurrRow(row)
+            }}>
+            菜单权限
+          </Button>
+        </>
       ),
     },
   ]
@@ -179,6 +191,16 @@ const PageViewRole: React.FC<IProps> = props => {
             onSearch()
           }}
           onCancel={() => setIsShowEdit.setFalse()}
+        />
+      )}
+      {isShowMenu && (
+        <Menu
+          isShow={isShowMenu}
+          currRow={currRow}
+          onOk={() => {
+            setIsShowMenu.setFalse()
+          }}
+          onCancel={() => setIsShowMenu.setFalse()}
         />
       )}
     </div>

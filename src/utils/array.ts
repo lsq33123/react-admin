@@ -2,14 +2,15 @@
 
 /**
  * 数组转化为树
- * 必要字段 id，parentId
+ * data需要转化的数组
+ * pid起始的父节点 id
  */
-export const arrayToTree = (data: Array<any>, pid: any): Array<any> => {
+export const arrayToTree = (data: Array<any>, pid: any, key = 'id', pkey = 'parentId'): Array<any> => {
   if (!Array.isArray(data) || !data.length) return []
   let res: Array<any> = []
   data.forEach(item => {
-    if (item.parentId === pid) {
-      let childrenItem = arrayToTree(data, item.id)
+    if (item[pkey] === pid) {
+      let childrenItem = arrayToTree(data, item[key], key, pkey)
       if (childrenItem.length) item.children = childrenItem
       res.push(item)
     }

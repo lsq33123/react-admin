@@ -63,11 +63,11 @@ const PageViewRoleEdit: React.FC<IProps> = props => {
           api
             .addRoleList({...res})
             .then(res => {
-              message.success('角色添加成功')
+              message.success('添加成功')
               props.onOk()
             })
             .catch(err => {
-              message.error('角色添加失败')
+              message.error('添加失败')
             })
         }
       })
@@ -90,7 +90,7 @@ const PageViewRoleEdit: React.FC<IProps> = props => {
           <Input></Input>
         </Form.Item>
         <Form.Item name="code" label="角色编码" rules={[{required: true}]}>
-          <Input></Input>
+          <Input disabled={props.isEdit}></Input>
         </Form.Item>
         <Form.Item name="sort" label="排序" rules={[{required: true}]}>
           <InputNumber min={0} max={999} />

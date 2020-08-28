@@ -5,7 +5,7 @@ import {createContainer} from 'unstated-next'
 import {getStore, setStore, removeStore} from '@/utils/store'
 // import {useHistory} from 'react-router-dom'
 const homeView = {
-  pathname: '/need/home',
+  pathname: '/need/nav/home',
   state: {title: '首页'},
 }
 

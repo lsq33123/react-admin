@@ -31,7 +31,14 @@ const PageViewRoleEdit: React.FC<IProps> = props => {
       .getMenuList(params)
       .then(res => {
         setTableLoading.setFalse()
-        setTreeData(arrayToTree(res.data, 0, 'id', 'parent_id'))
+        const data = res.data || []
+        data.forEach(item => {
+          //处理数据
+          item.value = item.id
+          item.key = item.id
+          item.title = item.name
+        })
+        setTreeData(arrayToTree(data, 0, 'id', 'parent_id'))
         if (props.currRow.menu_ids && props.currRow.menu_ids.length) {
           const tempStrArr = props.currRow.menu_ids?.split(',') || []
           setCheckList(tempStrArr.map(item => Number(item)))
@@ -53,7 +60,7 @@ const PageViewRoleEdit: React.FC<IProps> = props => {
   const onOk = () => {
     // 保存
     api
-      .updateRole(props.currRow.id, {menu_ids: checkList.join(',')})
+      .updateRole(props.currRow.id, {menu_ids: checkList})
       .then(res => {
         if (res.code === 0) {
           message.success('更新成功')

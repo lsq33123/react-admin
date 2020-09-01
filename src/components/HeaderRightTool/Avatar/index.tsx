@@ -16,6 +16,7 @@ const PageViewAvatarMenu: React.FC<IProps> = props => {
   const {delAllView} = TagView.useContainer()
   const history = useHistory()
   const onLogout = () => {
+    console.log('123:', 123)
     history.replace('/noneed/login')
     logout()
     delAllView()
@@ -23,18 +24,14 @@ const PageViewAvatarMenu: React.FC<IProps> = props => {
 
   const avatarMenu = (
     <Menu>
-      <Menu.Item icon={<UserOutlined />}>
-        <span style={{marginLeft: 0, marginRight: 40}} onClick={() => history.replace('/need/sys/my')}>
-          个人中心
-        </span>
+      <Menu.Item icon={<UserOutlined />} onClick={() => history.replace('/need/sys/my')}>
+        <span style={{marginLeft: 0, marginRight: 40}}>个人中心</span>
       </Menu.Item>
       <Menu.Item icon={<QuestionCircleOutlined />}>
         <span style={{marginLeft: 0, marginRight: 40}}>关于</span>
       </Menu.Item>
-      <Menu.Item icon={<LogoutOutlined />}>
-        <span style={{marginLeft: 0, marginRight: 40}} onClick={onLogout}>
-          注销
-        </span>
+      <Menu.Item icon={<LogoutOutlined />} onClick={onLogout}>
+        <span style={{marginLeft: 0, marginRight: 40}}>注销</span>
       </Menu.Item>
     </Menu>
   )

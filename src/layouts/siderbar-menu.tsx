@@ -2,8 +2,6 @@
 
 import React, {useState, useEffect} from 'react'
 import {Layout, Menu} from 'antd'
-//UserOutlined, VideoCameraOutlined, UploadOutlined,
-import {MenuOutlined} from '@ant-design/icons'
 import SubMenu from 'antd/lib/menu/SubMenu'
 import {Link, useHistory} from 'react-router-dom'
 import {Scrollbars} from 'react-custom-scrollbars'
@@ -11,13 +9,17 @@ import {Scrollbars} from 'react-custom-scrollbars'
 import {arrayToTree} from '@/utils/array'
 import {getStore, setStore} from '@/utils/store'
 import Global from '@/store/global'
+import TagView from '@/store/tag-view'
+import * as icon from '@ant-design/icons'
+// import {AppstoreOutlined, HomeOutlined} from '@ant-design/icons'
 interface IProps {
   //props:any
 }
 
 const PageView: React.FC<IProps> = props => {
   // const menusTree = arrayToTree(menus, 0)
-  const {menuList, getMenuPath} = Global.useContainer()
+  const {menuList, getMenuPath, logout} = Global.useContainer()
+  const {delAllView} = TagView.useContainer()
   const [menusTree, setMenusTree] = useState<Array<any>>([])
   const [activeSubMenu, setActiveSubMenu] = useState(getStore('activeSubMenu') || ['nav'])
   const [currMenuKey, setCurrMenuKey] = useState<any>('home')
@@ -30,8 +32,20 @@ const PageView: React.FC<IProps> = props => {
 
   useEffect(() => {
     console.log('routeUrl:', routeUrl)
-    const temp: any = menuList.find((item: any) => getMenuPath(item.is_frame, item.path) === routeUrl)
-    setCurrMenuKey(temp.code)
+    if (routeUrl === '/need/nav/home') {
+      setCurrMenuKey('home')
+    } else {
+      if (!menuList.length) {
+        history.replace('/noneed/login')
+        logout()
+        delAllView()
+      } else {
+        const temp: any = menuList.find((item: any) => getMenuPath(item.is_frame, item.path) === routeUrl)
+        console.log('menuList:', menuList)
+        console.log('temp:', temp)
+        setCurrMenuKey(temp?.code || '')
+      }
+    }
   }, [routeUrl])
 
   const onOpenChange = keyArr => {
@@ -46,6 +60,15 @@ const PageView: React.FC<IProps> = props => {
     // setStore('currMenuKey', e.key)
   }
 
+  const getIcon = val =>
+    icon && icon[val]
+      ? React.createElement(icon && icon[val], {
+          style: {
+            fontSize: '14px',
+          },
+        })
+      : null
+
   return (
     <Layout>
       <Scrollbars autoHide autoHideTimeout={500} autoHideDuration={200} className="scroller-menu">
@@ -59,6 +82,19 @@ const PageView: React.FC<IProps> = props => {
           onOpenChange={onOpenChange}
           selectedKeys={currMenuKey}
           openKeys={activeSubMenu}>
+          {/* <SubMenu
+            key="nav"
+            title={
+              <span>
+                <AppstoreOutlined />
+                <span>系统导航</span>
+              </span>
+            }>
+            <Menu.Item key="home" icon={<HomeOutlined />}>
+              <Link to="/need/nav/home">首页</Link>
+            </Menu.Item>
+          </SubMenu> */}
+
           {menusTree.map((item, index) => {
             if (!item.visible && item.children?.length) {
               return (
@@ -66,14 +102,15 @@ const PageView: React.FC<IProps> = props => {
                   key={item.code}
                   title={
                     <span>
-                      <MenuOutlined />
+                      {/* <MenuOutlined /> */}
+                      {getIcon(item.icon)}
                       <span>{item.title}</span>
                     </span>
                   }>
                   {item.children.map(
                     ele =>
                       !ele.visible && (
-                        <Menu.Item key={ele.code}>
+                        <Menu.Item key={ele.code} icon={getIcon(ele.icon)}>
                           <Link to={getMenuPath(ele.is_frame, ele.path)}>{ele.title}</Link>
                         </Menu.Item>
                       ),
@@ -83,7 +120,7 @@ const PageView: React.FC<IProps> = props => {
             }
             if (!item.visible && !item.children?.length) {
               return (
-                <Menu.Item key={item.code} icon={<MenuOutlined />}>
+                <Menu.Item key={item.code} icon={getIcon(item.icon)}>
                   <Link to={getMenuPath(item.is_frame, item.path)}>{item.title}</Link>
                 </Menu.Item>
               )
@@ -91,24 +128,6 @@ const PageView: React.FC<IProps> = props => {
             return ''
           })}
 
-          {/* <SubMenu
-            key="tit1"
-            title={
-              <span>
-                <MenuOutlined />
-                <span>统计</span>
-              </span>
-            }>
-            <Menu.Item key="need/test1">
-              <Link to="/need/test1">测试页面1</Link>
-            </Menu.Item>
-            <Menu.Item key="need/test2">
-              <Link to="/need/test2">测试页面2</Link>
-            </Menu.Item>
-            <Menu.Item key="need/test3">
-              <Link to="/need/test3">测试页面3</Link>
-            </Menu.Item>
-          </SubMenu> */}
           {/* <SubMenu
             key="tit2"
             title={

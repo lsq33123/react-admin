@@ -3,17 +3,28 @@
 import {createContainer} from 'unstated-next'
 import {useState, useEffect} from 'react'
 import {getStore, setStore, removeStoreType} from '@/utils/store'
+import {sysMenus} from './menus'
 import * as api from '@/api'
 const globalData = () => {
   const [token, setToken] = useState(getStore('token'))
-  const [menuList, setMenuList] = useState([])
+  const [menuList, setMenuList] = useState<Array<any>>([])
+  const [userInfo, setUserInfo] = useState({})
 
   useEffect(() => {
     if (token) {
       // 初始化 一些用户的相关信息
       ;(async () => {
-        const menuInfo = await api.getMenuList({status: 0})
-        setMenuList(menuInfo.data)
+        const user_name = getStore('user_name')
+        const Info = await api.getUserInfo(user_name)
+        const finalMenu = sysMenus.concat(Info.data.menus || []) //系统菜单  + 权限菜单
+        finalMenu.forEach((item: any) => {
+          //处理数据
+          item.value = item.id
+          item.key = item.id
+          item.title = item.name
+        })
+        setMenuList(finalMenu)
+        setUserInfo(Info.data.user)
       })()
     }
   }, [token])
@@ -39,6 +50,7 @@ const globalData = () => {
 
   return {
     token,
+    userInfo,
     menuList,
     updateToken,
     getMenuPath,

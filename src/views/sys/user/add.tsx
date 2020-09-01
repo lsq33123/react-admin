@@ -23,7 +23,9 @@ const PageViewUserEdit: React.FC<IProps> = props => {
   useEffect(() => {
     if (props.isEdit) {
       const temp = {...props.currRow}
-      temp.role_ids = temp.role_ids.split(',').map(item => Number(item))
+      if (temp.role_ids && temp.role_ids.length) {
+        temp.role_ids = temp.role_ids.split(',').map(item => Number(item))
+      }
       console.log('temp:', temp)
       form.setFieldsValue({...temp})
     }
@@ -68,7 +70,6 @@ const PageViewUserEdit: React.FC<IProps> = props => {
         //保存
         if (props.isEdit) {
           //编辑
-          res.role_ids = res.role_ids.join(',')
           api
             .updateUser(props.currRow.id, {...props.currRow, ...res})
             .then(res => {

@@ -35,7 +35,14 @@ const PageViewRole: React.FC<IProps> = props => {
       .getMenuList(params)
       .then(res => {
         setTableLoading.setFalse()
-        setTableData(arrayToTree(res.data, 0, 'id', 'parent_id'))
+        const data = res.data || []
+        data.forEach(item => {
+          //处理数据
+          item.value = item.id
+          item.key = item.id
+          item.title = item.name
+        })
+        setTableData(arrayToTree(data, 0, 'id', 'parent_id'))
       })
       .catch(() => {
         setTableLoading.setFalse()

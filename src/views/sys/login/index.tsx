@@ -6,6 +6,7 @@ import {Form, Input, Button, message} from 'antd'
 import {useHistory} from 'react-router-dom'
 import Global from '@/store/global'
 import * as api from '@/api'
+import {setStore} from '@/utils/store'
 interface IProps {
   //props:any
 }
@@ -29,6 +30,7 @@ const PageLogin: React.FC<IProps> = props => {
 
     api.getToken({username, password}).then(res => {
       if (res.code === 0 && res.data) {
+        setStore('user_name', username)
         updateToken('Bearer ' + res.data.token)
         hisotry.replace('/need/nav/home')
       } else {

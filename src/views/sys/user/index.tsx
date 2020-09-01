@@ -92,6 +92,10 @@ const PageViewUser: React.FC<IProps> = props => {
       render: val => (val === 0 ? '男' : val === 1 ? '女' : '-'),
     },
     {
+      title: '角色',
+      dataIndex: 'role_names',
+    },
+    {
       title: '状态',
       dataIndex: 'status',
       // render: (val, row) => (val === '0' ? '启用' : '禁用'),

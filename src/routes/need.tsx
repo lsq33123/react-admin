@@ -51,22 +51,9 @@ const PageViewNeed: React.FC = () => {
                 />
               ) : null
             })}
-          {/*<Route path={`${match.path}/home`} component={lazy(() => import('@/views/sys/home'))} />
-          <Route path={`${match.path}/test1`} component={lazy(() => import('@/views/test'))} />
-          <Route path={`${match.path}/test2`} component={lazy(() => import('@/views/test'))} />
-          <Route path={`${match.path}/test3`} component={lazy(() => import('@/views/test'))} />
-          <Route path={`${match.path}/test31`} component={lazy(() => import('@/views/test/index1'))} />
-          <Route path={`${match.path}/test32`} component={lazy(() => import('@/views/test/index2'))} />
-          <Route path={`${match.path}/test33`} component={lazy(() => import('@/views/test/index3'))} />
-          <Route path={`${match.path}/test34`} component={lazy(() => import('@/views/test/index4'))} />
-          <Route path={`${match.path}/test35`} component={lazy(() => import('@/views/test/index5'))} />
-          <Route path={`${match.path}/test36`} component={lazy(() => import('@/views/test/index6'))} />
-          <Route path={`${match.path}/sys/dict`} component={lazy(() => import('@/views/sys/dict'))} />
-          <Route path={`${match.path}/sys/user`} component={lazy(() => import('@/views/sys/user'))} />
-          <Route path={`${match.path}/sys/role`} component={lazy(() => import('@/views/sys/role'))} />
-        <Route path={`${match.path}/sys/menu`} component={lazy(() => import('@/views/sys/menu'))} /> */}
+          {/* <Route path={`${match.path}/nav/home`} component={lazy(() => import('@/views/sys/home'))} />
           <Route path={`${match.path}/sys/my`} component={lazy(() => import('@/views/sys/my'))} />
-          <Route path={`${match.path}/sys/notice`} component={lazy(() => import('@/views/sys/notice'))} />
+          <Route path={`${match.path}/sys/notice`} component={lazy(() => import('@/views/sys/notice'))} /> */}
           <Redirect from={match.path} to={'/sys/404'} />
         </Switch>
       </Suspense>

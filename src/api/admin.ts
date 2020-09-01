@@ -7,6 +7,8 @@ const EXPIRED_TIME = 60 * 1 //1小时过期
 
 //获取token
 export const getToken = (body): HttpResponse<any> => request.post('/token/login', body)
+// 获取获取用户信息 及相关权限菜单  user_name为登录账号
+export const getUserInfo = (user_name): HttpResponse<any> => request.get('/users/getUserInfo2/' + user_name)
 
 //数据字典===========================================================
 /**获取数据字典数分类*/

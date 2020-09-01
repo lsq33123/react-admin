@@ -1,6 +1,6 @@
 /** @format */
 
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Table, Input, Button, Space, Form, DatePicker, Select, Switch, message} from 'antd'
 import {SearchOutlined, PlusOutlined} from '@ant-design/icons'
 import Toolbars from '@/components/Toolbars'
@@ -10,7 +10,7 @@ import './index.less'
 import {useForm} from 'antd/lib/form/util'
 import Edit from './edit'
 import Menu from './menu'
-import {useBoolean} from 'ahooks'
+import {useBoolean, useAntdTable} from 'ahooks'
 
 interface IProps {
   //props:any
@@ -22,25 +22,40 @@ const PageViewRole: React.FC<IProps> = props => {
   const [isShowMenu, setIsShowMenu] = useBoolean(false)
   const [isEdit, setIsEdit] = useBoolean(false)
   const [currRow, setCurrRow] = useState({})
-  const [tableLoading, setTableLoading] = useBoolean(false)
+  // const [tableLoading, setTableLoading] = useBoolean(false)
   const [form] = useForm()
 
-  useEffect(() => {
-    loadData({})
-  }, [])
+  // useEffect(() => {
+  //   loadData({})
+  // }, [])
 
-  const loadData = params => {
-    setTableLoading.setTrue()
-    api
-      .getRoleList(params)
-      .then(res => {
-        setTableLoading.setFalse()
-        setTableData(res.data)
-      })
-      .catch(() => {
-        setTableLoading.setFalse()
-      })
-  }
+  // const loadData = params => {
+  //   setTableLoading.setTrue()
+  //   api
+  //     .getRoleList(params)
+  //     .then(res => {
+  //       setTableLoading.setFalse()
+  //       setTableData(res.data)
+  //     })
+  //     .catch(() => {
+  //       setTableLoading.setFalse()
+  //     })
+  // }
+
+  const getTableData = (page, formData) =>
+    api.getRoleList({...formData, ...page}).then(res => {
+      setTableData(res.data.list)
+      return {
+        list: res.data.list,
+        total: res.data.total,
+      }
+    })
+
+  const {tableProps, search} = useAntdTable(getTableData, {
+    defaultPageSize: 20,
+    form,
+  })
+  const {submit} = search
 
   const onStatusChange = (row, value) => {
     const val = value ? 0 : 1
@@ -64,8 +79,9 @@ const PageViewRole: React.FC<IProps> = props => {
   }
 
   const onSearch = () => {
-    const formData = (form.getFieldValue as any)()
-    loadData(formData)
+    submit()
+    // const formData = (form.getFieldValue as any)()
+    // loadData(formData)
   }
 
   const column = [
@@ -179,7 +195,19 @@ const PageViewRole: React.FC<IProps> = props => {
             </Form.Item>
           </Form>
         </Toolbars>
-        <Table columns={column} dataSource={tableData} rowKey="id" loading={tableLoading}></Table>
+        <Table
+          columns={column}
+          // dataSource={tableData}
+          {...{...tableProps, dataSource: tableData}}
+          rowKey="id"
+          pagination={{
+            pageSizeOptions: ['10', '20', '50'],
+            showSizeChanger: true,
+            total: tableProps.pagination.total,
+            current: tableProps.pagination.current,
+            showTotal: total => `共 ${total} 条`,
+            pageSize: tableProps.pagination.pageSize,
+          }}></Table>
       </Space>
       {isShowEdit && (
         <Edit

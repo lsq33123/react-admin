@@ -2,6 +2,7 @@
 /**
  * 系统必备菜单
  * 也可写写到数据库
+ * parent_id 为0  则是最外层
  */
 export const sysMenus = [
   {

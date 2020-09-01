@@ -151,10 +151,7 @@ const PageViewUserEdit: React.FC<IProps> = props => {
             <Form.Item
               name="phonenumber"
               label="手机号"
-              rules={[
-                {required: !props.isEdit, whitespace: true, message: '手机号不能为空'},
-                {pattern: /^1(3|4|5|7|8)\d{9}$/, message: '请输入正确手机号'},
-              ]}>
+              rules={[{pattern: /^1(3|4|5|7|8)\d{9}$/, message: '请输入正确手机号'}]}>
               <Input></Input>
             </Form.Item>
           </Col>
@@ -162,10 +159,7 @@ const PageViewUserEdit: React.FC<IProps> = props => {
             <Form.Item
               name="email"
               label="邮箱"
-              rules={[
-                {required: !props.isEdit, whitespace: true, message: '邮箱不能为空'},
-                {pattern: /^([a-zA-Z\d])(\w|\-)+@[a-zA-Z\d]+\.[a-zA-Z]{2,4}$/, message: '请输入正确邮箱'},
-              ]}>
+              rules={[{pattern: /^([a-zA-Z\d])(\w|\-)+@[a-zA-Z\d]+\.[a-zA-Z]{2,4}$/, message: '请输入正确邮箱'}]}>
               <Input></Input>
             </Form.Item>
           </Col>

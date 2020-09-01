@@ -1,6 +1,6 @@
 /** @format */
 
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Table, Input, Button, Space, Form, DatePicker, Select, Switch, message} from 'antd'
 import {SearchOutlined, PlusOutlined} from '@ant-design/icons'
 import Toolbars from '@/components/Toolbars'
@@ -10,7 +10,7 @@ import dayjs from 'dayjs'
 import './index.less'
 import {useForm} from 'antd/lib/form/util'
 import Add from './add'
-import {useBoolean} from 'ahooks'
+import {useBoolean, useAntdTable} from 'ahooks'
 
 interface IProps {
   //props:any
@@ -20,26 +20,40 @@ const PageViewUser: React.FC<IProps> = props => {
   const [tableData, setTableData] = useState<Array<any>>([])
   const [isShowEdit, setIsShowEdit] = useBoolean(false)
   const [isEdit, setIsEdit] = useBoolean(false)
-  const [tableLoading, setTableLoading] = useBoolean(false)
+  // const [tableLoading, setTableLoading] = useBoolean(false)
   const [currRow, setCurrRow] = useState({})
   const [form] = useForm()
 
-  useEffect(() => {
-    loadData({})
-  }, [])
+  // useEffect(() => {
+  //   loadData({})
+  // }, [])
 
-  const loadData = params => {
-    setTableLoading.setTrue()
-    api
-      .getUersList(params)
-      .then(res => {
-        setTableLoading.setFalse()
-        setTableData(res.data)
-      })
-      .catch(() => {
-        setTableLoading.setFalse()
-      })
-  }
+  // const loadData = params => {
+  //   setTableLoading.setTrue()
+  //   api
+  //     .getUersList(params)
+  //     .then(res => {
+  //       setTableLoading.setFalse()
+  //       setTableData(res.data)
+  //     })
+  //     .catch(() => {
+  //       setTableLoading.setFalse()
+  //     })
+  // }
+  const getTableData = (page, formData) =>
+    api.getUersList({...formData, ...page}).then(res => {
+      setTableData(res.data.list)
+      return {
+        list: res.data.list,
+        total: res.data.total,
+      }
+    })
+
+  const {tableProps, search} = useAntdTable(getTableData, {
+    defaultPageSize: 20,
+    form,
+  })
+  const {submit} = search
 
   const onStatusChange = (row, value) => {
     const val = value ? 0 : 1
@@ -56,6 +70,11 @@ const PageViewUser: React.FC<IProps> = props => {
           })
           return tempArr
         })
+        // tableProps.dataSource.forEach((item, index, arr) => {
+        //   if (item.id === row.id) {
+        //     item.status = val
+        //   }
+        // })
       })
       .catch(err => {
         message.error('操作失败')
@@ -63,8 +82,9 @@ const PageViewUser: React.FC<IProps> = props => {
   }
 
   const onSearch = () => {
-    const formData = (form.getFieldValue as any)()
-    loadData(formData)
+    submit()
+    // const formData = (form.getFieldValue as any)()
+    // loadData(formData)
   }
 
   const column = [
@@ -181,7 +201,20 @@ const PageViewUser: React.FC<IProps> = props => {
             </Form.Item>
           </Form>
         </Toolbars>
-        <Table columns={column} dataSource={tableData} rowKey="id" loading={tableLoading}></Table>
+        <Table
+          columns={column}
+          rowKey="id"
+          // dataSource={tableData}
+          // loading={tableProps.loading}
+          {...{...tableProps, dataSource: tableData}}
+          pagination={{
+            pageSizeOptions: ['10', '20', '50'],
+            showSizeChanger: true,
+            total: tableProps.pagination.total,
+            current: tableProps.pagination.current,
+            showTotal: total => `共 ${total} 条`,
+            pageSize: tableProps.pagination.pageSize,
+          }}></Table>
       </Space>
       {isShowEdit && (
         <Add

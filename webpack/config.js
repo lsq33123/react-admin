@@ -9,8 +9,8 @@ const webpack = require('webpack')
 const isProd = process.env.NODE_ENV === 'production'
 const env = process.env.NODE_ENV || 'development'
 module.exports = {
-  mode: 'development',
-  devtool: 'eval-source-map',
+  mode: isProd ? 'production' : 'development',
+  devtool: isProd ? '' : 'eval-source-map',
   entry: {
     index: path.join(srcPath, 'index.tsx'),
     vendors: ['react', 'react-dom'],

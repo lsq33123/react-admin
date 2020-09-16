@@ -12,7 +12,8 @@ interface IProps {
   visible: boolean
   isEdit: boolean
   isType: boolean
-  formData: object
+  formData: any
+  currTypeId: string
   onOk: (form) => void
   onCancel: () => void
 }
@@ -29,7 +30,12 @@ const PageViewDictAdd: React.FC<IProps> = props => {
   // }
 
   useEffect(() => {
-    getTypeTree() //加载父节点
+    debugger
+    if (props.isType) {
+      getTypeTree() //加载父节点
+    } else {
+      getDataTree()
+    }
     if (JSON.stringify(props.formData) !== '{}') {
       form.setFieldsValue({...props.formData})
     }
@@ -37,6 +43,12 @@ const PageViewDictAdd: React.FC<IProps> = props => {
 
   const getTypeTree = () => {
     api.getDictTypeTree({cache: true, is_disable: 0}).then(res => {
+      // console.log('res:', res)
+      setTreeData(res.data)
+    })
+  }
+  const getDataTree = () => {
+    api.getDictDataList({type_id: props.currTypeId, is_disable: 0}).then(res => {
       // console.log('res:', res)
       setTreeData(res.data)
     })

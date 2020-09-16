@@ -13,6 +13,16 @@ const globalData = () => {
   useEffect(() => {
     if (token) {
       // 初始化 一些用户的相关信息
+      setMenuList(
+        //初始化路由
+        sysMenus.map((item: any) => {
+          //处理数据
+          item.value = item.id
+          item.key = item.id
+          item.title = item.name
+          return item
+        }),
+      )
       ;(async () => {
         const user_name = getStore('user_name')
         const Info = await api.getUserInfo(user_name)

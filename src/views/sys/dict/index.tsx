@@ -268,6 +268,7 @@ const PageViewDict: React.FC<IProps> = props => {
           isEdit={isEdit}
           isType={isType}
           formData={currFormData}
+          currTypeId={currTypeId}
           onOk={onOk}
           onCancel={onCancelLeft}
         />

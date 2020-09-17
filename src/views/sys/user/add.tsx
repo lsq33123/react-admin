@@ -38,7 +38,7 @@ const PageViewUserEdit: React.FC<IProps> = props => {
       .getRoleList({status: 0})
       .then(res => {
         setSelectLoading.setFalse()
-        setRoleList(res.data)
+        setRoleList(res.data.list)
       })
       .catch(() => {
         setSelectLoading.setFalse()

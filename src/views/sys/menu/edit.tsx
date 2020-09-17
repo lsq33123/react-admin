@@ -257,10 +257,10 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
 
           {menuType ? (
             <Col span={12}>
-              <Form.Item name="is_frame" label="权限验证" rules={[{required: true}]}>
+              <Form.Item name="is_frame" label="打开方式" rules={[{required: true}]}>
                 <Radio.Group>
-                  <Radio value={0}>需要</Radio>
-                  <Radio value={1}>不需要</Radio>
+                  <Radio value={0}>系统</Radio>
+                  <Radio value={1}>全屏</Radio>
                   <Radio value={2}>外链</Radio>
                 </Radio.Group>
               </Form.Item>

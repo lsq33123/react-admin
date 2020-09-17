@@ -39,10 +39,11 @@ const PageViewNeed: React.FC = () => {
     <BaseLayout>
       <Suspense fallback={<Loading />}>
         <Switch>
-          path.join(__dirname, '../src')
+          {/* path.join(__dirname, '../src') */}
           {menuList.length &&
             menuList.map((item: any, index) => {
-              return item.menu_type === 1 ? (
+              // 菜单 并且 需要权限的
+              return item.menu_type === 1 && item.is_frame === 0 ? (
                 <Route
                   key={index}
                   path={`${match.path}${item.path}`}

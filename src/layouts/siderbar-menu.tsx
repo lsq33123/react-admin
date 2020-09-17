@@ -69,6 +69,10 @@ const PageView: React.FC<IProps> = props => {
         })
       : null
 
+  const isShowMenu = (item: any) => !item.visible && !item.status
+
+  const getUrl = (url: string) => (url.indexOf('http') > -1 ? url : 'https://' + url)
+
   return (
     <Layout>
       <Scrollbars autoHide autoHideTimeout={500} autoHideDuration={200} className="scroller-menu">
@@ -94,9 +98,8 @@ const PageView: React.FC<IProps> = props => {
               <Link to="/need/nav/home">首页</Link>
             </Menu.Item>
           </SubMenu> */}
-
           {menusTree.map((item, index) => {
-            if (!item.visible && item.children?.length) {
+            if (isShowMenu(item) && item.children?.length) {
               return (
                 <SubMenu
                   key={item.code}
@@ -107,23 +110,53 @@ const PageView: React.FC<IProps> = props => {
                       <span>{item.title}</span>
                     </span>
                   }>
-                  {item.children.map(
-                    ele =>
-                      !ele.visible && (
-                        <Menu.Item key={ele.code} icon={getIcon(ele.icon)}>
-                          <Link to={getMenuPath(ele.is_frame, ele.path)}>{ele.title}</Link>
-                        </Menu.Item>
-                      ),
-                  )}
+                  {item.children.map(ele => {
+                    if (isShowMenu(ele)) {
+                      if (ele.is_frame === 2) {
+                        // 外链
+                        return (
+                          <Menu.Item key={ele.code} icon={getIcon(ele.icon)}>
+                            <span>
+                              <a href={getUrl(ele.path)} target="_blank" rel="noopener noreferrer">
+                                {ele.title}
+                              </a>
+                            </span>
+                          </Menu.Item>
+                        )
+                      } else {
+                        return (
+                          <Menu.Item key={ele.code} icon={getIcon(ele.icon)}>
+                            <Link to={getMenuPath(ele.is_frame, ele.path)}>{ele.title}</Link>
+                          </Menu.Item>
+                        )
+                      }
+                    } else {
+                      return ''
+                    }
+                  })}
                 </SubMenu>
               )
             }
-            if (!item.visible && !item.children?.length) {
-              return (
-                <Menu.Item key={item.code} icon={getIcon(item.icon)}>
-                  <Link to={getMenuPath(item.is_frame, item.path)}>{item.title}</Link>
-                </Menu.Item>
-              )
+            // 没有父节点的菜单
+            if (isShowMenu(item) && !item.children?.length) {
+              if (item.is_frame === 2) {
+                // 外链
+                return (
+                  <Menu.Item key={item.code} icon={getIcon(item.icon)}>
+                    <span>
+                      <a href={getUrl(item.path)} target="_blank" rel="noopener noreferrer">
+                        {item.title}
+                      </a>
+                    </span>
+                  </Menu.Item>
+                )
+              } else {
+                return (
+                  <Menu.Item key={item.code} icon={getIcon(item.icon)}>
+                    <Link to={getMenuPath(item.is_frame, item.path)}>{item.title}</Link>
+                  </Menu.Item>
+                )
+              }
             }
             return ''
           })}

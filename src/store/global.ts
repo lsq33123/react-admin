@@ -3,26 +3,26 @@
 import {createContainer} from 'unstated-next'
 import {useState, useEffect} from 'react'
 import {getStore, setStore, removeStoreType} from '@/utils/store'
-import {sysMenus} from './menus'
+import {sysMenus} from '../routes/menus'
 import * as api from '@/api'
 const globalData = () => {
   const [token, setToken] = useState(getStore('token'))
   const [menuList, setMenuList] = useState<Array<any>>([])
   const [userInfo, setUserInfo] = useState({})
 
+  const formatMenu = (arr: Array<any> = []): Array<any> =>
+    arr.map((item: any) => {
+      //处理数据
+      item.value = item.id
+      item.key = item.id
+      item.title = item.name
+      return item
+    })
+
   useEffect(() => {
     if (token) {
       // 初始化 一些用户的相关信息
-      setMenuList(
-        //初始化路由
-        sysMenus.map((item: any) => {
-          //处理数据
-          item.value = item.id
-          item.key = item.id
-          item.title = item.name
-          return item
-        }),
-      )
+      setMenuList(formatMenu(sysMenus)) //初始化路由
       ;(async () => {
         const user_name = getStore('user_name')
         const Info = await api.getUserInfo(user_name)
@@ -33,7 +33,7 @@ const globalData = () => {
           item.key = item.id
           item.title = item.name
         })
-        setMenuList(finalMenu)
+        setMenuList(formatMenu(finalMenu))
         setUserInfo(Info.data.user)
       })()
     }
@@ -49,7 +49,7 @@ const globalData = () => {
     removeStoreType() //清除出缓存
   }
 
-  /** is_frame 权限验证 0需要 1不需要 2外链    path:定义的路径*/
+  /** is_frame 打开方式 0系统 1全屏 2外链    path:定义的路径*/
   const getMenuPath = (is_frame: number, path: string) => {
     //重组菜单路径
     let prePath = ''

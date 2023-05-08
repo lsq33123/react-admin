@@ -73,7 +73,7 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
       menu_type: !props.isEdit ? 1 : '',
       is_frame: !props.isEdit ? 0 : '',
       visible: !props.isEdit ? 0 : '',
-      sort: !props.isEdit ? 0 : '',
+      order_num: !props.isEdit ? 0 : '',
       status: !props.isEdit ? 0 : '',
     },
   }
@@ -224,12 +224,12 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="name" label="菜单名称" rules={[{required: true}]}>
+            <Form.Item name="menu_name" label="菜单名称" rules={[{required: true}]}>
               <Input></Input>
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="code" label="菜单编码" rules={[{required: true}]}>
+            <Form.Item name="perms" label="菜单编码" rules={[{required: true}]}>
               <Input></Input>
             </Form.Item>
           </Col>
@@ -250,7 +250,7 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
           ) : null}
 
           <Col span={12}>
-            <Form.Item name="sort" label="显示排序" rules={[{required: true}]}>
+            <Form.Item name="order_num" label="显示排序" rules={[{required: true}]}>
               <InputNumber min={0} max={99} style={{width: '100%'}} />
             </Form.Item>
           </Col>
@@ -293,7 +293,7 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
         {/* <Form.Item name="code" label="角色编码" rules={[{required: true}]}>
           <Input></Input>
         </Form.Item>
-        <Form.Item name="sort" label="排序" rules={[{required: true}]}>
+        <Form.Item name="order_num" label="排序" rules={[{required: true}]}>
           <InputNumber min={0} max={999} />
         </Form.Item>
         <Form.Item name="status" label="状态" rules={[{required: true}]}>

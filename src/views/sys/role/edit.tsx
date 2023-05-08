@@ -50,25 +50,15 @@ const PageViewRoleEdit: React.FC<IProps> = props => {
         if (props.isEdit) {
           const formData = (form.getFieldValue as any)()
           debugger
-          api
-            .updateRole(formData.id, formData)
-            .then(res => {
-              message.success('更新成功')
-              props.onOk()
-            })
-            .catch(err => {
-              message.error('更新失败')
-            })
+          api.updateRole(formData.id, formData).then(res => {
+            message.success('更新成功')
+            props.onOk()
+          })
         } else {
-          api
-            .addRoleList({...res})
-            .then(res => {
-              message.success('添加成功')
-              props.onOk()
-            })
-            .catch(err => {
-              message.error('添加失败')
-            })
+          api.addRoleList({...res}).then(res => {
+            message.success('添加成功')
+            props.onOk()
+          })
         }
       })
       .catch(err => {})
@@ -86,13 +76,13 @@ const PageViewRoleEdit: React.FC<IProps> = props => {
       okText="确定"
       cancelText="取消">
       <Form {...formOptions}>
-        <Form.Item name="name" label="角色名称" rules={[{required: true}]}>
+        <Form.Item name="role_name" label="角色名称" rules={[{required: true}]}>
           <Input></Input>
         </Form.Item>
-        <Form.Item name="code" label="角色编码" rules={[{required: true}]}>
+        <Form.Item name="role_key" label="角色编码" rules={[{required: true}]}>
           <Input disabled={props.isEdit}></Input>
         </Form.Item>
-        <Form.Item name="sort" label="排序" rules={[{required: true}]}>
+        <Form.Item name="role_sort" label="排序" rules={[{required: true}]}>
           <InputNumber min={0} max={999} />
         </Form.Item>
         <Form.Item name="status" label="状态" rules={[{required: true}]}>

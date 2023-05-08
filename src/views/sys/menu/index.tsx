@@ -38,11 +38,11 @@ const PageViewRole: React.FC<IProps> = props => {
         const data = res.data || []
         data.forEach(item => {
           //处理数据
-          item.value = item.id
-          item.key = item.id
-          item.title = item.name
+          item.value = item.menu_id
+          item.key = item.menu_id
+          item.title = item.menu_name
         })
-        setTableData(arrayToTree(data, 0, 'id', 'parent_id'))
+        setTableData(arrayToTree(data, 0, 'menu_id', 'parent_id'))
       })
       .catch(() => {
         setTableLoading.setFalse()
@@ -76,7 +76,7 @@ const PageViewRole: React.FC<IProps> = props => {
 
   const updateField = (id, value, field, arr) => {
     arr.forEach(item => {
-      if (item.id === id) {
+      if (item.menu_id === id) {
         item[field] = value
       }
       if (item.children && item.children.length) {
@@ -98,11 +98,11 @@ const PageViewRole: React.FC<IProps> = props => {
     },
     {
       title: '菜单名称',
-      dataIndex: 'name',
+      dataIndex: 'menu_name',
     },
     {
       title: '菜单编码',
-      dataIndex: 'code',
+      dataIndex: 'perms',
     },
     {
       title: '图标',
@@ -118,7 +118,11 @@ const PageViewRole: React.FC<IProps> = props => {
     },
     {
       title: '排序',
-      dataIndex: 'sort',
+      dataIndex: 'order_num',
+    },
+    {
+      title: '路由地址',
+      dataIndex: 'path',
     },
     {
       title: '组件路径',
@@ -181,10 +185,10 @@ const PageViewRole: React.FC<IProps> = props => {
       <Space size={20} direction="vertical" style={{width: '100%'}}>
         <Toolbars>
           <Form layout="inline" form={form}>
-            <Form.Item name="name">
+            <Form.Item name="menu_name">
               <Input placeholder="请输入菜单名称" allowClear className="tool-input-w-150"></Input>
             </Form.Item>
-            <Form.Item name="code">
+            <Form.Item name="perms">
               <Input placeholder="请输入角色编码" allowClear className="tool-input-w-150"></Input>
             </Form.Item>
             <Form.Item name="visible">

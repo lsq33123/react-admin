@@ -6,11 +6,11 @@
  */
 export const sysMenus = [
   {
-    id: 9000,
+    menu_id: 9000,
     parent_id: 0,
-    code: 'nav',
-    name: '系统导航',
-    sort: 1,
+    perms: 'nav',
+    menu_name: '系统导航',
+    order_num: 1,
     path: '/nav',
     component: '',
     icon: 'AppstoreOutlined',
@@ -21,11 +21,11 @@ export const sysMenus = [
     remark: '',
   },
   {
-    id: 9001,
+    menu_id: 9001,
     parent_id: 9000,
-    code: 'home',
-    name: '首页',
-    sort: 1,
+    perms: 'home',
+    menu_name: '首页',
+    order_num: 1,
     path: '/nav/home',
     component: '/sys/home',
     icon: 'HomeOutlined',
@@ -36,11 +36,11 @@ export const sysMenus = [
     remark: '',
   },
   {
-    id: 9002,
+    menu_id: 9002,
     parent_id: 0,
-    code: 'my',
-    name: '个人中心',
-    sort: 1,
+    perms: 'my',
+    menu_name: '个人中心',
+    order_num: 1,
     path: '/sys/my',
     component: '/sys/my',
     icon: '',
@@ -51,11 +51,11 @@ export const sysMenus = [
     remark: '',
   },
   {
-    id: 9002,
+    menu_id: 9003,
     parent_id: 0,
-    code: 'notice',
-    name: '消息提醒',
-    sort: 1,
+    perms: 'notice',
+    menu_name: '消息提醒',
+    order_num: 1,
     path: '/sys/notice',
     component: '/sys/notice',
     icon: '',
@@ -64,5 +64,5 @@ export const sysMenus = [
     visible: 1, //菜单状态（0显示 1隐藏）
     status: 0, //菜单状态（0正常 1停用）
     remark: '',
-  },
+  }
 ]

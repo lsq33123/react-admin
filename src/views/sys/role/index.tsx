@@ -7,7 +7,6 @@ import Toolbars from '@/components/Toolbars'
 import * as api from '@/api'
 import dayjs from 'dayjs'
 import './index.less'
-import {useForm} from 'antd/lib/form/util'
 import Edit from './edit'
 import Menu from './menu'
 import {useBoolean, useAntdTable} from 'ahooks'
@@ -23,7 +22,7 @@ const PageViewRole: React.FC<IProps> = props => {
   const [isEdit, setIsEdit] = useBoolean(false)
   const [currRow, setCurrRow] = useState({})
   // const [tableLoading, setTableLoading] = useBoolean(false)
-  const [form] = useForm()
+  const [form] = Form.useForm()
 
   // useEffect(() => {
   //   loadData({})
@@ -60,13 +59,13 @@ const PageViewRole: React.FC<IProps> = props => {
   const onStatusChange = (row, value) => {
     const val = value ? 0 : 1
     api
-      .updateRoleStatus(row.id, val)
+      .updateRoleStatus(row.role_id, val)
       .then(res => {
         message.success('操作成功')
         setTableData(pre => {
           const tempArr = [...pre]
           tempArr.forEach((item, index, arr) => {
-            if (item.id === row.id) {
+            if (item.role_id === row.role_id) {
               item.status = val
             }
           })
@@ -92,15 +91,15 @@ const PageViewRole: React.FC<IProps> = props => {
     },
     {
       title: '角色名称',
-      dataIndex: 'name',
+      dataIndex: 'role_name',
     },
     {
       title: '角色编码',
-      dataIndex: 'code',
+      dataIndex: 'role_key',
     },
     {
       title: '排序',
-      dataIndex: 'sort',
+      dataIndex: 'role_sort',
     },
     {
       title: '状态',
@@ -114,6 +113,10 @@ const PageViewRole: React.FC<IProps> = props => {
           onChange={val => onStatusChange(row, val)}
         />
       ),
+    },
+    {
+      title: '备注',
+      dataIndex: 'remark',
     },
     // {
     //   title: '创建时间',
@@ -157,10 +160,10 @@ const PageViewRole: React.FC<IProps> = props => {
       <Space size={20} direction="vertical" style={{width: '100%'}}>
         <Toolbars>
           <Form layout="inline" form={form}>
-            <Form.Item name="name">
+            <Form.Item name="role_name">
               <Input placeholder="请输入角色名称" allowClear className="tool-input-w-150"></Input>
             </Form.Item>
-            <Form.Item name="code">
+            <Form.Item name="role_key">
               <Input placeholder="请输入角色编码" allowClear className="tool-input-w-150"></Input>
             </Form.Item>
             <Form.Item name="status">

@@ -109,7 +109,7 @@ const PageViewUser: React.FC<IProps> = props => {
     {
       title: '性别',
       dataIndex: 'sex',
-      render: val => (val === 0 ? '男' : val === 1 ? '女' : '-'),
+      render: val => (val == 0 ? '男' : val == 1 ? '女' : '-'),
     },
     {
       title: '角色',

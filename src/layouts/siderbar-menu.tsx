@@ -11,7 +11,7 @@ import {getStore, setStore} from '@/utils/store'
 import Global from '@/store/global'
 import TagView from '@/store/tag-view'
 import * as icon from '@ant-design/icons'
-// import {AppstoreOutlined, HomeOutlined} from '@ant-design/icons'
+// import {VideoCameraOutlined, UserOutlined, MenuOutlined, UploadOutlined} from '@ant-design/icons'
 interface IProps {
   //props:any
 }
@@ -27,7 +27,8 @@ const PageView: React.FC<IProps> = props => {
   const routeUrl = history.location.pathname
 
   useEffect(() => {
-    setMenusTree(arrayToTree(menuList, 0, 'id', 'parent_id'))
+    console.log('menuList:', menuList)
+    setMenusTree(arrayToTree(menuList, 0, 'menu_id', 'parent_id'))
   }, [menuList])
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const PageView: React.FC<IProps> = props => {
         const temp: any = menuList.find((item: any) => getMenuPath(item.is_frame, item.path) === routeUrl)
         console.log('menuList:', menuList)
         console.log('temp:', temp)
-        setCurrMenuKey(temp?.code || '')
+        setCurrMenuKey(temp?.perms || '')
       }
     }
   }, [routeUrl])
@@ -69,7 +70,7 @@ const PageView: React.FC<IProps> = props => {
         })
       : null
 
-  const isShowMenu = (item: any) => !item.visible && !item.status
+  const isShowMenu = (item: any) => !parseInt(item.visible) && !parseInt(item.status)
 
   const getUrl = (url: string) => (url.indexOf('http') > -1 ? url : 'https://' + url)
 
@@ -102,12 +103,12 @@ const PageView: React.FC<IProps> = props => {
             if (isShowMenu(item) && item.children?.length) {
               return (
                 <SubMenu
-                  key={item.code}
+                  key={item.perms}
                   title={
                     <span>
                       {/* <MenuOutlined /> */}
                       {getIcon(item.icon)}
-                      <span>{item.title}</span>
+                      <span>{item.menu_name}</span>
                     </span>
                   }>
                   {item.children.map(ele => {
@@ -115,18 +116,18 @@ const PageView: React.FC<IProps> = props => {
                       if (ele.is_frame === 2) {
                         // 外链
                         return (
-                          <Menu.Item key={ele.code} icon={getIcon(ele.icon)}>
+                          <Menu.Item key={ele.perms} icon={getIcon(ele.icon)}>
                             <span>
                               <a href={getUrl(ele.path)} target="_blank" rel="noopener noreferrer">
-                                {ele.title}
+                                {ele.menu_name}
                               </a>
                             </span>
                           </Menu.Item>
                         )
                       } else {
                         return (
-                          <Menu.Item key={ele.code} icon={getIcon(ele.icon)}>
-                            <Link to={getMenuPath(ele.is_frame, ele.path)}>{ele.title}</Link>
+                          <Menu.Item key={ele.perms} icon={getIcon(ele.icon)}>
+                            <Link to={getMenuPath(ele.is_frame, ele.path)}>{ele.menu_name}</Link>
                           </Menu.Item>
                         )
                       }
@@ -142,34 +143,33 @@ const PageView: React.FC<IProps> = props => {
               if (item.is_frame === 2) {
                 // 外链
                 return (
-                  <Menu.Item key={item.code} icon={getIcon(item.icon)}>
+                  <Menu.Item key={item.perms} icon={getIcon(item.icon)}>
                     <span>
                       <a href={getUrl(item.path)} target="_blank" rel="noopener noreferrer">
-                        {item.title}
+                        {item.menu_name}
                       </a>
                     </span>
                   </Menu.Item>
                 )
               } else {
                 return (
-                  <Menu.Item key={item.code} icon={getIcon(item.icon)}>
-                    <Link to={getMenuPath(item.is_frame, item.path)}>{item.title}</Link>
+                  <Menu.Item key={item.perms} icon={getIcon(item.icon)}>
+                    <Link to={getMenuPath(item.is_frame, item.path)}>{item.menu_name}</Link>
                   </Menu.Item>
                 )
               }
             }
             return ''
           })}
-
-          {/* <SubMenu
+          {/* 
+          <SubMenu
             key="tit2"
             title={
               <span>
                 <MenuOutlined />
                 <span>菜单</span>
               </span>
-            }
-          >
+            }>
             <Menu.Item key="dataSurvey1">
               <Link to="/need/home">菜单-1</Link>
             </Menu.Item>
@@ -196,8 +196,7 @@ const PageView: React.FC<IProps> = props => {
                 <MenuOutlined />
                 <span>其他</span>
               </span>
-            }
-          >
+            }>
             <Menu.Item key="dataSurvey11">
               <Link to="/need/home">其他-1</Link>
             </Menu.Item>
@@ -224,8 +223,7 @@ const PageView: React.FC<IProps> = props => {
                 <MenuOutlined />
                 <span>测试</span>
               </span>
-            }
-          > 
+            }>
             <Menu.Item key="dataSurvey111">
               <Link to="/need/home">测试-1</Link>
             </Menu.Item>
@@ -245,8 +243,7 @@ const PageView: React.FC<IProps> = props => {
               <Link to="/need/home">测试-6</Link>
             </Menu.Item>
           </SubMenu>
-*/}
-          {/* <Menu.Item key="1" icon={<UserOutlined />}>
+          <Menu.Item key="1" icon={<UserOutlined />}>
             nav 1
           </Menu.Item>
           <Menu.Item key="2" icon={<VideoCameraOutlined />}>

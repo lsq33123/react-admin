@@ -90,9 +90,8 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
         //保存
         if (props.isEdit) {
           const formData = (form.getFieldValue as any)()
-          debugger
           api
-            .updateMenu(formData.id, formData)
+            .updateMenu(formData.menu_id, formData)
             .then(res => {
               message.success('更新成功')
               props.onOk()

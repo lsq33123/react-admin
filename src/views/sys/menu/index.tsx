@@ -10,7 +10,7 @@ import './index.less'
 import {useForm} from 'antd/lib/form/util'
 import Edit from './edit'
 import {useBoolean} from 'ahooks'
-import {arrayToTree} from '@/utils/array'
+import {handleTree} from '@/utils/array'
 import * as icon from '@ant-design/icons'
 
 interface IProps {
@@ -42,7 +42,8 @@ const PageViewRole: React.FC<IProps> = props => {
           item.key = item.menu_id
           item.title = item.menu_name
         })
-        setTableData(arrayToTree(data, 0, 'menu_id', 'parent_id'))
+        // setTableData(arrayToTree(data, 0, 'menu_id', 'parent_id'))
+        setTableData(handleTree(data, 'menu_id', 'parent_id'))
       })
       .catch(() => {
         setTableLoading.setFalse()

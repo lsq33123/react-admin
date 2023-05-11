@@ -95,7 +95,7 @@ const PageViewDict: React.FC<IProps> = props => {
       api.addDictType(formData).then(res => {
         // console.log('res:', res)
         message.success('新增分类成功')
-        getTypeTree({is_disabled: 0})
+        getTypeTree({status: 0})
       })
     }
     if (isType && isEdit) {
@@ -103,7 +103,7 @@ const PageViewDict: React.FC<IProps> = props => {
       api.updateTypeList(formData).then(res => {
         // console.log('res:', res)
         message.success('修改分类成功')
-        getTypeTree({is_disabled: 0})
+        getTypeTree({status: 0})
       })
     }
     if (!isType && !isEdit) {
@@ -112,7 +112,7 @@ const PageViewDict: React.FC<IProps> = props => {
       api.addDictData(formData).then(res => {
         // console.log('res:', res)
         message.success('新增字典成功')
-        getDataList({type_id: currTypeId, is_disabled: 0, name: seachData})
+        getDataList({type_id: currTypeId, status: 0, name: seachData})
       })
     }
     if (!isType && isEdit) {
@@ -120,7 +120,7 @@ const PageViewDict: React.FC<IProps> = props => {
       api.updateDataList(formData).then(res => {
         // console.log('res:', res)
         message.success('修改字典成功')
-        getDataList({type_id: currTypeId, is_disabled: 0, name: seachData})
+        getDataList({type_id: currTypeId, status: 0, name: seachData})
       })
     }
     setShowEdit.setFalse()
@@ -132,13 +132,13 @@ const PageViewDict: React.FC<IProps> = props => {
   }
 
   useEffect(() => {
-    getTypeTree({cache: true, is_disabled: 0})
-    // getDataList({type_id: currTypeId, cache: true, is_disabled: 0})
+    getTypeTree({cache: true, status: 0})
+    // getDataList({type_id: currTypeId, cache: true, status: 0})
   }, [])
 
   useEffect(() => {
     if (currTypeId) {
-      getDataList({type_id: currTypeId, is_disabled: 0})
+      getDataList({type_id: currTypeId, status: 0})
     }
   }, [currTypeId])
 
@@ -158,11 +158,11 @@ const PageViewDict: React.FC<IProps> = props => {
   }
 
   const onSearchType = val => {
-    // getDataList({type_id: currTypeId, is_disabled: 0, name: val})
-    getTypeTree({is_disabled: 0, name: val})
+    // getDataList({type_id: currTypeId, status: 0, name: val})
+    getTypeTree({status: 0, name: val})
   }
   const onSearchData = val => {
-    getDataList({type_id: currTypeId, is_disabled: 0, name: val})
+    getDataList({type_id: currTypeId, status: 0, name: val})
   }
   const getTreeNode = data => {
     return data.map(item => {

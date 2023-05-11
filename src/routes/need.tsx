@@ -18,7 +18,7 @@ const PageViewNeed: React.FC = () => {
     let title = 'new Page'
     menuList.forEach(item => {
       if (getMenuPath(item.is_frame, item.path) === pathname) {
-        title = item.title
+        title = item.menu_name
       }
     })
     return title

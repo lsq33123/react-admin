@@ -1,12 +1,12 @@
 /** @format */
 
-import {useState, useEffect} from 'react'
-import {createContainer} from 'unstated-next'
-import {getStore, setStore, removeStore} from '@/utils/store'
+import { useState, useEffect } from 'react'
+import { createContainer } from 'unstated-next'
+import { getStore, setStore, removeStore } from '@/utils/store'
 // import {useHistory} from 'react-router-dom'
 const homeView = {
   pathname: '/need/nav/home',
-  state: {title: '首页'},
+  state: { title: '首页' },
 }
 
 const defaultViewList = getStore('viewList') || [homeView]
@@ -54,7 +54,7 @@ const useTabView = () => {
       oldViewList.forEach((item, index, arr) => {
         if (item.pathname === view.pathname) {
           arr.splice(index, 1)
-          newCurrView = {...oldViewList[index - 1]}
+          newCurrView = { ...oldViewList[index - 1] }
         }
       })
       return oldViewList

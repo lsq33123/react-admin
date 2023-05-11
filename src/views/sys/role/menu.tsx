@@ -34,11 +34,11 @@ const PageViewRoleEdit: React.FC<IProps> = props => {
         const data = res.data || []
         data.forEach(item => {
           //处理数据
-          item.value = item.id
-          item.key = item.id
-          item.title = item.name
+          item.value = item.menu_id
+          item.key = item.menu_id
+          item.title = item.menu_name
         })
-        setTreeData(arrayToTree(data, 0, 'id', 'parent_id'))
+        setTreeData(arrayToTree(data, 0, 'menu_id', 'parent_id'))
         if (props.currRow.menu_ids && props.currRow.menu_ids.length) {
           const tempStrArr = props.currRow.menu_ids?.split(',') || []
           setCheckList(tempStrArr.map(item => Number(item)))
@@ -60,7 +60,7 @@ const PageViewRoleEdit: React.FC<IProps> = props => {
   const onOk = () => {
     // 保存
     api
-      .updateRole(props.currRow.id, {menu_ids: checkList})
+      .updateRole(props.currRow.role_id, {menu_ids: checkList})
       .then(res => {
         if (res.code === 0) {
           message.success('更新成功')
@@ -85,7 +85,7 @@ const PageViewRoleEdit: React.FC<IProps> = props => {
       onCancel={props.onCancel}
       okText="确定"
       cancelText="取消">
-      {JSON.stringify(checkList)}
+      {/* {JSON.stringify(checkList)} */}
       <Spin spinning={tableLoading}>
         <Scrollbars autoHide autoHideTimeout={500} autoHideDuration={200} className="scroller-menu-role">
           <Tree checkable onSelect={onSelect} onCheck={onCheck} checkedKeys={checkList} treeData={treeData} />

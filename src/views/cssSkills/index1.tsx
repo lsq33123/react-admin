@@ -10,7 +10,7 @@ interface IProps {
 
 const PageView: React.FC<IProps> = props => {
   return (
-    <div id="cssSkillsIndex1" className="contrainerBox">
+    <div id="cssSkillsIndex2" className="contrainerBox">
       <Title level={4}>模拟flex布局</Title>
 
       <div className="showBox flex-center">

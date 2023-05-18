@@ -90,25 +90,15 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
         //保存
         if (props.isEdit) {
           const formData = (form.getFieldValue as any)()
-          api
-            .updateMenu(formData.menu_id, formData)
-            .then(res => {
-              message.success('更新成功')
-              props.onOk()
-            })
-            .catch(err => {
-              message.error('更新失败')
-            })
+          api.updateMenu(formData.menu_id, formData).then(res => {
+            message.success('更新成功')
+            props.onOk()
+          })
         } else {
-          api
-            .addMenuList({...res})
-            .then(res => {
-              message.success('添加成功')
-              props.onOk()
-            })
-            .catch(err => {
-              message.error('添加失败')
-            })
+          api.addMenuList({...res}).then(res => {
+            message.success('添加成功')
+            props.onOk()
+          })
         }
       })
       .catch(err => {})

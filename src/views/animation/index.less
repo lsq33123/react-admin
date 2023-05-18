@@ -1,0 +1,144 @@
+/** @format */
+
+#PageViewAnimation {
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  .flex {
+    display: flex;
+    &-center {
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .item-body {
+    border: 1px solid #eee;
+    border-collapse: collapse;
+    min-height: 200px;
+  }
+  .item-body + .item-body {
+    border-left: 0px;
+  }
+}
+// ==============
+.script-bf-box {
+  width: 100px;
+  height: 300px;
+  background: #d3adf7;
+  margin: 5px;
+  will-change: transform;
+}
+
+.script-bf-box:hover {
+  background: hotpink;
+}
+
+// ==============
+.c {
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: 300px;
+  max-height: 200px;
+  width: 50ch;
+  height: 50ch;
+  cursor: pointer;
+  will-change: transform, opacity;
+}
+
+.front,
+.back {
+  background-size: cover;
+}
+
+.back {
+  // background-image: url(https://images.unsplash.com/photo-1544511916-0148ccdeb877?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1901&q=80i&auto=format&fit=crop);
+  background-image: url(../../assets/img/avatar.jpg);
+}
+
+.front {
+  // background-image: url(https://images.unsplash.com/photo-1540206395-68808572332f?ixlib=rb-1.2.1&w=1181&q=80&auto=format&fit=crop);
+  background-image: url(../../assets/img/pic1.jpg);
+}
+// ==============
+.draggable-main {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  font-family: 'Raleway', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f0f0f0;
+}
+
+.content-body {
+  position: relative;
+  width: 320px;
+  height: 240px;
+}
+
+.content-body > div {
+  position: absolute;
+  width: 320px;
+  height: 90px;
+  overflow: visible;
+  pointer-events: auto;
+  transform-origin: 50% 50% 0px;
+  border-radius: 5px;
+  color: white;
+  line-height: 90px;
+  padding-left: 32px;
+  font-size: 14.5px;
+  background: lightblue;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.content-body > div:nth-child(1) {
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+}
+.content-body > div:nth-child(2) {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+.content-body > div:nth-child(3) {
+  background: linear-gradient(135deg, #5ee7df 0%, #b490ca 100%);
+}
+.content-body > div:nth-child(4) {
+  background: linear-gradient(135deg, #c3cfe2 0%, #c3cfe2 100%);
+}
+
+// ==============
+
+.trails-main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trails-text {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
+  color: palevioletred;
+  font-size: 5em;
+  font-weight: 800;
+  text-transform: uppercase;
+  will-change: transform, opacity;
+  overflow: hidden;
+}
+
+.trails-text > div {
+  overflow: hidden;
+}
+
+// ==============

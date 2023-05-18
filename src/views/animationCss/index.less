@@ -1,0 +1,174 @@
+/** @format */
+
+#PageViewAnimationCss {
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  display: flex;
+
+  .side-div {
+    width: 250px;
+    flex-shrink: 0;
+  }
+
+  .right-div {
+    width: 100%;
+    &-row {
+      height: 300px;
+    }
+    &-col {
+      .img {
+        width: 100px;
+        height: 100px;
+      }
+      .img2 {
+        width: 50px;
+        height: 50px;
+      }
+
+      .demo1 {
+        transition: 1s;
+        &:hover {
+          margin-left: 200px;
+          margin-top: 50px;
+        }
+      }
+      .demo2 {
+        transition: 1s width, 2s height;
+        &:hover {
+          width: 200px;
+          height: 200px;
+        }
+      }
+      .demo3 {
+        transition: 1s width, 2s height;
+        transition-delay: 1s;
+        &:hover {
+          width: 200px;
+          height: 200px;
+        }
+      }
+      .demo4 {
+        transition: 1s width, 1s 1s height;
+        &:hover {
+          width: 200px;
+          height: 200px;
+        }
+      }
+      .demo55 {
+        .demo51 {
+          transition: 1s linear;
+        }
+        .demo52 {
+          transition: 1s ease-in;
+        }
+        .demo53 {
+          transition: 1s ease-out;
+        }
+        .demo54 {
+          transition: 1s cubic-bezier(0.83, 0.97, 0.05, 1.44);
+        }
+      }
+      .demo55:hover {
+        .demo51,
+        .demo52,
+        .demo53,
+        .demo54 {
+          margin-left: 80%;
+        }
+      }
+
+      @keyframes rainbow {
+        0% {
+          background: #c00;
+          margin-left: 200px;
+        }
+        25% {
+          background: orange;
+          margin-left: 0px;
+        }
+        50% {
+          background: yellowgreen;
+          margin-top: 100px;
+        }
+        100% {
+          background: rgb(55, 129, 226);
+          margin-left: 200px;
+        }
+      }
+
+      .animation1 {
+        border: 1px solid #999;
+        animation: 2s rainbow;
+      }
+      .animation2 {
+        border: 1px solid #999;
+        animation: 2s rainbow infinite;
+      }
+      .animation3 {
+        border: 1px solid #999;
+        animation: 2s rainbow 3;
+      }
+      .animation4 {
+        border: 1px solid #999;
+        animation: 2s rainbow forwards;
+      }
+      .animation51 {
+        border: 1px solid #999;
+        animation: 2s rainbow infinite normal;
+      }
+      .animation52 {
+        border: 1px solid #999;
+        animation: 2s rainbow infinite alternate;
+      }
+      .animation53 {
+        border: 1px solid #999;
+        animation: 2s rainbow infinite reverse;
+      }
+      .animation54 {
+        border: 1px solid #999;
+        animation: 2s rainbow infinite alternate-reverse;
+      }
+      .animation6 {
+        border: 1px solid #999;
+        animation: 2s rainbow infinite steps(10);
+      }
+      .animation7 {
+        border: 1px solid #999;
+        animation: 2s rainbow infinite;
+        animation-play-state: paused;
+        :hover {
+          animation-play-state: running;
+        }
+      }
+      .animation7-div {
+        width: 100%;
+        height: 100%;
+        &:hover {
+          .animation7 {
+            animation-play-state: running;
+          }
+        }
+      }
+    }
+  }
+
+  .flex {
+    display: flex;
+    &-center {
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .bg-img1 {
+    background-image: url(../../assets/img/emoji2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .bg-img3 {
+    background-image: url(../../assets/img/emoji3.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}

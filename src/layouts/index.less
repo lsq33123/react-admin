@@ -3,6 +3,9 @@
 @import '@/assets/css/define.less';
 
 header.header {
+  position: sticky;
+  top: 0px;
+  z-index: 2000;
   background-color: white;
   display: flex;
   justify-content: space-between;
@@ -83,7 +86,7 @@ aside.sider {
     font-weight: bold;
     color: white;
     white-space: nowrap;
-    transition: width 0.2s;
+    transition: all 0.2s;
     @flex-center();
   }
 

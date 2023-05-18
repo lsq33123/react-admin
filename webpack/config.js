@@ -3,6 +3,7 @@ const srcPath = path.join(__dirname, '../src')
 const dictPath = path.join(__dirname, '../dist')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpack = require('webpack')
 
@@ -92,14 +93,23 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin({}),
     new HTMLWebpackPlugin({
-      template: path.join(srcPath, 'index.html'),
+      // template: path.join(srcPath, 'index.html'),
+      template: path.join(__dirname, '../public/index.html')
     }),
+    new CopyPlugin([
+      {
+        from: path.join(__dirname, '../public'),
+        to: path.join(__dirname, '../dist'),
+        ignore: ['index.html'],
+      },
+    ]),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[hash:8].css',
       // allChunks: true,
     }),
     new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: `"${env}"` }
+      'process.env': { NODE_ENV: `"${env}"` },
+      'BASE_URL': "'./'"
     })
   ],
   // 核心配置

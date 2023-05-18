@@ -5,6 +5,35 @@
   box-sizing: border-box;
 }
 
+//滚动条样式
+::-webkit-scrollbar {
+  width: 10px; //纵向宽度
+  height: 10px; //横向高度
+}
+
+::-webkit-scrollbar-track {
+  //底色
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  //角落箭头区域
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  //滚动条颜色
+  background-color: #ccc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ddd
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #ccc
+}
+
 .container-body {
   margin: 20px;
   // background-color: white;

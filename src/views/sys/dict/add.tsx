@@ -5,7 +5,6 @@ import Modal from 'antd/lib/modal/Modal'
 import {Form, Input, InputNumber, Radio, TreeSelect, Button, Row, Col} from 'antd'
 import {useBoolean} from 'ahooks'
 import * as api from '@/api'
-import {useForm} from 'antd/lib/form/util'
 
 interface IProps {
   //props:any
@@ -21,7 +20,7 @@ interface IProps {
 const PageViewDictAdd: React.FC<IProps> = props => {
   const [showExtra, showExtraAct] = useBoolean(false)
   const [treeData, setTreeData] = useState([])
-  const [form] = useForm()
+  const [form] = Form.useForm()
   // const onOk = props => {
   //   //console.log(props)
   // }

@@ -5,7 +5,6 @@ import Modal from 'antd/lib/modal/Modal'
 import {Form, Input, message, InputNumber, Radio, Row, Col, TreeSelect, Popover} from 'antd'
 import * as icon from '@ant-design/icons'
 import {CloseOutlined} from '@ant-design/icons'
-import {useForm} from 'antd/lib/form/util'
 
 import * as api from '@/api'
 // import {useBoolean} from 'ahooks'
@@ -26,7 +25,7 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
   const [iconList, setIconList] = useState<Array<any>>([])
   const [showIconList, setShowIconList] = useState<Array<any>>([])
   const [currIcon, setCurrIcon] = useState('')
-  const [form] = useForm()
+  const [form] = Form.useForm()
 
   useEffect(() => {
     if (props.isEdit) {

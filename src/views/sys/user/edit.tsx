@@ -3,7 +3,6 @@
 import React from 'react'
 import Modal from 'antd/lib/modal/Modal'
 import {Form, Input, message} from 'antd'
-import {useForm} from 'antd/lib/form/util'
 import * as api from '@/api'
 
 interface IProps {
@@ -13,7 +12,7 @@ interface IProps {
 }
 
 const PageViewUserEdit: React.FC<IProps> = props => {
-  const [form] = useForm()
+  const [form] = Form.useForm()
   const formOptions = {
     labelCol: {
       flex: '100px',

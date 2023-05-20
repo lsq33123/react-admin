@@ -3,7 +3,6 @@
 import React, {useEffect} from 'react'
 import Modal from 'antd/lib/modal/Modal'
 import {Form, Input, message, InputNumber, Radio} from 'antd'
-import {useForm} from 'antd/lib/form/util'
 import * as api from '@/api'
 
 interface IProps {
@@ -15,7 +14,7 @@ interface IProps {
 }
 
 const PageViewRoleEdit: React.FC<IProps> = props => {
-  const [form] = useForm()
+  const [form] = Form.useForm()
 
   useEffect(() => {
     if (props.isEdit) {

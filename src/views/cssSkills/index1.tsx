@@ -1,8 +1,8 @@
 /** @format */
 
-import Title from 'antd/lib/typography/Title'
 import React from 'react'
 import './index.less'
+import DocModel from '@/components/DocModel'
 
 interface IProps {
   //props:any
@@ -10,20 +10,16 @@ interface IProps {
 
 const PageView: React.FC<IProps> = props => {
   return (
-    <div id="cssSkillsIndex1" className="contrainerBox">
-      <Title level={4}>模拟flex布局</Title>
-
-      <div className="showBox flex-center">
-        <div className="father ">
-          <div className="child">
-            <div className="child-item flex-center">13</div>
-            <div className="child-item flex-center">3</div>
-            <div className="child-item flex-center">66</div>
-            <div className="child-item flex-center">47775</div>
-          </div>
+    <DocModel title="模拟flex布局">
+      <div className="father ">
+        <div className="child">
+          <div className="child-item flex-center">13</div>
+          <div className="child-item flex-center">3</div>
+          <div className="child-item flex-center">66</div>
+          <div className="child-item flex-center">47775</div>
         </div>
       </div>
-    </div>
+    </DocModel>
   )
 }
 export default PageView

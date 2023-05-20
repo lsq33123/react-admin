@@ -8,7 +8,6 @@ import * as api from '@/api'
 import {formatMobile} from '@/utils/format'
 import dayjs from 'dayjs'
 import './index.less'
-import {useForm} from 'antd/lib/form/util'
 import Add from './add'
 import {useBoolean, useAntdTable} from 'ahooks'
 
@@ -22,7 +21,7 @@ const PageViewUser: React.FC<IProps> = props => {
   const [isEdit, setIsEdit] = useBoolean(false)
   // const [tableLoading, setTableLoading] = useBoolean(false)
   const [currRow, setCurrRow] = useState({})
-  const [form] = useForm()
+  const [form] = Form.useForm()
 
   // useEffect(() => {
   //   loadData({})

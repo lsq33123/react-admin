@@ -7,7 +7,6 @@ import Toolbars from '@/components/Toolbars'
 import * as api from '@/api'
 import dayjs from 'dayjs'
 import './index.less'
-import {useForm} from 'antd/lib/form/util'
 import Edit from './edit'
 import {useBoolean} from 'ahooks'
 import {handleTree} from '@/utils/array'
@@ -23,7 +22,7 @@ const PageViewRole: React.FC<IProps> = props => {
   const [isEdit, setIsEdit] = useBoolean(false)
   const [currRow, setCurrRow] = useState({})
   const [tableLoading, setTableLoading] = useBoolean(false)
-  const [form] = useForm()
+  const [form] = Form.useForm()
 
   useEffect(() => {
     loadData({})

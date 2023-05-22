@@ -1,5 +1,7 @@
 /** @format */
 
+/** @format */
+
 import React from 'react'
 import './index.less'
 import Chart from '@/components/Echarts'
@@ -55,10 +57,8 @@ const PageViewBar: React.FC<IProps> = props => {
           interval: 0,
           show: true,
           splitNumber: 15,
-          textStyle: {
-            fontSize: 10,
-            color: '#000',
-          },
+          fontSize: 10,
+          color: '#000',
         },
         data: datacity,
       },

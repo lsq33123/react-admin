@@ -46,9 +46,9 @@ const PageView: React.FC<IProps> = props => {
           位置：<span style={{color: 'red', marginRight: 20}}>{isHovering ? '里面' : '外面'}</span>
         </div>
         {isFullScreen}
-        <Button onClick={() => setIsFullScreen.setFull()}> setFull</Button>
-        <Button onClick={() => setIsFullScreen.exitFull()}> exitFull</Button>
-        <Button onClick={() => setIsFullScreen.toggleFull()}> toggleFull</Button>
+        <Button onClick={() => setIsFullScreen.enterFullscreen()}> setFull</Button>
+        <Button onClick={() => setIsFullScreen.exitFullscreen()}> exitFull</Button>
+        <Button onClick={() => setIsFullScreen.toggleFullscreen()}> toggleFull</Button>
         <img
           src="https://photo.harsonserver.com/FkGsm-taLCgNF5DxASb2-g6XuQ2i"
           style={{height: 'auto', width: 'auto', display: 'inline-block'}}

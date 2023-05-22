@@ -8,7 +8,7 @@ const loadingWrap: React.CSSProperties = {
   textAlign: 'center',
 }
 
-const PageLoading: React.SFC = () => {
+const PageLoading = () => {
   return (
     <div style={loadingWrap}>
       <Spin size="large" />

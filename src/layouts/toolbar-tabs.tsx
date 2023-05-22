@@ -3,7 +3,7 @@
 import React from 'react'
 import {Tabs} from 'antd'
 import TagViewStore from '@/store/tag-view'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 interface IProps {
   //props:any
@@ -11,11 +11,11 @@ interface IProps {
 
 const ToolBarTabs: React.FC<IProps> = props => {
   const {currView, viewList, delView} = TagViewStore.useContainer()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const onChange = key => {
     const currView = viewList.find(item => item.pathname === key)
-    currView && history.push(currView)
+    currView && navigate(currView)
   }
 
   const onEdit = key => {
@@ -37,9 +37,9 @@ const ToolBarTabs: React.FC<IProps> = props => {
     delView(currDelView)
     if (currDelView.pathname === currView.pathname) {
       if (viewList[currIndex + 1]) {
-        history.push(viewList[currIndex + 1])
+        navigate(viewList[currIndex + 1])
       } else {
-        history.push(viewList[currIndex - 1])
+        navigate(viewList[currIndex - 1])
       }
     }
   }

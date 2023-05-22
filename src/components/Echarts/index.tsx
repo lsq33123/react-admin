@@ -1,5 +1,9 @@
+/** @format */
+
+/** @format */
+
 import * as React from 'react'
-import echarts from 'echarts'
+import * as echarts from 'echarts'
 
 /**
  * 参数列表
@@ -15,7 +19,7 @@ import echarts from 'echarts'
 
 interface ChartProps {
   key: string
-  option: object | null
+  option: any
   style: {
     width: string
     height: string
@@ -27,7 +31,7 @@ interface ChartProps {
 
 const Chart = (props: ChartProps): React.ReactElement => {
   // 挂载节点
-  let chartDom = null
+  let chartDom: any = null
 
   // 生命钩子函数
   type Callback = () => void

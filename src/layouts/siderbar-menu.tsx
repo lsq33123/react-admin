@@ -3,7 +3,7 @@
 import React, {useState, useEffect} from 'react'
 import {Layout, Menu} from 'antd'
 import SubMenu from 'antd/lib/menu/SubMenu'
-import {Link, useHistory} from 'react-router-dom'
+import {Link, useNavigate, useLocation} from 'react-router-dom'
 import {Scrollbars} from 'react-custom-scrollbars'
 // import {menus} from '@/store/menus'
 import {arrayToTree} from '@/utils/array'
@@ -23,8 +23,9 @@ const PageView: React.FC<IProps> = props => {
   const [menusTree, setMenusTree] = useState<Array<any>>([])
   const [activeSubMenu, setActiveSubMenu] = useState(getStore('activeSubMenu') || ['nav'])
   const [currMenuKey, setCurrMenuKey] = useState<any>('home')
-  const history = useHistory()
-  const routeUrl = history.location.pathname
+  const navigate = useNavigate()
+  const location = useLocation()
+  const routeUrl = location.pathname
 
   useEffect(() => {
     console.log('menuList:', menuList)
@@ -37,7 +38,7 @@ const PageView: React.FC<IProps> = props => {
       setCurrMenuKey('home')
     } else {
       if (!menuList.length) {
-        history.replace('/noneed/login')
+        navigate('/noneed/login', {replace: true})
         logout()
         delAllView()
       } else {

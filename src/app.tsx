@@ -1,22 +1,25 @@
 /** @format */
 
 import React, {lazy, Suspense} from 'react'
-import {HashRouter, Switch, Route, Redirect} from 'react-router-dom'
+import {HashRouter, Routes, Route, Navigate} from 'react-router-dom'
 import Loading from '@/components/PageLoading/loading'
+let PageSys = lazy(() => import('@/routes/sys'))
+let PageNoneed = lazy(() => import('@/routes/noneed'))
+let PageNeed = lazy(() => import('@/routes/need'))
 
 const App = () => {
   return (
     <HashRouter>
       <Suspense fallback={<Loading />}>
-        <Switch>
+        <Routes>
           {/* 需要token验证才能访问的模块 */}
-          <Route path="/need" component={lazy(() => import('@/routes/need'))} />
+          <Route path="/need/*" element={<PageNeed />} />
           {/* 不需要token验证能访问的模块 */}
-          <Route path="/noneed" component={lazy(() => import('@/routes/noneed'))} />
+          <Route path="/noneed/*" element={<PageNoneed />} />
           {/* 系统模块 */}
-          <Route path="/sys" component={lazy(() => import('@/routes/sys'))} />
-          <Redirect from={'/'} to={'/noneed'} />
-        </Switch>
+          <Route path="/sys/*" element={<PageSys />} />
+          <Route path="/*" element={<Navigate to="/noneed/login" replace={true} />} />
+        </Routes>
       </Suspense>
     </HashRouter>
   )

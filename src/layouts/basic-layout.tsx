@@ -10,6 +10,7 @@ import ToolbarTabs from './toolbar-tabs'
 
 import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
 interface IProps {
+  children?: any
   //props:any
 }
 const PageView: React.FC<IProps> = props => {

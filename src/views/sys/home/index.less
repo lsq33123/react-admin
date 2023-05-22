@@ -4,14 +4,17 @@
 
 #showTop {
   display: flex;
-  margin: 40px 0 40px -20px;
+  margin: 15px 0 30px 0px;
 
+  .show-top-body + .show-top-body {
+    margin-left: 20px;
+  }
   .show-top-body {
     height: 100px;
     flex: 1;
     border: 1x solid #ccc;
     background-color: #fff;
-    margin-left: 20px;
+
     @flex-between();
     padding: 20px;
 
@@ -109,14 +112,14 @@
 
 .other-echart {
   display: flex;
-  margin: 40px 0 40px -20px;
-
-  &-body {
+  margin: 20px 0 0px 0px;
+.other-echart-body + .other-echart-body {
+    margin-left: 20px;
+  }
+  .other-echart-body {
     height: 360px;
     flex: 1;
-    border: 1x solid #ccc;
     background-color: #fff;
-    margin-left: 20px;
     @flex-between();
   }
 }

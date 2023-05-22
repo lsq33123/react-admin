@@ -1,5 +1,7 @@
 /** @format */
 
+/** @format */
+
 import React from 'react'
 import './index.less'
 import Chart from '@/components/Echarts'
@@ -56,11 +58,9 @@ const PageViewLine: React.FC<IProps> = props => {
         smooth: true,
         data: value1, //data.data.count
         lineStyle: {
-          normal: {
-            shadowColor: 'rgba(253, 130, 104, 0.1)',
-            shadowBlur: 2,
-            shadowOffsetY: 10,
-          },
+          shadowColor: 'rgba(253, 130, 104, 0.1)',
+          shadowBlur: 2,
+          shadowOffsetY: 10,
         },
       },
       {
@@ -69,11 +69,9 @@ const PageViewLine: React.FC<IProps> = props => {
         smooth: true,
         data: value2,
         lineStyle: {
-          normal: {
-            shadowColor: 'rgba(61,200,189, 0.1)',
-            shadowBlur: 2,
-            shadowOffsetY: 10,
-          },
+          shadowColor: 'rgba(61,200,189, 0.1)',
+          shadowBlur: 2,
+          shadowOffsetY: 10,
         },
       },
     ],

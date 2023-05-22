@@ -5,7 +5,7 @@ import {Menu, Dropdown} from 'antd'
 import './index.less'
 import Global from '@/store/global'
 import TagView from '@/store/tag-view'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import {UserOutlined, LogoutOutlined, QuestionCircleOutlined} from '@ant-design/icons'
 interface IProps {
   //props:any
@@ -14,17 +14,17 @@ interface IProps {
 const PageViewAvatarMenu: React.FC<IProps> = props => {
   const {logout} = Global.useContainer()
   const {delAllView} = TagView.useContainer()
-  const history = useHistory()
+  const navigate = useNavigate()
   const onLogout = () => {
     console.log('123:', 123)
-    history.replace('/noneed/login')
+    navigate('/noneed/login', {replace: true})
     logout()
     delAllView()
   }
 
   const avatarMenu = (
     <Menu>
-      <Menu.Item icon={<UserOutlined />} onClick={() => history.replace('/need/sys/my')}>
+      <Menu.Item icon={<UserOutlined />} onClick={() => navigate('/need/sys/my', {replace: true})}>
         <span style={{marginLeft: 0, marginRight: 40}}>个人中心</span>
       </Menu.Item>
       <Menu.Item icon={<QuestionCircleOutlined />}>

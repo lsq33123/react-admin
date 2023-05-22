@@ -15,9 +15,8 @@
     "strictNullChecks": true,
     "noImplicitThis": true,
     "forceConsistentCasingInFileNames": true,
-    "noUnusedLocals": true,
-    "noImplicitReturns": true,
-    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": false,
+    "noImplicitReturns": false,
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {

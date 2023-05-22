@@ -3,7 +3,7 @@ const srcPath = path.join(__dirname, '../src')
 const dictPath = path.join(__dirname, '../dist')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpack = require('webpack')
 
@@ -25,11 +25,18 @@ module.exports = {
     host: 'localhost',
     port: 3015,
     hot: true,
-    inline: true,
-    contentBase: ['./'],
-    publicPath: '/',
+    open: true,
+    // inline: true,
+    // contentBase: ['./'],
+    // publicPath: '/',
     historyApiFallback: true, //用于如果找不到界面就返回默认首页
     // disableHostCheck: true
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+      }
+    }
   },
   resolve: {
     alias: {
@@ -56,21 +63,32 @@ module.exports = {
       },
       {
         test: /\.(jpg|png|jpeg|gif)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 1024,
-              fallback: {
-                loader: 'file-loader',
-                options: {
-                  name: 'img/[name].[hash:8].[ext]',
-                },
-              },
-            },
-          },
-        ],
+        loader: "url-loader",
+        options: {
+          limit: 5 * 1024,
+          esModule: false,
+          name: 'img/[name].[hash:8].[ext]',
+        },
+        type: 'javascript/auto'
       },
+      // {
+      //   test: /\.(jpg|png|jpeg|gif)$/,
+      //   use: [
+      //     {
+      //       loader: 'url-loader',
+      //       options: {
+      //         limit: 1024,
+      //         fallback: {
+      //           loader: 'file-loader',
+      //           options: {
+      //             name: 'img/[name].[hash:8].[ext]',
+      //           },
+      //         },
+      //       },
+      //     },
+      //   ],
+      //   type: 'javascript/auto'
+      // },
       {
         test: /\.(mp4|webm|ogg|mp3|wav)$/,
         use: [
@@ -96,13 +114,20 @@ module.exports = {
       // template: path.join(srcPath, 'index.html'),
       template: path.join(__dirname, '../public/index.html')
     }),
-    new CopyPlugin([
-      {
-        from: path.join(__dirname, '../public'),
-        to: path.join(__dirname, '../dist'),
-        ignore: ['index.html'],
-      },
-    ]),
+    new CopyWebpackPlugin({
+      // 需拷贝的配置项
+      patterns: [
+        {
+          from: "public", // 从哪里 copy
+          // to: '', 这里可以省略 to，自动从 output 的 path 去找
+          globOptions: {
+            ignore: ['**/index.html']
+            // 这里必须在前面加 **/ 表示从当前路径下忽略
+            // 且忽略目录中文件后不能为空
+          }
+        },
+      ],
+    }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[hash:8].css',
       // allChunks: true,
@@ -114,6 +139,8 @@ module.exports = {
   ],
   // 核心配置
   optimization: {
+    nodeEnv: false, // 防止webpack将process.env.NODE_ENV设置为production //https://blog.csdn.net/weixin_42349568/article/details/124229170
+    runtimeChunk: 'single', //将runtime代码单独打包 解决无法热更新问题
     splitChunks: {
       cacheGroups: {
         //打包公共模块

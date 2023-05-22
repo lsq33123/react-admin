@@ -17,11 +17,11 @@ const PageViewRadar: React.FC<IProps> = props => {
     },
     radar: {
       indicator: [
-        {text: '绩效奖金', max: 100},
-        {text: '带薪年假', max: 100},
-        {text: '补充医疗保险', max: 100},
-        {text: '年底双薪', max: 100},
-        {text: '员工旅游', max: 100},
+        {name: '绩效奖金', max: 100},
+        {name: '带薪年假', max: 100},
+        {name: '补充医疗保险', max: 100},
+        {name: '年底双薪', max: 100},
+        {name: '员工旅游', max: 100},
       ],
       splitArea: {
         show: true,
@@ -35,13 +35,11 @@ const PageViewRadar: React.FC<IProps> = props => {
       axisLabel: {
         rotate: 30,
       },
-      name: {
+      axisName: {
         // (圆外的标签)雷达图每个指示器名称的配置项。
         formatter: '{value}',
-        textStyle: {
-          fontSize: 10,
-          color: '#333',
-        },
+        fontSize: 10,
+        color: '#333',
       },
     },
     series: {
@@ -73,14 +71,10 @@ const PageViewRadar: React.FC<IProps> = props => {
           value: [45, 70, 49, 55, 39],
           name: '其他',
           itemStyle: {
-            normal: {
-              color: '#FF6666',
-            },
+            color: '#FF6666',
           },
           areaStyle: {
-            normal: {
-              color: '#FF6666',
-            },
+            color: '#FF6666',
           },
         },
 
@@ -88,14 +82,10 @@ const PageViewRadar: React.FC<IProps> = props => {
           value: [60, 45, 77, 56, 50, 66],
           name: '我',
           itemStyle: {
-            normal: {
-              color: '#39A5FE',
-            },
+            color: '#39A5FE',
           },
           areaStyle: {
-            normal: {
-              color: '#39A5FE',
-            },
+            color: '#39A5FE',
           },
         },
       ],

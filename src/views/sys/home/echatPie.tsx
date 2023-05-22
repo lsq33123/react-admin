@@ -116,42 +116,39 @@ const PageViewPie: React.FC<IProps> = props => {
         radius: ['45%', '60%'],
         center: ['50%', '50%'],
         data: echartData,
-        hoverAnimation: false,
+        // hoverAnimation: false,
+        emphasis: {
+          scale: false,
+        },
         itemStyle: {
-          normal: {
-            borderColor: bgColor,
-            borderWidth: 2,
-          },
+          borderColor: bgColor,
+          borderWidth: 2,
         },
         labelLine: {
-          normal: {
-            length: 20,
-            length2: 120,
-            lineStyle: {
-              color: '#e6e6e6',
-            },
+          length: 20,
+          length2: 120,
+          lineStyle: {
+            color: '#e6e6e6',
           },
         },
         label: {
-          normal: {
-            formatter: params => {
-              return '{icon|●}{name|' + params.name + '}{value|' + formatNumber(params.value) + '}'
+          formatter: params => {
+            return '{icon|●}{name|' + params.name + '}{value|' + formatNumber(params.value) + '}'
+          },
+          padding: [0, -100, 25, -100],
+          rich: {
+            icon: {
+              fontSize: 16,
             },
-            padding: [0, -100, 25, -100],
-            rich: {
-              icon: {
-                fontSize: 16,
-              },
-              name: {
-                fontSize: 14,
-                padding: [0, 10, 0, 4],
-                color: '#666666',
-              },
-              value: {
-                fontSize: 18,
-                fontWeight: 'bold',
-                color: '#333333',
-              },
+            name: {
+              fontSize: 14,
+              padding: [0, 10, 0, 4],
+              color: '#666666',
+            },
+            value: {
+              fontSize: 18,
+              fontWeight: 'bold',
+              color: '#333333',
             },
           },
         },

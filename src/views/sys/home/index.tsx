@@ -6,6 +6,7 @@ import EchatLine from './echatLine'
 import EchatPie from './echatPie'
 import EchatBar from './echatBar'
 import EchatRadar from './echatRadar'
+import './index.less'
 const PageHome = props => {
   return (
     <div className="container-body">
@@ -22,7 +23,6 @@ const PageHome = props => {
           <EchatRadar />
         </div>
       </div>
-
       {/* <div className="other-echart">
         <div className="other-echart-body">
           <EchatPie />

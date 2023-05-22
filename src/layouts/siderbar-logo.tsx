@@ -7,6 +7,13 @@ interface IProps {
 }
 
 const PageView: React.FC<IProps> = props => {
-  return <span className="logo">{!props.collapsed ? <span>某某某系统</span> : <span>某某</span>}</span>
+  return (
+    <span className="logo">
+      <span>
+        <img src={require('@/assets/logo.png')} alt="" style={{width: '20px', height: '20px', marginRight: '6px'}} />
+      </span>
+      {!props.collapsed ? <span>某某某系统</span> : null}
+    </span>
+  )
 }
 export default PageView

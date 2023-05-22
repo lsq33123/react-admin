@@ -4,6 +4,7 @@ import React from 'react'
 import TagView from './tag-view'
 import Global from './global'
 interface IProps {
+  children?: any
   //props:any
 }
 

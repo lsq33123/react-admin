@@ -22,7 +22,8 @@ module.exports = {
     publicPath: '',
   },
   devServer: {
-    host: 'localhost',
+    // host: 'localhost',
+    host: '0.0.0.0',
     port: 3015,
     hot: true,
     open: true,

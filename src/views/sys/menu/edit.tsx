@@ -24,6 +24,7 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
   // const [showSelect, setShowSelect] = useBoolean(false)
   const [iconList, setIconList] = useState<Array<any>>([])
   const [showIconList, setShowIconList] = useState<Array<any>>([])
+  const [isShowIcon, setIsShowIcon] = useState<boolean>(false)
   const [currIcon, setCurrIcon] = useState('')
   const [form] = Form.useForm()
 
@@ -47,7 +48,7 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
   useEffect(() => {
     if (iconList.length) {
       if (currIcon) {
-        let arr = iconList.filter(item => item.toLowerCase().indexOf(currIcon) > -1)
+        let arr = iconList.filter(item => item.indexOf(currIcon) < 0)
         setShowIconList(arr)
       } else {
         setShowIconList(iconList)
@@ -133,9 +134,11 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
                   fontSize: '20px',
                   margin: '0px 10px 10px 0px',
                 },
+                key: index,
                 onClick: val => {
                   form.setFieldsValue({icon: item})
                   setCurrIcon(item)
+                  setIsShowIcon(false)
                 },
               })}
             </Popover>
@@ -150,7 +153,7 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
       destroyOnClose
       centered
       maskClosable={false}
-      visible={props.isShow}
+      open={props.isShow}
       onOk={onOk}
       onCancel={props.onCancel}
       okText="确定"
@@ -183,7 +186,7 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
             </Form.Item>
           </Col>
           <Col span={10}>
-            <Popover content={showIcon} trigger="focus">
+            <Popover content={showIcon} trigger="click" open={isShowIcon} onOpenChange={setIsShowIcon}>
               <Form.Item name="icon" label="菜单图标">
                 <Input
                   allowClear

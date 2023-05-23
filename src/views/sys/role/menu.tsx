@@ -76,7 +76,7 @@ const PageViewRoleEdit: React.FC<IProps> = props => {
 
   return (
     <Modal
-      title={`${props.currRow.name} - 绑定菜单 `}
+      title={`${props.currRow.role_name} - 绑定菜单 `}
       destroyOnClose
       centered
       maskClosable={false}

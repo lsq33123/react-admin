@@ -33,10 +33,7 @@ module.exports = {
     historyApiFallback: true, //用于如果找不到界面就返回默认首页
     // disableHostCheck: true
     client: {
-      overlay: {
-        errors: true,
-        warnings: false,
-      }
+      overlay: false
     }
   },
   resolve: {

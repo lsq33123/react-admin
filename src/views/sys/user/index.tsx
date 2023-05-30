@@ -6,7 +6,6 @@ import {SearchOutlined, PlusOutlined} from '@ant-design/icons'
 import Toolbars from '@/components/Toolbars'
 import * as api from '@/api'
 import {formatMobile} from '@/utils/format'
-import dayjs from 'dayjs'
 import './index.less'
 import Add from './add'
 import {useBoolean, useAntdTable} from 'ahooks'
@@ -39,14 +38,21 @@ const PageViewUser: React.FC<IProps> = props => {
   //       setTableLoading.setFalse()
   //     })
   // }
-  const getTableData = (page, formData) =>
-    api.getUersList({...formData, ...page}).then(res => {
+  const getTableData = (page, formData) => {
+    if (formData.tempDate && formData.tempDate.length > 0) {
+      formData.beginDate = formData.tempDate[0].format('YYYY-MM-DD') + ' 00:00:00'
+      formData.endDate = formData.tempDate[1].format('YYYY-MM-DD') + ' 23:59:59'
+    }
+    delete formData.tempDate
+    const {current, pageSize} = page
+    return api.getUersList({...formData, current, pageSize}).then(res => {
       setTableData(res.data.list)
       return {
         list: res.data.list,
         total: res.data.total,
       }
     })
+  }
 
   const {tableProps, search} = useAntdTable(getTableData, {
     defaultPageSize: 20,
@@ -57,13 +63,13 @@ const PageViewUser: React.FC<IProps> = props => {
   const onStatusChange = (row, value) => {
     const val = value ? 0 : 1
     api
-      .updateUersStatus(row.id, val)
+      .updateUersStatus(row.user_id, val)
       .then(res => {
         message.success('操作成功')
         setTableData(pre => {
           const tempArr = [...pre]
           tempArr.forEach((item, index, arr) => {
-            if (item.id === row.id) {
+            if (item.user_id === row.user_id) {
               item.status = val
             }
           })
@@ -130,12 +136,10 @@ const PageViewUser: React.FC<IProps> = props => {
     {
       title: '最后登录时间',
       dataIndex: 'login_date',
-      render: val => (val ? dayjs(val).format('YYYY-MM-DD HH:mm:ss') : ''),
     },
     {
       title: '更新时间',
       dataIndex: 'update_time',
-      render: val => (val ? dayjs(val).format('YYYY-MM-DD HH:mm:ss') : ''),
     },
     {
       title: '操作',
@@ -155,8 +159,8 @@ const PageViewUser: React.FC<IProps> = props => {
   ]
 
   return (
-    <div id="page-view-user" className="container-body ">
-      <Space size={20} direction="vertical" style={{width: '100%'}}>
+    <div className="container-body ">
+      <Space size={15} direction="vertical" style={{width: '100%'}}>
         <Toolbars>
           <Form layout="inline" form={form}>
             <Form.Item name="nick_name">
@@ -175,12 +179,7 @@ const PageViewUser: React.FC<IProps> = props => {
               </Select>
             </Form.Item>
             <Form.Item name="tempDate">
-              <DatePicker.RangePicker
-                allowClear
-                className="tool-datepacker-w-230"
-                onChange={(dates, dateStrs) =>
-                  api.setFormDateRange(dateStrs, form, 'beginDate', 'endDate')
-                }></DatePicker.RangePicker>
+              <DatePicker.RangePicker allowClear className="tool-datepacker-w-230"></DatePicker.RangePicker>
             </Form.Item>
             <Form.Item>
               <Button type="primary" icon={<SearchOutlined />} onClick={onSearch}>
@@ -202,11 +201,12 @@ const PageViewUser: React.FC<IProps> = props => {
         </Toolbars>
         <Table
           columns={column}
-          rowKey="id"
+          rowKey="user_id"
           // dataSource={tableData}
           // loading={tableProps.loading}
           {...{...tableProps, dataSource: tableData}}
           pagination={{
+            size: 'default',
             pageSizeOptions: ['10', '20', '50'],
             showSizeChanger: true,
             total: tableProps.pagination.total,

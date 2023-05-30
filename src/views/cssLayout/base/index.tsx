@@ -50,9 +50,16 @@ const PageView: React.FC<IProps> = props => {
           </div>
         </div>
       </Card>
-      <div id="part-2" style={{width: '100px', height: '300px'}}>
-        part-2
-      </div>
+      <Card title={items[1].title} bordered={false} id={items[1].key}>
+        <div className="father ">
+          <div className="child">
+            <div className="child-item flex-center">13</div>
+            <div className="child-item flex-center">3</div>
+            <div className="child-item flex-center">66</div>
+            <div className="child-item flex-center">47775</div>
+          </div>
+        </div>
+      </Card>
       <div id="part-3" style={{width: '100px', height: '300px'}}>
         part-3
       </div>

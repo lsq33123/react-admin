@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react'
 import {useBoolean} from 'ahooks'
 import {Row, Col, Card, Button, Tree, Table, Input, Space, message} from 'antd'
 import {DownOutlined, EditTwoTone} from '@ant-design/icons'
-import {Scrollbars} from 'react-custom-scrollbars'
+import {Scrollbars} from 'react-custom-scrollbars-2'
 import Add from './add'
 import * as api from '@/api'
 // import {
@@ -198,7 +198,7 @@ const PageViewDict: React.FC<IProps> = props => {
 
   return (
     <div id="page-view-dict" className="container-body ">
-      <Row gutter={20}>
+      <Row gutter={15}>
         <Col span={7}>
           <Card
             title=" "

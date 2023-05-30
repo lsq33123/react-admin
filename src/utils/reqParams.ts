@@ -1,4 +1,5 @@
 /** @format */
+import dayjs from "dayjs"
 //格式化请求接口的参数
 /*
   tableParams : {
@@ -51,3 +52,18 @@ export const setFormDateRange = (dateStrings, form, startField: string, endField
     [endField]: dateStrings[1] ? dateStrings[1] + ' 23:59:59' : '',
   })
 }
+// //form设置日期范围
+// export const setFormDateRange2 = (form, dateKey: string, startField: string, endField: string) => {
+//   if (!dateKey) {
+//     return
+//   } else if (form[dateKey] instanceof Array) {
+//     let date0 = dayjs(form[dateKey][0]).format('YYYY-MM-DD')
+//     let date1 = dayjs(form[dateKey][1]).format('YYYY-MM-DD')
+//     form.setFieldsValue({
+//       [startField]: date0 + ' 00:00:00',
+//       [endField]: date1 + ' 23:59:59',
+//     })
+//   } else {
+//     form.setFieldValue(startField, dayjs(form[dateKey]).format('YYYY-MM-DD') + ' 00:00:00')
+//   }
+// }

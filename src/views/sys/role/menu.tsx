@@ -6,7 +6,7 @@ import {message, Tree, Spin} from 'antd'
 import {arrayToTree} from '@/utils/array'
 import * as api from '@/api'
 import {useBoolean} from 'ahooks'
-import {Scrollbars} from 'react-custom-scrollbars'
+import {Scrollbars} from 'react-custom-scrollbars-2'
 import './index.less'
 
 interface IProps {

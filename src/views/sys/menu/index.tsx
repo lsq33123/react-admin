@@ -87,6 +87,7 @@ const PageViewRole: React.FC<IProps> = props => {
 
   const onSearch = () => {
     const formData = (form.getFieldValue as any)()
+    console.log('formData:', formData)
     loadData(formData)
   }
 
@@ -181,8 +182,8 @@ const PageViewRole: React.FC<IProps> = props => {
   ]
 
   return (
-    <div id="page-view-user" className="container-body ">
-      <Space size={20} direction="vertical" style={{width: '100%'}}>
+    <div className="container-body ">
+      <Space size={15} direction="vertical" style={{width: '100%'}}>
         <Toolbars>
           <Form layout="inline" form={form}>
             <Form.Item name="menu_name">
@@ -192,16 +193,24 @@ const PageViewRole: React.FC<IProps> = props => {
               <Input placeholder="请输入角色编码" allowClear className="tool-input-w-150"></Input>
             </Form.Item>
             <Form.Item name="visible">
-              <Select allowClear placeholder="请选择显示状态" className="tool-input-w-150">
-                <Select.Option value={0}>显示</Select.Option>
-                <Select.Option value={1}>隐藏</Select.Option>
-              </Select>
+              <Select
+                allowClear
+                placeholder="请选择显示状态"
+                className="tool-input-w-150"
+                options={[
+                  {label: '显示', value: 0},
+                  {label: '隐藏', value: 1},
+                ]}></Select>
             </Form.Item>
             <Form.Item name="status">
-              <Select allowClear placeholder="请选择状态" className="tool-input-w-150">
-                <Select.Option value={0}>启用</Select.Option>
-                <Select.Option value={1}>禁用</Select.Option>
-              </Select>
+              <Select
+                allowClear
+                placeholder="请选择状态"
+                className="tool-input-w-150"
+                options={[
+                  {label: '启用', value: 0},
+                  {label: '禁用', value: 1},
+                ]}></Select>
             </Form.Item>
             <Form.Item name="tempDate">
               <DatePicker.RangePicker
@@ -229,7 +238,7 @@ const PageViewRole: React.FC<IProps> = props => {
             </Form.Item>
           </Form>
         </Toolbars>
-        <Table columns={column} dataSource={tableData} rowKey="id" loading={tableLoading}></Table>
+        <Table columns={column} dataSource={tableData} rowKey="menu_id" loading={tableLoading}></Table>
       </Space>
       {isShowEdit && (
         <Edit

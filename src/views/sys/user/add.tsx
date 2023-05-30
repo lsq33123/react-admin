@@ -24,8 +24,10 @@ const PageViewUserEdit: React.FC<IProps> = props => {
       const temp = {...props.currRow}
       if (temp.role_ids && temp.role_ids.length) {
         temp.role_ids = temp.role_ids.split(',').map(item => Number(item))
+      } else {
+        temp.role_ids = undefined
       }
-      console.log('temp:', temp)
+      // console.log('temp:', temp)
       form.setFieldsValue({...temp})
     }
     initData()
@@ -69,26 +71,16 @@ const PageViewUserEdit: React.FC<IProps> = props => {
         //保存
         if (props.isEdit) {
           //编辑
-          api
-            .updateUser(props.currRow.id, {...props.currRow, ...res})
-            .then(res => {
-              message.success('用户更新成功')
-              props.onOk()
-            })
-            .catch(err => {
-              message.error('用户更新失败')
-            })
+          api.updateUser(props.currRow.user_id, {...props.currRow, ...res}).then(res => {
+            message.success('用户更新成功')
+            props.onOk()
+          })
         } else {
           //新增
-          api
-            .addUersList({...res})
-            .then(res => {
-              message.success('用户添加成功')
-              props.onOk()
-            })
-            .catch(err => {
-              message.error('用户添加失败')
-            })
+          api.addUersList({...res}).then(res => {
+            message.success('用户添加成功')
+            props.onOk()
+          })
         }
       })
       .catch(err => {})
@@ -112,7 +104,7 @@ const PageViewUserEdit: React.FC<IProps> = props => {
           label="昵称"
           rules={[
             {required: true, whitespace: true, message: '昵称不能为空'},
-            {min: 4, message: '昵称至少4位'},
+            {min: 2, message: '昵称至少2位'},
             {max: 12, message: '昵称最多12位'},
           ]}>
           <Input style={{width: '610px'}}></Input>
@@ -126,7 +118,7 @@ const PageViewUserEdit: React.FC<IProps> = props => {
                 // 声明式验证: 直接使用别人定义好的验证规则进行验证
                 {required: true, whitespace: true, message: '账号不能为空'},
                 {min: 4, message: '账号至少4位'},
-                {max: 12, message: '账号最多12位'},
+                {max: 16, message: '账号最多16位'},
                 {pattern: /^[a-zA-Z0-9_]+$/, message: '账号必须是英文、数字或下划线组成'},
               ]}>
               <Input></Input>
@@ -174,8 +166,8 @@ const PageViewUserEdit: React.FC<IProps> = props => {
             <Form.Item name="role_ids" label="角色">
               <Select mode="multiple" loading={selectLoading}>
                 {roleList.map((item, index) => (
-                  <Select.Option value={item.id} key={index}>
-                    {item.name}
+                  <Select.Option value={item.role_id} key={index}>
+                    {item.role_name}
                   </Select.Option>
                 ))}
               </Select>

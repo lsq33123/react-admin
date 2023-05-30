@@ -5,7 +5,6 @@ import {Table, Input, Button, Space, Form, DatePicker, Select, Switch, message} 
 import {SearchOutlined, PlusOutlined} from '@ant-design/icons'
 import Toolbars from '@/components/Toolbars'
 import * as api from '@/api'
-import dayjs from 'dayjs'
 import './index.less'
 import Edit from './edit'
 import Menu from './menu'
@@ -41,14 +40,21 @@ const PageViewRole: React.FC<IProps> = props => {
   //     })
   // }
 
-  const getTableData = (page, formData) =>
-    api.getRoleList({...formData, ...page}).then(res => {
+  const getTableData = (page, formData) => {
+    if (formData.tempDate && formData.tempDate.length > 0) {
+      formData.beginDate = formData.tempDate[0].format('YYYY-MM-DD') + ' 00:00:00'
+      formData.endDate = formData.tempDate[1].format('YYYY-MM-DD') + ' 23:59:59'
+    }
+    delete formData.tempDate
+
+    return api.getRoleList({...formData, ...page}).then(res => {
       setTableData(res.data.list)
       return {
         list: res.data.list,
         total: res.data.total,
       }
     })
+  }
 
   const {tableProps, search} = useAntdTable(getTableData, {
     defaultPageSize: 20,
@@ -58,23 +64,18 @@ const PageViewRole: React.FC<IProps> = props => {
 
   const onStatusChange = (row, value) => {
     const val = value ? 0 : 1
-    api
-      .updateRoleStatus(row.role_id, val)
-      .then(res => {
-        message.success('操作成功')
-        setTableData(pre => {
-          const tempArr = [...pre]
-          tempArr.forEach((item, index, arr) => {
-            if (item.role_id === row.role_id) {
-              item.status = val
-            }
-          })
-          return tempArr
+    api.updateRoleStatus(row.role_id, val).then(res => {
+      message.success('操作成功')
+      setTableData(pre => {
+        const tempArr = [...pre]
+        tempArr.forEach((item, index, arr) => {
+          if (item.role_id === row.role_id) {
+            item.status = val
+          }
         })
+        return tempArr
       })
-      .catch(err => {
-        message.error('操作失败')
-      })
+    })
   }
 
   const onSearch = () => {
@@ -126,8 +127,6 @@ const PageViewRole: React.FC<IProps> = props => {
     {
       title: '更新时间',
       dataIndex: 'update_time',
-      render: (val, row) =>
-        val ? dayjs(val).format('YYYY-MM-DD HH:mm:ss') : dayjs(row.create_time).format('YYYY-MM-DD HH:mm:ss'),
     },
     {
       title: '操作',
@@ -156,8 +155,8 @@ const PageViewRole: React.FC<IProps> = props => {
   ]
 
   return (
-    <div id="page-view-user" className="container-body ">
-      <Space size={20} direction="vertical" style={{width: '100%'}}>
+    <div className="container-body ">
+      <Space size={15} direction="vertical" style={{width: '100%'}}>
         <Toolbars>
           <Form layout="inline" form={form}>
             <Form.Item name="role_name">
@@ -173,12 +172,7 @@ const PageViewRole: React.FC<IProps> = props => {
               </Select>
             </Form.Item>
             <Form.Item name="tempDate">
-              <DatePicker.RangePicker
-                allowClear
-                className="tool-datepacker-w-230"
-                onChange={(dates, dateStrs) =>
-                  api.setFormDateRange(dateStrs, form, 'beginDate', 'endDate')
-                }></DatePicker.RangePicker>
+              <DatePicker.RangePicker allowClear className="tool-datepacker-w-230"></DatePicker.RangePicker>
             </Form.Item>
             <Form.Item>
               <Button type="primary" icon={<SearchOutlined />} onClick={onSearch}>
@@ -202,7 +196,7 @@ const PageViewRole: React.FC<IProps> = props => {
           columns={column}
           // dataSource={tableData}
           {...{...tableProps, dataSource: tableData}}
-          rowKey="id"
+          rowKey="role_id"
           pagination={{
             pageSizeOptions: ['10', '20', '50'],
             showSizeChanger: true,

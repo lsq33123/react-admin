@@ -48,8 +48,7 @@ const PageViewRoleEdit: React.FC<IProps> = props => {
         //保存
         if (props.isEdit) {
           const formData = (form.getFieldValue as any)()
-          debugger
-          api.updateRole(formData.id, formData).then(res => {
+          api.updateRole(formData.role_id, formData).then(res => {
             message.success('更新成功')
             props.onOk()
           })
@@ -83,6 +82,9 @@ const PageViewRoleEdit: React.FC<IProps> = props => {
         </Form.Item>
         <Form.Item name="role_sort" label="排序" rules={[{required: true}]}>
           <InputNumber min={0} max={999} />
+        </Form.Item>
+        <Form.Item name="remark" label="备注">
+          <Input></Input>
         </Form.Item>
         <Form.Item name="status" label="状态" rules={[{required: true}]}>
           <Radio.Group>

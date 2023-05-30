@@ -12,7 +12,7 @@ const PageView: React.FC<IProps> = props => {
       <span>
         <img src={require('@/assets/logo.png')} alt="" style={{width: '20px', height: '20px', marginRight: '6px'}} />
       </span>
-      {!props.collapsed ? <span>某某某系统</span> : null}
+      {!props.collapsed ? <span>系统</span> : null}
     </span>
   )
 }

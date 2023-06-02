@@ -14,6 +14,10 @@ const PageView: React.FC<IProps> = props => {
         <span>https://juejin.cn/post/7020396322062598181#heading-9</span>
       </div>
       <div>
+        <span style={{fontWeight: 'bold'}}>Threejs掘金（二）：</span>
+        <span>https://juejin.cn/post/7020422904248533029#heading-16</span>
+      </div>
+      <div>
         <span style={{fontWeight: 'bold'}}>Threejs中文文档：</span>
         <span>http://www.webgl3d.cn/pages/aac9ab/</span>
       </div>

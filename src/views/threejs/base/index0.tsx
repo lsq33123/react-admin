@@ -11,8 +11,6 @@ const PageViewIndex: React.FC<IProps> = props => {
 
   const init = () => {
     const threeBaseCurrent: any = threeBaseRef.current
-    console.log('threeBaseCurrent:', threeBaseCurrent.style)
-    console.dir(threeBaseCurrent)
     const scene = new THREE.Scene() // 1、创建场景
     // 2、创建相机
     const camera = new THREE.PerspectiveCamera(

@@ -13,8 +13,6 @@ const PageViewIndex: React.FC<IProps> = props => {
 
   const init = () => {
     const threeBaseCurrent: any = threeBaseRef.current
-    console.log('threeBaseCurrent:', threeBaseCurrent.style)
-    console.dir(threeBaseCurrent)
     const scene = new THREE.Scene() // 1、创建场景
     // 2、创建相机
     const camera = new THREE.PerspectiveCamera(
@@ -44,6 +42,24 @@ const PageViewIndex: React.FC<IProps> = props => {
     spotLight.castShadow = true
     scene.add(spotLight)
 
+    // 随机创建大量的模型,测试渲染性能
+    const num = 1000 //控制长方体模型数量
+    const group = new THREE.Group()
+    for (let i = 0; i < num; i++) {
+      const geometry = new THREE.BoxGeometry(5, 5, 5)
+      const material = new THREE.MeshLambertMaterial({
+        color: 0x00ffff,
+      })
+      const mesh = new THREE.Mesh(geometry, material)
+      // 随机生成长方体xyz坐标
+      const x = (Math.random() - 0.5) * 200
+      const y = (Math.random() - 0.5) * 200
+      const z = (Math.random() - 0.5) * 200
+      mesh.position.set(x, y, z)
+      group.add(mesh)
+      scene.add(group) // 模型对象插入场景中
+    }
+
     const axexHelper = new THREE.AxesHelper(1000) // 8、添加坐标轴辅助线
     scene.add(axexHelper)
 
@@ -67,6 +83,8 @@ const PageViewIndex: React.FC<IProps> = props => {
       requestAnimationFrame(animate)
       cube.rotation.x += 0.01
       cube.rotation.y += 0.01
+      group.rotation.x += 0.01
+      group.rotation.y += 0.01
       stats.update()
       stats2.update()
       stats3.update()

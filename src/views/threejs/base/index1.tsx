@@ -13,7 +13,6 @@ const PageViewIndex: React.FC<IProps> = props => {
   const init = () => {
     const threeBaseCurrent: any = threeBaseRef1.current
     const threeBaseCurrent2: any = threeBaseRef2.current
-    console.dir(threeBaseCurrent)
     const scene = new THREE.Scene() // 1、创建场景
     // 2、创建相机
     const camera = new THREE.PerspectiveCamera(
@@ -83,6 +82,68 @@ const PageViewIndex: React.FC<IProps> = props => {
     var cylinderMesh = new THREE.Mesh(cylinderGeo, cylinderMat)
     cylinderMesh.position.set(7, 0, 0) //设置圆柱坐标
     scene.add(cylinderMesh) //向场景添加圆柱体
+
+    // 创建一个圆环
+    var torusGeo = new THREE.TorusGeometry(1, 0.3, 20, 20)
+    var torusMat = new THREE.MeshLambertMaterial({
+      //创建材料
+      color: 0xff6600, //设置颜色
+      wireframe: true,
+    })
+    var torusMesh = new THREE.Mesh(torusGeo, torusMat)
+    torusMesh.position.set(10, 0, 0) //设置圆柱坐标
+    scene.add(torusMesh)
+
+    // const generateSprite = () => {
+    //   const canvas = document.createElement('canvas')
+    //   canvas.width = 16
+    //   canvas.height = 16
+    //   const context = canvas.getContext('2d')
+    //   if (context) {
+    //     context.fillStyle = 'rgba(255,255,255,0.5)'
+    //     context.beginPath()
+    //     context.arc(8, 8, 8, 0, Math.PI * 2, true)
+    //     context.closePath()
+    //     context.fill()
+    //   }
+    //   return canvas
+    // }
+    // // 创建一个蒙层
+    // const spriteMaterial = new THREE.SpriteMaterial({
+    //   map: new THREE.CanvasTexture(generateSprite()),
+    //   blending: THREE.AdditiveBlending,
+    // })
+    // const sprite = new THREE.Sprite(spriteMaterial)
+    // sprite.scale.set(200, 200, 1.0)
+    // scene.add(sprite)
+
+    // 创建一个圆锥体
+    var coneGeo = new THREE.ConeGeometry(1, 2, 20, 20)
+    var coneMat = new THREE.MeshLambertMaterial({
+      //创建材料
+      color: 0xff6600, //设置颜色
+      wireframe: true,
+    })
+    var coneMesh = new THREE.Mesh(coneGeo, coneMat)
+    coneMesh.position.set(0, 0, 2) //设置圆柱坐标
+    scene.add(coneMesh)
+
+    // 创建一个精灵
+    const spriteMaterial2 = new THREE.SpriteMaterial({color: 0x00ffff})
+    const sprite2 = new THREE.Sprite(spriteMaterial2)
+    sprite2.position.set(-2.5, 2.5, 0)
+    sprite2.scale.set(1, 1, 1.0) // 可以拉伸精灵
+    scene.add(sprite2)
+
+    //粒子材质
+    const sphereGeometry2 = new THREE.SphereGeometry(1, 20, 20) // 4、创建球体几何对象
+    const sphereMaterial2 = new THREE.PointsMaterial({
+      color: 0xff00ff,
+      size: 0.1,
+    }) // 5、创建材质对象
+    var sphere2 = new THREE.Points(sphereGeometry2, sphereMaterial2) // 6、创建网格对象
+    sphere2.position.set(-2, 0, 0) // 设置球体网格模型的坐标
+    scene.add(sphere2) // 将球体网格模型添加到场景中
 
     camera.lookAt(cube.position) // 设置相机位置
     camera2.lookAt(cube.position) // 设置相机位置

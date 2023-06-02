@@ -41,7 +41,7 @@ module.exports = {
       '@': srcPath,
       '~': path.join(__dirname, '../'),
     },
-    extensions: ['.js', '.tsx', '.ts'],
+    extensions: ['.js', '.tsx', '.ts', '.json'],
   },
   module: {
     rules: [
@@ -58,6 +58,15 @@ module.exports = {
       {
         test: /\.less?$/,
         use: ['style-loader', 'css-loader', 'less-loader'],
+      },
+      {
+        test: /\.json$/,
+        loader: "url-loader",
+        options: {
+          esModule: false,
+          name: 'json/[name].[hash:8].[ext]',
+        },
+        type: 'javascript/auto'
       },
       {
         test: /\.(jpg|png|jpeg|gif)$/,

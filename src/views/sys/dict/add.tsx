@@ -29,7 +29,6 @@ const PageViewDictAdd: React.FC<IProps> = props => {
   // }
 
   useEffect(() => {
-    debugger
     if (props.isType) {
       getTypeTree() //加载父节点
     } else {
@@ -92,6 +91,7 @@ const PageViewDictAdd: React.FC<IProps> = props => {
           <TreeSelect
             // style={{ width: '100%' }}
             // value={this.state.value}
+            fieldNames={{label: 'name', value: 'id'}}
             dropdownStyle={{maxHeight: 400, overflow: 'auto'}}
             treeData={treeData}
             placeholder="请选择父节点"

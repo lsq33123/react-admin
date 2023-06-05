@@ -31,7 +31,7 @@ const PageViewDict: React.FC<IProps> = props => {
   const [tableData, setTableData] = useState([])
   const [seachType, setSeachType] = useState('')
   const [seachData, setSeachData] = useState('')
-  const height = document.body.clientHeight - 104
+  const height = document.body.clientHeight - 94
 
   const columns = [
     {
@@ -49,7 +49,8 @@ const PageViewDict: React.FC<IProps> = props => {
     },
     {
       title: '状态',
-      dataIndex: 'isDisabled',
+      dataIndex: 'is_disabled',
+      render: value => (value === 0 ? '启用' : '禁用'),
     },
     {
       title: '排序',
@@ -167,7 +168,7 @@ const PageViewDict: React.FC<IProps> = props => {
   const getTreeNode = data => {
     return data.map(item => {
       return (
-        <Tree.TreeNode title={() => getTreeTitle(item)} key={item.key}>
+        <Tree.TreeNode title={() => getTreeTitle(item)} key={item.id}>
           {item.children && getTreeNode(item.children)}
         </Tree.TreeNode>
       )
@@ -180,7 +181,7 @@ const PageViewDict: React.FC<IProps> = props => {
         onClick={() => {
           setCurrTypeId(item.id)
         }}>
-        {item.title}
+        {item.name}
       </span>
       <span className="tree-edit-btn">
         &nbsp;&nbsp;
@@ -217,6 +218,7 @@ const PageViewDict: React.FC<IProps> = props => {
                     setIsEdit.setFalse()
                     setIsType.setTrue()
                     setShowEdit.setTrue()
+                    setCurrFormData({})
                   }}>
                   新增
                 </Button>
@@ -224,7 +226,7 @@ const PageViewDict: React.FC<IProps> = props => {
             }
             style={{height: height}}>
             <Scrollbars autoHide autoHideTimeout={500} autoHideDuration={200} className="scroller-menu">
-              <Tree showLine switcherIcon={<DownOutlined />}>
+              <Tree showLine switcherIcon={<DownOutlined />} defaultExpandAll={true}>
                 {getTreeNode(treeData)}
               </Tree>
             </Scrollbars>
@@ -247,6 +249,7 @@ const PageViewDict: React.FC<IProps> = props => {
                   onClick={() => {
                     setIsEdit.setFalse()
                     setIsType.setFalse()
+                    setCurrFormData({})
                     if (currTypeId) {
                       setShowEdit.setTrue()
                     } else {

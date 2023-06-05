@@ -47,7 +47,7 @@ export default class FullScreen extends Component {
 
     return (
       <Button
-        style={{border: 'none', color: '#696969'}}
+        style={{border: 'none'}}
         className="fullscreen"
         onClick={this.handClick}
         shape="circle"

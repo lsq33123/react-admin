@@ -12,7 +12,7 @@ interface IProps {
 const PageView: React.FC<IProps> = props => {
   const navigate = useNavigate()
   return (
-    <Badge count={props.number} offset={[-10, 0]}>
+    <Badge count={props.number} offset={[-10, 0]} size="small">
       <BellOutlined className="notice-tip" onClick={() => navigate('/need/sys/notice', {replace: true})} />
     </Badge>
   )

@@ -1,13 +1,13 @@
 /** @format */
 
 import axios from 'axios'
-import { BASE_URL } from '@/config'
+import config from '@/config'
 import { message } from 'antd'
 import { getStore } from './store'
 import { isEmpty } from './validate'
 
 export const request = axios.create({
-  baseURL: BASE_URL,
+  baseURL: config.baseUrl,
   timeout: 20000,
 })
 

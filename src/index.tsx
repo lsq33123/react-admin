@@ -10,12 +10,16 @@ import 'antd/dist/reset.css'
 import App from './app'
 // import 'antd/dist/antd.css'
 import '@/assets/css/app.less'
+import {Watermark} from 'antd'
+import {getStore} from '@/utils/store'
 
 const Root = () => {
   return (
     <Store>
       <ConfigProvider locale={zhCN} componentSize="middle">
-        <App />
+        <Watermark content={getStore('user_name')} gap={[200, 200]}>
+          <App />
+        </Watermark>
       </ConfigProvider>
     </Store>
   )

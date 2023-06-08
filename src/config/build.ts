@@ -1,6 +1,6 @@
 const path = require('path')
-const srcPath = path.join(__dirname, '../src')
-const dictPath = path.join(__dirname, '../dist')
+const srcPath = path.join(__dirname, '../../src')
+const dictPath = path.join(__dirname, '../../dist')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -39,7 +39,7 @@ module.exports = {
   resolve: {
     alias: {
       '@': srcPath,
-      '~': path.join(__dirname, '../'),
+      '~': path.join(srcPath, '../'),
     },
     extensions: ['.js', '.tsx', '.ts', '.json'],
   },
@@ -119,7 +119,7 @@ module.exports = {
     new CleanWebpackPlugin({}),
     new HTMLWebpackPlugin({
       // template: path.join(srcPath, 'index.html'),
-      template: path.join(__dirname, '../public/index.html')
+      template: path.join(srcPath, '../public/index.html')
     }),
     new CopyWebpackPlugin({
       // 需拷贝的配置项

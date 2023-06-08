@@ -3,6 +3,7 @@
 import React, {useEffect} from 'react'
 import * as THREE from 'three'
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
+import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry.js'
 interface IProps {
   //props:any
 }
@@ -37,48 +38,23 @@ const PageViewIndex: React.FC<IProps> = props => {
 
     camera.lookAt(cube.position) // 设置相机位置
 
-    //用canvas生成图片
-    let canvas: any = document.createElement('canvas')
-    let ctx = canvas.getContext('2d')
-    canvas.width = 300
-    canvas.height = 300
-    //制作矩形
-    ctx.fillStyle = 'rgba(255,165,0,0.8)'
-    ctx.fillRect(0, 0, 300, 300)
-
-    //设置文字
-    ctx.fillStyle = '#fff'
-    ctx.font = 'normal 18pt "楷体"'
-    ctx.fillText('模型介绍', 100, 20)
-    let textWord = '该模型由小少小同学制作完成'
-    //文字换行
-    let len = parseInt((textWord.length / 10) as any)
-    for (let i = 0; i < len + 1; i++) {
-      let space = 10
-      if (i === len) {
-        space = textWord.length - len * 10
-      }
-      console.log('len+' + len, 'space+' + space)
-      let word = textWord.substr(i * 10, space)
-      ctx.fillText(word, 15, 60 * (i + 1))
-    }
-    //生成图片
-    let url = canvas.toDataURL('image/png')
-    //将图片构建到纹理中
-    let geometry1 = new THREE.PlaneGeometry(10, 10)
-    let material1 = new THREE.MeshBasicMaterial({
-      map: new THREE.TextureLoader().load(url),
-      side: THREE.DoubleSide,
-      opacity: 1,
-      transparent: true,
+    //创建文本几何体
+    const textGeometry = new TextGeometry('Hello Three.js', {
+      size: 10, //字体大小
+      height: 1, //字体高度
+      curveSegments: 12, //弧线分段数，使得文字的曲线更加光滑
+      // font: new THREE.Font(undefined), //设置字体，默认是'helvetiker'，需对应引入的字体文件
+      bevelEnabled: true, //布尔值，是否使用倒角，意为在边缘处斜切
+      bevelThickness: 1, //倒角厚度
+      bevelSize: 0.5, //倒角宽度
+      bevelSegments: 3, //倒角分段数
     })
-    let mesh = new THREE.Mesh(geometry1, material1)
-    mesh.position.set(10, 10, 5)
-    scene.add(mesh)
-
-    let mesh2 = new THREE.Mesh(geometry1, material1)
-    mesh2.position.set(0, 0, 5)
-    scene.add(mesh2)
+    const textMaterial = new THREE.MeshStandardMaterial({
+      color: 0xff0000, //文字颜色
+    })
+    const textMesh = new THREE.Mesh(textGeometry, textMaterial)
+    textMesh.position.set(0, 7, 0)
+    scene.add(textMesh)
 
     const spotLight = new THREE.SpotLight(0xffffff) // 8、添加聚光灯光源
     spotLight.position.set(100, 1000, 1000)
@@ -113,8 +89,7 @@ const PageViewIndex: React.FC<IProps> = props => {
 
   return (
     <>
-      <div>思路：创建图片，添加文字，设置为纹理，添加到场景中</div>
-      <div>来源：https://blog.csdn.net/WWW_share8/article/details/102826326</div>
+      <div>来源：https://blog.csdn.net/qw8704149/article/details/110499196</div>
       <div ref={threeBaseRef} style={{width: '100%', height: '400px'}}></div>
     </>
   )

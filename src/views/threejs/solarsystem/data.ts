@@ -9,7 +9,7 @@ export const starArr = [
     showRasius: 1,    // 显示半径
     showDistance: 0, // 显示距离
     showSpeed: 0,    // 显示速度
-    img: require('@/assets/images/solarsystem/sun.jpg'),
+    img: require('/public/threejs/textures/solarsystem/sun.jpg'),
   },
   {
     name: '水星',
@@ -21,7 +21,7 @@ export const starArr = [
     showRasius: 0.5,
     showDistance: 2,
     showSpeed: 0.0911,
-    img: require('@/assets/images/solarsystem/mercury.jpg')
+    img: require('/public/threejs/textures/solarsystem/mercury.jpg')
   },
   {
     name: '金星',
@@ -33,7 +33,7 @@ export const starArr = [
     showRasius: 0.5,
     showDistance: 4,
     showSpeed: 0.0822,
-    img: require('@/assets/images/solarsystem/venus.jpg')
+    img: require('/public/threejs/textures/solarsystem/venus.jpg')
   },
   {
     name: '地球',
@@ -45,7 +45,7 @@ export const starArr = [
     showRasius: 0.5,
     showDistance: 6,
     showSpeed: 0.0733,
-    img: require('@/assets/images/solarsystem/earth.jpg')
+    img: require('/public/threejs/textures/solarsystem/earth.jpg')
   },
   {
     name: '火星',
@@ -57,7 +57,7 @@ export const starArr = [
     showRasius: 0.4,
     showDistance: 8,
     showSpeed: 0.0644,
-    img: require('@/assets/images/solarsystem/mars.jpg')
+    img: require('/public/threejs/textures/solarsystem/mars.jpg')
   },
   {
     name: '木星',
@@ -69,7 +69,7 @@ export const starArr = [
     showRasius: 1,
     showDistance: 10,
     showSpeed: 0.0555,
-    img: require('@/assets/images/solarsystem/jupiter.jpg')
+    img: require('/public/threejs/textures/solarsystem/jupiter.jpg')
   },
   {
     name: '土星',
@@ -81,7 +81,7 @@ export const starArr = [
     showRasius: 1,
     showDistance: 12,
     showSpeed: 0.0466,
-    img: require('@/assets/images/solarsystem/saturn.jpg')
+    img: require('/public/threejs/textures/solarsystem/saturn.jpg')
   },
   {
     name: '天王星',
@@ -93,7 +93,7 @@ export const starArr = [
     showRasius: 0.7,
     showDistance: 14,
     showSpeed: 0.0377,
-    img: require('@/assets/images/solarsystem/uranus.jpg')
+    img: require('/public/threejs/textures/solarsystem/uranus.jpg')
   },
   {
     name: '海王星',
@@ -105,7 +105,7 @@ export const starArr = [
     showRasius: 0.7,
     showDistance: 16,
     showSpeed: 0.0288,
-    img: require('@/assets/images/solarsystem/neptune.jpg')
+    img: require('/public/threejs/textures/solarsystem/neptune.jpg')
   },
   // {
   //   name: '冥王星',
@@ -117,6 +117,6 @@ export const starArr = [
   //showRasius: 0.3,
   //showDistance: 18,
   //showSpeed: 0.0199,
-  //   img: require('@/assets/images/solarsystem/pluto.jpg')
+  //   img: require('/public/threejs/textures/solarsystem/pluto.jpg')
   // }
 ]

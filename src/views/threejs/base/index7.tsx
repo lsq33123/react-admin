@@ -29,7 +29,7 @@ const PageViewIndex: React.FC<IProps> = props => {
     threeBaseRef.current!.appendChild(renderer.domElement) // 将渲染器的dom元素（canvas元素）添加到指定元素中
 
     const loader = new GLTFLoader()
-    loader.load('/3d_gltf/scene.gltf', gltf => {
+    loader.load('/threejs/models/3d_gltf_car/scene.gltf', gltf => {
       // 设置缩放大小
       // gltf.scene.scale.set(2, 2, 2)
       scene.add(gltf.scene)

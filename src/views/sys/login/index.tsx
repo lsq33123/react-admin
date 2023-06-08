@@ -7,6 +7,7 @@ import {useNavigate} from 'react-router-dom'
 import Global from '@/store/global'
 import * as api from '@/api'
 import {setStore} from '@/utils/store'
+import config from '@/config'
 interface IProps {
   //props:any
 }
@@ -42,7 +43,7 @@ const PageLogin: React.FC<IProps> = props => {
   return (
     <div id="pageLogin">
       <div className="login-body">
-        <div className="login-body-title">XXX系统</div>
+        <div className="login-body-title">{config.systemName}</div>
         <div className="login-body-form">
           <Form
             form={form}

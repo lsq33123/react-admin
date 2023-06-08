@@ -38,12 +38,12 @@ const PageViewIndex: React.FC<IProps> = props => {
     }
     //创建太阳
     const sun = createBall([1, 20, 20])
-    sun.material.map = new THREE.TextureLoader().load(require('@/assets/images/solarsystem/sun.jpg'))
+    sun.material.map = new THREE.TextureLoader().load(require('/public/threejs/textures/solarsystem/sun.jpg'))
     scene.add(sun)
 
     const mercury = createBall([0.2, 20, 20]) // 水星
     mercury.position.set(2, 0, 0)
-    mercury.material.map = new THREE.TextureLoader().load(require('@/assets/images/solarsystem/mercury.jpg'))
+    mercury.material.map = new THREE.TextureLoader().load(require('/public/threejs/textures/solarsystem/mercury.jpg'))
     scene.add(mercury)
     // let geometryMercury = new THREE.CircleGeometry()
     // const arcCurveMercury = new THREE.ArcCurve(0, 0, 2, 0, 2 * Math.PI)
@@ -59,46 +59,46 @@ const PageViewIndex: React.FC<IProps> = props => {
 
     const venus = createBall([0.3, 20, 20]) // 金星
     venus.position.set(3, 0, 0)
-    venus.material.map = new THREE.TextureLoader().load(require('@/assets/images/solarsystem/venus.jpg'))
+    venus.material.map = new THREE.TextureLoader().load(require('/public/threejs/textures/solarsystem/venus.jpg'))
     scene.add(venus)
 
     const earth = createBall([0.4, 20, 20]) // 地球
     earth.position.set(4, 0, 0)
-    earth.material.map = new THREE.TextureLoader().load(require('@/assets/images/solarsystem/earth.jpg'))
+    earth.material.map = new THREE.TextureLoader().load(require('/public/threejs/textures/solarsystem/earth.jpg'))
     scene.add(earth)
 
     const moon = createBall([0.1, 20, 20]) // 月球
     moon.position.set(0.5, 0, 0)
-    moon.material.map = new THREE.TextureLoader().load(require('@/assets/images/solarsystem/moon.jpg'))
+    moon.material.map = new THREE.TextureLoader().load(require('/public/threejs/textures/solarsystem/moon.jpg'))
     earth.add(moon)
 
     const mars = createBall([0.3, 20, 20]) // 火星
     mars.position.set(5, 0, 0)
-    mars.material.map = new THREE.TextureLoader().load(require('@/assets/images/solarsystem/mars.jpg'))
+    mars.material.map = new THREE.TextureLoader().load(require('/public/threejs/textures/solarsystem/mars.jpg'))
     scene.add(mars)
 
     const jupiter = createBall([0.8, 20, 20]) // 木星
     jupiter.position.set(6, 0, 0)
     jupiter.rotation.y = 150
-    jupiter.material.map = new THREE.TextureLoader().load(require('@/assets/images/solarsystem/jupiter.jpg'))
+    jupiter.material.map = new THREE.TextureLoader().load(require('/public/threejs/textures/solarsystem/jupiter.jpg'))
     scene.add(jupiter)
 
     const saturn = createBall([0.7, 20, 20]) // 土星
     saturn.position.set(7, 0, 0)
     jupiter.rotation.y = 290
-    saturn.material.map = new THREE.TextureLoader().load(require('@/assets/images/solarsystem/saturn.jpg'))
+    saturn.material.map = new THREE.TextureLoader().load(require('/public/threejs/textures/solarsystem/saturn.jpg'))
     scene.add(saturn)
 
     const uranus = createBall([0.5, 20, 20]) // 天王星
     uranus.position.set(8, 0, 0)
     jupiter.rotation.y = 300
-    uranus.material.map = new THREE.TextureLoader().load(require('@/assets/images/solarsystem/uranus.jpg'))
+    uranus.material.map = new THREE.TextureLoader().load(require('/public/threejs/textures/solarsystem/uranus.jpg'))
     scene.add(uranus)
 
     const neptune = createBall([0.5, 20, 20]) // 海王星
     neptune.position.set(9, 0, 0)
     jupiter.rotation.y = 60
-    neptune.material.map = new THREE.TextureLoader().load(require('@/assets/images/solarsystem/neptune.jpg'))
+    neptune.material.map = new THREE.TextureLoader().load(require('/public/threejs/textures/solarsystem/neptune.jpg'))
     scene.add(neptune)
 
     // 添加环境 光

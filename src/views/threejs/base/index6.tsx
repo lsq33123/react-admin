@@ -28,7 +28,7 @@ const PageViewIndex: React.FC<IProps> = props => {
     threeBaseRef.current!.appendChild(renderer.domElement) // 将渲染器的dom元素（canvas元素）添加到指定元素中
 
     var loader = new THREE.ObjectLoader()
-    loader.load(require('../data/scene.json'), function (obj) {
+    loader.load(require('/public/threejs/data/scene.json'), function (obj) {
       scene.add(obj)
     })
     // loader.load('https://threejs.org/examples/models/obj/cerberus/Cerberus.obj', function (obj) {

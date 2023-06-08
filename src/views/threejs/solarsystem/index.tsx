@@ -15,8 +15,12 @@ const PageViewIndex: React.FC<IProps> = props => {
   const threeBaseRef = React.createRef<HTMLDivElement>()
   const statsRef = React.createRef<HTMLDivElement>()
   const hieght = document.documentElement.clientHeight - 64
+  let renderer: any = null
+  let resize: any = null
+  let animateId: any = null
+  let labelRenderer3DInstance: any = null
 
-  const init = () => {
+  let init = () => {
     const threeBaseCurrent: any = threeBaseRef.current
     const scene = new THREE.Scene({
       antialias: true, // 抗锯齿
@@ -29,7 +33,7 @@ const PageViewIndex: React.FC<IProps> = props => {
       1000, // 远端渲染距离
     )
     camera.position.set(0, 10, 20)
-    const renderer = new THREE.WebGLRenderer() // 3、创建渲染器
+    renderer = new THREE.WebGLRenderer() // 3、创建渲染器
     renderer.setSize(threeBaseCurrent.clientWidth, threeBaseCurrent.clientHeight) // 设置渲染器的大小为窗口的内宽度，也就是内容区的宽度
     // renderer.setSize(window.innerWidth, window.innerHeight) // 设置渲染器的大小为窗口的内宽度，也就是内容区的宽度
     // document.body.appendChild(renderer.domElement) // 将渲染器的dom元素（canvas元素）添加到body中
@@ -47,7 +51,7 @@ const PageViewIndex: React.FC<IProps> = props => {
     let spaceGeometry = new THREE.SphereGeometry(100, 100, 100)
     let spaceMaterial = new THREE.MeshLambertMaterial({
       //高光材质
-      map: new THREE.TextureLoader().load(require('@/assets/images/solarsystem/space.jpg')),
+      map: new THREE.TextureLoader().load(require('/public/threejs/textures/solarsystem/space.jpg')),
       side: THREE.DoubleSide, //双面显示
       //透明度 0.7
       transparent: true,
@@ -76,7 +80,7 @@ const PageViewIndex: React.FC<IProps> = props => {
         // scene.add(torusMercury)
 
         //创建轨迹
-        let trackGeometry = new THREE.RingBufferGeometry(showDistance, showDistance + 0.01, 1000) //圆环几何体
+        let trackGeometry = new THREE.RingGeometry(showDistance, showDistance + 0.01, 1000) //圆环几何体
         //圆环材质
         let trackMaterial = new THREE.LineBasicMaterial({
           color: 0xffffff,
@@ -90,7 +94,7 @@ const PageViewIndex: React.FC<IProps> = props => {
         if (item.name === '地球') {
           const moon = createBall([0.1, 20, 20]) // 月球
           moon.position.set(0.9, 0, 0)
-          moon.material.map = new THREE.TextureLoader().load(require('@/assets/images/solarsystem/moon.jpg'))
+          moon.material.map = new THREE.TextureLoader().load(require('/public/threejs/textures/solarsystem/moon.jpg'))
           ;(moon.material.normalScale = new THREE.Vector2(0.2, 0.2)), //凹凸深度
             (moon.name = '月球')
           planet.add(moon)
@@ -105,7 +109,7 @@ const PageViewIndex: React.FC<IProps> = props => {
           // 土星环
           const torusGeometry = new THREE.TorusGeometry(1.5, 0.1, 2, 100)
           const torusMaterial = new THREE.MeshBasicMaterial({
-            map: new THREE.TextureLoader().load(require('@/assets/images/solarsystem/saturn_rings.jpg')),
+            map: new THREE.TextureLoader().load(require('/public/threejs/textures/solarsystem/saturn_rings.jpg')),
           })
           const torus = new THREE.Mesh(torusGeometry, torusMaterial)
           torus.rotation.x = THREE.MathUtils.degToRad(45) // 旋转45度
@@ -150,9 +154,9 @@ const PageViewIndex: React.FC<IProps> = props => {
     stats.dom.style.position = 'unset'
     statsRef.current!.appendChild(stats.dom)
 
-    const animate = function () {
+    let animate = function () {
       // 9、创建动画
-      requestAnimationFrame(animate)
+      animateId = requestAnimationFrame(animate)
 
       scene.traverse(function (obj) {
         if (obj.isMesh && obj.isPlanet) {
@@ -175,11 +179,14 @@ const PageViewIndex: React.FC<IProps> = props => {
       stats.update()
       control.update()
       renderer.render(scene, camera)
-      ;(labelRenderer3D as any)(threeBaseRef.current).render(scene, camera) //渲染HTML标签对象 CSS3DObject 标签
+      if (threeBaseRef.current) {
+        labelRenderer3DInstance = (labelRenderer3D as any)(threeBaseRef.current)
+        labelRenderer3DInstance.render(scene, camera) //渲染HTML标签对象 CSS3DObject 标签
+      }
     }
     animate()
 
-    window.addEventListener('resize', () => {
+    resize = window.addEventListener('resize', () => {
       // 10、监听窗口变化
       camera.aspect = threeBaseCurrent.clientWidth / threeBaseCurrent.clientHeight
       camera.updateProjectionMatrix()
@@ -189,6 +196,18 @@ const PageViewIndex: React.FC<IProps> = props => {
 
   useEffect(() => {
     init()
+    return () => {
+      //来源 https://www.195440.com/3380
+      console.log('销毁')
+      cancelAnimationFrame(animateId)
+      window.removeEventListener('resize', resize)
+      renderer.dispose()
+      renderer.forceContextLoss()
+      renderer.context = null
+      renderer.domElement = null
+      renderer = null
+      labelRenderer3DInstance = null
+    }
   }, [])
 
   return (

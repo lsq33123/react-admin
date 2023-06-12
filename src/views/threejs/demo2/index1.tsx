@@ -1,8 +1,9 @@
 /** @format */
 
-import React, {useEffect} from 'react'
+import React from 'react'
 import * as THREE from 'three'
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
+import useBaseView from '../_hooks/useBaseView'
+import {FontLoader} from 'three/examples/jsm/loaders/FontLoader.js'
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry.js'
 interface IProps {
   //props:any
@@ -11,85 +12,49 @@ interface IProps {
 const PageViewIndex: React.FC<IProps> = props => {
   const threeBaseRef = React.createRef<HTMLDivElement>()
 
-  const init = () => {
-    const threeBaseCurrent: any = threeBaseRef.current
-    const scene = new THREE.Scene() // 1、创建场景
-    // 2、创建相机
-    const camera = new THREE.PerspectiveCamera(
-      75, // 相机视野
-      threeBaseCurrent.clientWidth / threeBaseCurrent.clientHeight, // 水平方向和竖直方向长度的比值
-      0.1, // 近端渲染距离
-      1000, // 远端渲染距离
-    )
-    camera.position.set(0, 0, 20)
-    const renderer = new THREE.WebGLRenderer() // 3、创建渲染器
-    renderer.setSize(threeBaseCurrent.clientWidth, threeBaseCurrent.clientHeight) // 设置渲染器的大小为窗口的内宽度，也就是内容区的宽度
-    // renderer.setSize(window.innerWidth, window.innerHeight) // 设置渲染器的大小为窗口的内宽度，也就是内容区的宽度
-    // document.body.appendChild(renderer.domElement) // 将渲染器的dom元素（canvas元素）添加到body中
-    threeBaseRef.current!.appendChild(renderer.domElement) // 将渲染器的dom元素（canvas元素）添加到指定元素中
+  useBaseView({
+    divRef: threeBaseRef,
+    createModel: scene => {
+      const geometry = new THREE.BoxGeometry(10, 10, 10) // 4、创建几何体模型（立方几何体）
+      const material = new THREE.MeshBasicMaterial({
+        // 5.1 创建基础网格材质
+        color: 0x00ff00, // 绿色
+      })
+      const cube = new THREE.Mesh(geometry, material) // 6、创建网格模型（mesh）
+      cube.position.set(0, 0, 0) // 设置mesh位置
+      scene.add(cube) // 7、将网格模型添加到场景中
 
-    const geometry = new THREE.BoxGeometry(10, 10, 10) // 4、创建几何体模型（立方几何体）
-    const material = new THREE.MeshBasicMaterial({
-      // 5.1 创建基础网格材质
-      color: 0x00ff00, // 绿色
-    })
-    const cube = new THREE.Mesh(geometry, material) // 6、创建网格模型（mesh）
-    scene.add(cube) // 7、将网格模型添加到场景中
-
-    camera.lookAt(cube.position) // 设置相机位置
-
-    //创建文本几何体
-    const textGeometry = new TextGeometry('Hello Three.js', {
-      size: 10, //字体大小
-      height: 1, //字体高度
-      curveSegments: 12, //弧线分段数，使得文字的曲线更加光滑
-      // font: new THREE.Font(undefined), //设置字体，默认是'helvetiker'，需对应引入的字体文件
-      bevelEnabled: true, //布尔值，是否使用倒角，意为在边缘处斜切
-      bevelThickness: 1, //倒角厚度
-      bevelSize: 0.5, //倒角宽度
-      bevelSegments: 3, //倒角分段数
-    })
-    const textMaterial = new THREE.MeshStandardMaterial({
-      color: 0xff0000, //文字颜色
-    })
-    const textMesh = new THREE.Mesh(textGeometry, textMaterial)
-    textMesh.position.set(0, 7, 0)
-    scene.add(textMesh)
-
-    const spotLight = new THREE.SpotLight(0xffffff) // 8、添加聚光灯光源
-    spotLight.position.set(100, 1000, 1000)
-    spotLight.castShadow = true
-    scene.add(spotLight)
-
-    const axexHelper = new THREE.AxesHelper(1000) // 8、添加坐标轴辅助线
-    scene.add(axexHelper)
-
-    var control = new OrbitControls(camera, renderer.domElement) // 7、创建控制器
-    control.enableDamping = true // 阻尼惯性
-
-    const animate = function () {
-      // 9、创建动画
-      requestAnimationFrame(animate)
-      control.update()
-      renderer.render(scene, camera)
-    }
-    animate()
-
-    window.addEventListener('resize', () => {
-      // 10、监听窗口变化
-      camera.aspect = threeBaseCurrent.clientWidth / threeBaseCurrent.clientHeight
-      camera.updateProjectionMatrix()
-      renderer.setSize(threeBaseCurrent.clientWidth, threeBaseCurrent.clientHeight) // 设置渲染器的大小为窗口的内宽度，也就是内容区的宽度
-    })
-  }
-
-  useEffect(() => {
-    init()
-  }, [])
+      const loader = new FontLoader()
+      loader.load(
+        '/threejs/fonts/PingFang_SC_Regular_Regular.json',
+        function (font) {
+          const geometry = new TextGeometry('你好呀！ Hello three.js!', {
+            font: font, // 字体，默认是'helvetiker'，需对应引入的字体文件
+            size: 2, //字体大小 默认值是100
+            height: 0.5, //字体高度 默认值是50
+            curveSegments: 12, //弧线分段数，使得文字的曲线更加光滑 默认值是12
+            // bevelEnabled: true, //布尔值，是否使用倒角，意为在边缘处斜切 默认值为false
+            // bevelThickness: 1, //倒角厚度 默认值为10
+            // bevelSize: 0.5, //倒角宽度 默认值为8
+            // bevelSegments: 3, //倒角分段数 默认值为3
+          })
+          const textMaterial = new THREE.MeshBasicMaterial({color: 0x00ff00})
+          const textMesh = new THREE.Mesh(geometry, textMaterial)
+          textMesh.position.set(0, 9, 0)
+          scene.add(textMesh)
+        },
+        undefined,
+        function (err) {
+          console.log('err:', err)
+        },
+      )
+    },
+  })
 
   return (
     <>
       <div>来源：https://blog.csdn.net/qw8704149/article/details/110499196</div>
+      <div>字体库需要转化成json/js：http://gero3.github.io/facetype.js/</div>
       <div ref={threeBaseRef} style={{width: '100%', height: '400px'}}></div>
     </>
   )

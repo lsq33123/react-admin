@@ -36,6 +36,7 @@
     "src/**/*"
   ],
   "exclude": [
-    "webpack"
+    "src/config/*",
+    "src/views/threejs/utils/*"
   ]
 }

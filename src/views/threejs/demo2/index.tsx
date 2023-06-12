@@ -6,8 +6,8 @@ import DocModel from '@/components/DocModel'
 import {Card} from 'antd'
 import Index0 from './index0'
 import Index1 from './index1'
-// import Index2 from './index2'
-// import Index3 from './index3'
+import Index2 from './index2'
+import Index3 from './index3'
 // import Index4 from './index4'
 // import Index5 from './index5'
 // import Index6 from './index6'
@@ -33,18 +33,18 @@ const PageView: React.FC<IProps> = props => {
       title: 'TextGeometry文本几何体',
       component: <Index1 />,
     },
-    // {
-    //   key: 'part2',
-    //   href: '#part2',
-    //   title: '插件（GUI）',
-    //   component: <Index2 />,
-    // },
-    // {
-    //   key: 'part3',
-    //   href: '#part3',
-    //   title: '性能监控',
-    //   component: <Index3 />,
-    // },
+    {
+      key: 'part2',
+      href: '#part2',
+      title: '2D和3D文字',
+      component: <Index2 />,
+    },
+    {
+      key: 'part3',
+      href: '#part3',
+      title: '文字居中一',
+      component: <Index3 />,
+    },
     // {
     //   key: 'part4',
     //   href: '#part4',

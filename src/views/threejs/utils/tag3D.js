@@ -1,6 +1,6 @@
 import { CSS3DRenderer, CSS3DObject, CSS3DSprite } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
 // 创建一个HTML标签
-function tag3D(name) {
+function tag3D(name, x = 0.2, y = 0.2, z = 0.2) {
   // 创建div元素(作为标签)
   var div = document.createElement('div');
   div.innerHTML = name;
@@ -11,7 +11,7 @@ function tag3D(name) {
   // 设置HTML元素标签在three.js世界坐标中位置
   // label.position.set(x, y, z);
   //缩放CSS3DObject模型对象
-  label.scale.set(0.2, 0.2, 0.2);//根据相机渲染范围控制HTML 3D标签尺寸
+  label.scale.set(x, y, z);//根据相机渲染范围控制HTML 3D标签尺寸
   label.rotateY(Math.PI / 2);//控制HTML标签CSS3对象姿态角度
   // label.rotateX(-Math.PI/2);
   return label;//返回CSS3模型标签    

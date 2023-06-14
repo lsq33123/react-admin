@@ -28,12 +28,12 @@ const PageView: React.FC<IProps> = props => {
   const routeUrl = location.pathname
 
   useEffect(() => {
-    console.log('menuList:', menuList)
+    // console.log('menuList:', menuList)
     setMenusTree(arrayToTree(menuList, 0, 'menu_id', 'parent_id'))
   }, [menuList])
 
   useEffect(() => {
-    console.log('routeUrl:', routeUrl)
+    // console.log('routeUrl:', routeUrl)
     if (routeUrl === '/need/nav/home') {
       setCurrMenuKey('home')
     } else {
@@ -43,8 +43,8 @@ const PageView: React.FC<IProps> = props => {
         delAllView()
       } else {
         const temp: any = menuList.find((item: any) => getMenuPath(item.is_frame, item.path) === routeUrl)
-        console.log('menuList:', menuList)
-        console.log('temp:', temp)
+        // console.log('menuList:', menuList)
+        // console.log('temp:', temp)
         setCurrMenuKey(temp?.perms || '')
       }
     }
@@ -56,8 +56,7 @@ const PageView: React.FC<IProps> = props => {
   }
 
   const handleClick = e => {
-    console.log('e:', e)
-    console.log('e.key:', e.key)
+    // console.log('e:', e)
     setCurrMenuKey(e.key)
     // setStore('currMenuKey', e.key)
   }

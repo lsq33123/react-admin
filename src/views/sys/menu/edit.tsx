@@ -116,7 +116,7 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
               title={`${item}`}
               key={index}
               content={
-                <div className="flex-center">
+                <div className="flex-cc">
                   {React.createElement(icon && icon[item], {
                     style: {
                       fontSize: '100px',

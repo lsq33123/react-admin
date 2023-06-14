@@ -6,16 +6,19 @@
   display: flex;
   margin: 15px 0 30px 0px;
 
-  .show-top-body + .show-top-body {
+  .show-top-body+.show-top-body {
     margin-left: 20px;
   }
+
   .show-top-body {
     height: 100px;
     flex: 1;
     border: 1x solid #ccc;
     background-color: #fff;
 
-    @flex-between();
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 20px;
 
     // &-left {
@@ -30,12 +33,15 @@
     .icon1 {
       background: url('../../../assets/icon/tip1.png') center/contain no-repeat;
     }
+
     .icon2 {
       background: url('../../../assets/icon/tip2.png') center/contain no-repeat;
     }
+
     .icon3 {
       background: url('../../../assets/icon/tip3.png') center/contain no-repeat;
     }
+
     .icon4 {
       background: url('../../../assets/icon/tip4.png') center/contain no-repeat;
     }
@@ -45,6 +51,7 @@
       width: 100%;
       text-align: center;
     }
+
     .show-top-body-right {
       .title {
         font-size: 18px;
@@ -71,6 +78,7 @@
   -webkit-transition-property: transform;
   transition-property: transform;
 }
+
 .hvr-float-shadow:before {
   pointer-events: none;
   position: absolute;
@@ -89,6 +97,7 @@
   -webkit-transition-property: transform, opacity;
   transition-property: transform, opacity;
 }
+
 .hvr-float-shadow:hover,
 .hvr-float-shadow:focus,
 .hvr-float-shadow:active {
@@ -96,6 +105,7 @@
   transform: translateY(-5px);
   /* move the element up by 5px */
 }
+
 .hvr-float-shadow:hover:before,
 .hvr-float-shadow:focus:before,
 .hvr-float-shadow:active:before {
@@ -113,13 +123,17 @@
 .other-echart {
   display: flex;
   margin: 20px 0 0px 0px;
-.other-echart-body + .other-echart-body {
+
+  .other-echart-body+.other-echart-body {
     margin-left: 20px;
   }
+
   .other-echart-body {
     height: 360px;
     flex: 1;
     background-color: #fff;
-    @flex-between();
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }

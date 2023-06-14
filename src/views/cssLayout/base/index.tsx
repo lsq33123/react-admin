@@ -43,20 +43,20 @@ const PageView: React.FC<IProps> = props => {
       <Card title={items[0].title} bordered={false} id={items[0].key}>
         <div className="father ">
           <div className="child">
-            <div className="child-item flex-center">13</div>
-            <div className="child-item flex-center">3</div>
-            <div className="child-item flex-center">66</div>
-            <div className="child-item flex-center">47775</div>
+            <div className="child-item flex-cc">13</div>
+            <div className="child-item flex-cc">3</div>
+            <div className="child-item flex-cc">66</div>
+            <div className="child-item flex-cc">47775</div>
           </div>
         </div>
       </Card>
       <Card title={items[1].title} bordered={false} id={items[1].key}>
         <div className="father ">
           <div className="child">
-            <div className="child-item flex-center">13</div>
-            <div className="child-item flex-center">3</div>
-            <div className="child-item flex-center">66</div>
-            <div className="child-item flex-center">47775</div>
+            <div className="child-item flex-cc">13</div>
+            <div className="child-item flex-cc">3</div>
+            <div className="child-item flex-cc">66</div>
+            <div className="child-item flex-cc">47775</div>
           </div>
         </div>
       </Card>

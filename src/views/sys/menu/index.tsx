@@ -182,21 +182,21 @@ const PageViewRole: React.FC<IProps> = props => {
   ]
 
   return (
-    <div className="container-body ">
+    <div className="container-wrap ">
       <Space size={15} direction="vertical" style={{width: '100%'}}>
         <Toolbars>
           <Form layout="inline" form={form}>
             <Form.Item name="menu_name">
-              <Input placeholder="请输入菜单名称" allowClear className="tool-input-w-150"></Input>
+              <Input placeholder="请输入菜单名称" allowClear className="w150"></Input>
             </Form.Item>
             <Form.Item name="perms">
-              <Input placeholder="请输入角色编码" allowClear className="tool-input-w-150"></Input>
+              <Input placeholder="请输入角色编码" allowClear className="w150"></Input>
             </Form.Item>
             <Form.Item name="visible">
               <Select
                 allowClear
                 placeholder="请选择显示状态"
-                className="tool-input-w-150"
+                className="w150"
                 options={[
                   {label: '显示', value: 0},
                   {label: '隐藏', value: 1},
@@ -206,7 +206,7 @@ const PageViewRole: React.FC<IProps> = props => {
               <Select
                 allowClear
                 placeholder="请选择状态"
-                className="tool-input-w-150"
+                className="w150"
                 options={[
                   {label: '启用', value: 0},
                   {label: '禁用', value: 1},
@@ -215,7 +215,7 @@ const PageViewRole: React.FC<IProps> = props => {
             <Form.Item name="tempDate">
               <DatePicker.RangePicker
                 allowClear
-                className="tool-datepacker-w-230"
+                className="w250"
                 onChange={(dates, dateStrs) =>
                   api.setFormDateRange(dateStrs, form, 'beginDate', 'endDate')
                 }></DatePicker.RangePicker>

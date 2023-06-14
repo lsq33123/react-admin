@@ -33,7 +33,7 @@ const globalData = () => {
             item.key = item.id
             item.title = item.name
           })
-          console.log('formatMenu(finalMenu):', formatMenu(finalMenu))
+          // console.log('formatMenu(finalMenu):', formatMenu(finalMenu))
           setMenuList(formatMenu(finalMenu))
           setUserInfo(Info.data.user)
         })()

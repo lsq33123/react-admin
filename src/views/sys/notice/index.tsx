@@ -21,7 +21,7 @@ const columns = [
 
 const PageViewNotice: React.FC<IProps> = props => {
   return (
-    <div id="page-view-notice" className="container-body ">
+    <div id="page-view-notice" className="container-wrap ">
       <Tabs>
         <Tabs.TabPane tab="通知" key="1">
           <Table columns={columns}></Table>

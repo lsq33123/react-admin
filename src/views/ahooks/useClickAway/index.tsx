@@ -29,7 +29,7 @@ const PageView: React.FC<IProps> = props => {
   }, refBox1)
 
   return (
-    <div className="ahooks-class container-body">
+    <div className="ahooks-class container-wrap">
       <Title level={2} className="ahooks-class-title">
         useClickAway
       </Title>

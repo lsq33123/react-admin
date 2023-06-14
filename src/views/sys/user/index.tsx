@@ -159,27 +159,27 @@ const PageViewUser: React.FC<IProps> = props => {
   ]
 
   return (
-    <div className="container-body ">
+    <div className="container-wrap ">
       <Space size={15} direction="vertical" style={{width: '100%'}}>
         <Toolbars>
           <Form layout="inline" form={form}>
             <Form.Item name="nick_name">
-              <Input placeholder="请输入昵称" allowClear className="tool-input-w-150"></Input>
+              <Input placeholder="请输入昵称" allowClear className="w150"></Input>
             </Form.Item>
             <Form.Item name="user_name">
-              <Input placeholder="请输入账号" allowClear className="tool-input-w-150"></Input>
+              <Input placeholder="请输入账号" allowClear className="w150"></Input>
             </Form.Item>
             <Form.Item name="phonenumber">
-              <Input placeholder="请输入手机号" allowClear className="tool-input-w-150"></Input>
+              <Input placeholder="请输入手机号" allowClear className="w150"></Input>
             </Form.Item>
             <Form.Item name="status">
-              <Select allowClear placeholder="请选择状态" className="tool-input-w-150">
+              <Select allowClear placeholder="请选择状态" className="w150">
                 <Select.Option value={0}>启用</Select.Option>
                 <Select.Option value={1}>禁用</Select.Option>
               </Select>
             </Form.Item>
             <Form.Item name="tempDate">
-              <DatePicker.RangePicker allowClear className="tool-datepacker-w-230"></DatePicker.RangePicker>
+              <DatePicker.RangePicker allowClear className="w250"></DatePicker.RangePicker>
             </Form.Item>
             <Form.Item>
               <Button type="primary" icon={<SearchOutlined />} onClick={onSearch}>

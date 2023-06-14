@@ -144,46 +144,46 @@ const PageViewAnimationCss: React.FC<IProps> = props => {
           <Row gutter={20} className="right-div-row">
             <Col span={6} className=" right-div-col">
               <Card title="动画-循环模式-正常" bordered={false}>
-                <div className=" img animation51 flex-center">normal</div>
+                <div className=" img animation51 flex-cc">normal</div>
               </Card>
             </Col>
             <Col span={6} className=" right-div-col">
               <Card title="动画-循环模式-原路返回" bordered={false}>
-                <div className=" img animation52 flex-center">alternate</div>
+                <div className=" img animation52 flex-cc">alternate</div>
               </Card>
             </Col>
             <Col span={6} className=" right-div-col">
               <Card title="动画-循环模式-反向运动（和1相反）" bordered={false}>
-                <div className=" img animation53 flex-center">reverse</div>
+                <div className=" img animation53 flex-cc">reverse</div>
               </Card>
             </Col>
             <Col span={6} className=" right-div-col">
               <Card title="动画-循环模式-原路返回（和2相反）" bordered={false}>
-                <div className=" img animation54 flex-center">alternate-reverse</div>
+                <div className=" img animation54 flex-cc">alternate-reverse</div>
               </Card>
             </Col>
           </Row>
           <Row gutter={20} className="right-div-row">
             <Col span={6} className=" right-div-col">
               <Card title="动画-分布动画-steps(10)" bordered={false}>
-                <div className=" img animation6 flex-center"></div>
+                <div className=" img animation6 flex-cc"></div>
               </Card>
             </Col>
             <Col span={6} className=" right-div-col">
               <Card title="动画-变化/停止" bordered={false}>
                 <div className="animation7-div">
-                  <div className=" img animation7 flex-center"></div>
+                  <div className=" img animation7 flex-cc"></div>
                 </div>
               </Card>
             </Col>
             <Col span={6} className=" right-div-col">
               <Card title="动画-循环模式-反向运动（和1相反）" bordered={false}>
-                <div className=" img animation53 flex-center">reverse</div>
+                <div className=" img animation53 flex-cc">reverse</div>
               </Card>
             </Col>
             <Col span={6} className=" right-div-col">
               <Card title="动画-循环模式-原路返回（和2相反）" bordered={false}>
-                <div className=" img animation54 flex-center">alternate-reverse</div>
+                <div className=" img animation54 flex-cc">alternate-reverse</div>
               </Card>
             </Col>
           </Row>

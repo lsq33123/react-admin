@@ -41,10 +41,10 @@ const PageView: React.FC<IProps> = props => {
     <DocModel items={items}>
       <div className="father " id="part-1">
         <div className="child">
-          <div className="child-item flex-center">13</div>
-          <div className="child-item flex-center">3</div>
-          <div className="child-item flex-center">66</div>
-          <div className="child-item flex-center">47775</div>
+          <div className="child-item flex-cc">13</div>
+          <div className="child-item flex-cc">3</div>
+          <div className="child-item flex-cc">66</div>
+          <div className="child-item flex-cc">47775</div>
         </div>
       </div>
       <div id="part-2" style={{width: '100px', height: '300px'}}>

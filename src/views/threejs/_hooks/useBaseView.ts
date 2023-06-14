@@ -90,7 +90,7 @@ export default function useBaseView({
         if (isAnimate) {
           animateId = requestAnimationFrame(animate)
         }
-        createAnimate && createAnimate({ scene, camera, renderer })
+        createAnimate && createAnimate({ el: divElement, scene, camera, renderer })
         if (isControls) {
           control.update()
         }
@@ -139,9 +139,9 @@ export default function useBaseView({
         renderer.forceContextLoss()
         renderer = null
       }
-      if (scene) {
-        scene.dispose()
-      }
+      // if (scene) {  // 不能删除，否则会报错
+      //   scene.dispose()
+      // } 
       if (isResize) {
         window.removeEventListener('resize', resize)
       }

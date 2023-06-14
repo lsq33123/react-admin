@@ -198,7 +198,7 @@ const PageViewDict: React.FC<IProps> = props => {
   )
 
   return (
-    <div id="page-view-dict" className="container-body ">
+    <div id="page-view-dict" className="container-wrap ">
       <Row gutter={15}>
         <Col span={7}>
           <Card

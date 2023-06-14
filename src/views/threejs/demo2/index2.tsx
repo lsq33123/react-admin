@@ -51,10 +51,10 @@ const PageViewIndex: React.FC<IProps> = props => {
       scene.add(cube3)
       scene.add(label3DSprite)
     },
-    createAnimate: ({scene, camera}) => {
-      if (threeBaseRef.current) {
-        ;(labelRenderer2D as any)(threeBaseRef.current).render(scene, camera) // 渲染HTML标签对象 CSS2DObject 标签
-        ;(labelRenderer3D as any)(threeBaseRef.current).render(scene, camera) //渲染HTML标签对象 CSS3DObject 标签
+    createAnimate: ({el, scene, camera}) => {
+      if (el) {
+        ;(labelRenderer2D as any)(el).render(scene, camera) // 渲染HTML标签对象 CSS2DObject 标签
+        ;(labelRenderer3D as any)(el).render(scene, camera) //渲染HTML标签对象 CSS3DObject 标签
       }
     },
   })

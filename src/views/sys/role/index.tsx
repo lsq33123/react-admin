@@ -155,24 +155,24 @@ const PageViewRole: React.FC<IProps> = props => {
   ]
 
   return (
-    <div className="container-body ">
+    <div className="container-wrap ">
       <Space size={15} direction="vertical" style={{width: '100%'}}>
         <Toolbars>
           <Form layout="inline" form={form}>
             <Form.Item name="role_name">
-              <Input placeholder="请输入角色名称" allowClear className="tool-input-w-150"></Input>
+              <Input placeholder="请输入角色名称" allowClear className="w150"></Input>
             </Form.Item>
             <Form.Item name="role_key">
-              <Input placeholder="请输入角色编码" allowClear className="tool-input-w-150"></Input>
+              <Input placeholder="请输入角色编码" allowClear className="w150"></Input>
             </Form.Item>
             <Form.Item name="status">
-              <Select allowClear placeholder="请选择状态" className="tool-input-w-150">
+              <Select allowClear placeholder="请选择状态" className="w150">
                 <Select.Option value={0}>启用</Select.Option>
                 <Select.Option value={1}>禁用</Select.Option>
               </Select>
             </Form.Item>
             <Form.Item name="tempDate">
-              <DatePicker.RangePicker allowClear className="tool-datepacker-w-230"></DatePicker.RangePicker>
+              <DatePicker.RangePicker allowClear className="w250"></DatePicker.RangePicker>
             </Form.Item>
             <Form.Item>
               <Button type="primary" icon={<SearchOutlined />} onClick={onSearch}>

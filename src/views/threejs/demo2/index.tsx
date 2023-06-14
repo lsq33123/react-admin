@@ -8,6 +8,7 @@ import Index0 from './index0'
 import Index1 from './index1'
 import Index2 from './index2'
 import Index3 from './index3'
+import Index3a from './index3a'
 // import Index4 from './index4'
 // import Index5 from './index5'
 // import Index6 from './index6'
@@ -44,6 +45,12 @@ const PageView: React.FC<IProps> = props => {
       href: '#part3',
       title: '文字居中一',
       component: <Index3 />,
+    },
+    {
+      key: 'part3a',
+      href: '#part3a',
+      title: '文字居中二',
+      component: <Index3a />,
     },
     // {
     //   key: 'part4',

@@ -9,7 +9,7 @@ import EchatRadar from './echatRadar'
 import './index.less'
 const PageHome = props => {
   return (
-    <div className="container-body">
+    <div className="container-wrap">
       <ShowTop />
       <EchatLine />
       <div className="other-echart">

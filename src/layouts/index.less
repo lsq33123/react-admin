@@ -16,6 +16,7 @@ header.header {
     padding: 0 24px;
     cursor: pointer;
     transition: color 0.3s;
+
     &:hover {
       color: #1890ff;
     }
@@ -25,12 +26,15 @@ header.header {
     flex: 1;
     padding: 10px 16px;
     overflow-x: auto;
+
     .ant-tabs-nav {
       border: 0;
       margin: 0;
     }
+
     .ant-tabs-tab {
       background-color: #eee;
+
       &:hover {
         // background-color: #1890ff;
         color: #1890ff;
@@ -45,6 +49,7 @@ header.header {
       padding-right: 23px;
       transition: font-szie 0.3s;
     }
+
     .ant-tabs-tab.ant-tabs-tab-with-remove:hover {
       padding-left: 15px;
       padding-right: 15px;
@@ -53,14 +58,17 @@ header.header {
     .ant-tabs-tab.ant-tabs-tab-active,
     .ant-tabs-tab.ant-tabs-tab-with-remove.ant-tabs-tab-active {
       background: #1890ff;
+
       .ant-tabs-tab-btn {
         color: #fff !important;
       }
     }
+
     .ant-tabs-tab.ant-tabs-tab-with-remove .ant-tabs-tab-remove {
       opacity: 0;
       display: none;
     }
+
     .ant-tabs-tab.ant-tabs-tab-with-remove:hover .ant-tabs-tab-remove {
       opacity: 1;
       display: inline-block;
@@ -70,7 +78,7 @@ header.header {
       border-bottom: 0px;
     }
 
-    .ant-tabs-top > .ant-tabs-nav::before {
+    .ant-tabs-top>.ant-tabs-nav::before {
       border-bottom: 0px;
     }
   }
@@ -79,30 +87,38 @@ header.header {
 aside.sider {
   // position: fixed;
   height: 100%;
-  background: #304156;
+  background: @menuBgColor;
+
   .logo {
     height: @headerHeight;
-    background: #304156;
+    background: @menuBgColor;
     font-size: 20px;
     font-weight: bold;
     color: white;
     white-space: nowrap;
     transition: all 0.2s;
-    @flex-center();
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .scroller-menu {
     height: calc(100vh - @headerHeight) !important;
+    background-color: @menuBgColor;
   }
+
   .menu {
     height: calc(100vh - @headerHeight);
   }
-  .ant-menu.ant-menu-dark {
-    // 菜单背景颜色
-    background-color: #304156;
 
-    & .ant-menu-inline.ant-menu-sub {
-      background-color: #304156;
+  .ant-menu {
+    &.ant-menu-dark {
+      // 菜单背景颜色
+      background-color: @menuBgColor;
+
+      & .ant-menu-inline.ant-menu-sub {
+        background-color: @menuBgColor;
+      }
     }
   }
 }

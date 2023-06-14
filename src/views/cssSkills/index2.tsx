@@ -13,7 +13,7 @@ const PageView: React.FC<IProps> = props => {
     <div id="cssSkillsIndex2" className="contrainerBox">
       <Title level={4}>Grid布局</Title>
 
-      <div className="showBox flex-center">
+      <div className="showBox flex-cc">
         <div className="wrapper">
           <div className="one item">One</div>
           <div className="two item">Two</div>

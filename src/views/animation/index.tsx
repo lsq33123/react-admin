@@ -37,33 +37,33 @@ const PageViewAnimat: React.FC<IProps> = props => {
   return (
     <div id="PageViewAnimation">
       <Row>
-        <Col span={8} className="flex-center item-body">
+        <Col span={8} className="flex-cc item-body">
           <animated.div style={action}> 6666666666</animated.div>
         </Col>
-        <Col span={8} className="flex-center item-body">
+        <Col span={8} className="flex-cc item-body">
           <animated.svg strokeDashoffset={action2.x}>
             <path d="..." />
           </animated.svg>
         </Col>
-        <Col span={8} className="flex-center item-body">
+        <Col span={8} className="flex-cc item-body">
           <animated.span>{action3.number}</animated.span>
         </Col>
-        <Col span={8} className="flex-center item-body">
+        <Col span={8} className="flex-cc item-body">
           <animated.span>{action4.number}</animated.span>
         </Col>
-        <Col span={8} className="flex-center item-body">
+        <Col span={8} className="flex-cc item-body">
           <Animat1 />
         </Col>
-        <Col span={8} className="flex-center item-body">
+        <Col span={8} className="flex-cc item-body">
           <Animat2 />
         </Col>
-        <Col span={8} className="flex-center item-body">
+        <Col span={8} className="flex-cc item-body">
           <Animat3 />
         </Col>
-        <Col span={8} className="flex-center item-body">
+        <Col span={8} className="flex-cc item-body">
           {/* <Animat4 items={'Lorem ipsum dolor sit'.split(' ')} /> */}
         </Col>
-        <Col span={8} className="flex-center item-body">
+        <Col span={8} className="flex-cc item-body">
           <Animat5 />
         </Col>
       </Row>

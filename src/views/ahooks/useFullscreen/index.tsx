@@ -14,7 +14,7 @@ const PageView: React.FC<IProps> = props => {
   const [isFullScreen, setIsFullScreen] = useFullscreen(ref1)
   const isHovering = useHover(ref1)
   return (
-    <div className="ahooks-class container-body">
+    <div className="ahooks-class container-wrap">
       <Title level={2} className="ahooks-class-title">
         useFullscreen
       </Title>

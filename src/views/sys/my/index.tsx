@@ -32,7 +32,7 @@ const formOptions = {
 const InfoBar = props => {
   return (
     <div>
-      <div className="flex-between info-bar-bofy">
+      <div className=" info-bar-bofy">
         <span>
           {props.icon} &nbsp;
           {props.label}
@@ -46,11 +46,11 @@ const InfoBar = props => {
 
 const PageViewMy: React.FC<IProps> = props => {
   return (
-    <div id="page-view-my" className="container-body ">
+    <div id="page-view-my" className="container-wrap ">
       <Row gutter={20}>
         <Col span={8}>
           <Card title="个人信息">
-            <div className="flex-center">
+            <div className="flex-cc">
               <img src={avatarUrl} className="page-view-my-avatar" />
             </div>
             <InfoBar label="用户名称" value="admin" icon={<UserOutlined />} />

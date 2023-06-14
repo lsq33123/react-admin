@@ -1,0 +1,131 @@
+.fr {
+  float: right;
+}
+
+.fl {
+  float: left;
+}
+
+.block {
+  display: block;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+@marginPadding: 0, 4, 5, 8, 10, 15, 20, 50;
+
+each(@marginPadding, {
+  .m@{value} {
+    margin: @value * 1px;
+  }
+
+  .mt@{value} {
+    margin-top: @value * 1px;
+  }
+
+  .mr@{value} {
+    margin-right: @value * 1px;
+  }
+
+  .mb@{value} {
+    margin-bottom: @value * 1px;
+  }
+
+  .ml@{value} {
+    margin-left: @value * 1px;
+  }
+
+  .p@{value} {
+    padding: @value * 1px;
+  }
+
+  .pt@{value} {
+    padding-top: @value * 1px;
+  }
+
+  .pr@{value} {
+    padding-right: @value * 1px;
+  }
+
+  .pb@{value} {
+    padding-bottom: @value * 1px;
+  }
+
+  .pl@{value} {
+    padding-left: @value * 1px;
+  }
+
+}) @widthHeight: 50, 100, 150, 200, 250, 300, 350, 400, 450, 500;
+
+each(@widthHeight, {
+  .w@{value} {
+    width: @value * 1px !important;
+  }
+
+  .h@{value} {
+    height: @value * 1px !important;
+  }
+
+}) @widthHeightPercent: 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
+
+each(@widthHeightPercent, {
+  .wp@{value} {
+    width: @value * 1% !important;
+  }
+
+  .hp@{value} {
+    height: @value * 1% !important;
+  }
+
+}) @fontSizes: 12, 13, 14, 15, 16, 18, 20;
+
+each(@fontSizes, {
+  .fs@{value} {
+    font-size: @value * 1px;
+  }
+
+}) @lineHeights: 16, 20;
+
+each(@lineHeights, {
+  .lh@{value} {
+    line-height: @value * 1px;
+  }
+
+}) @lineNums: 1, 2, 3, 4, 5;
+
+each(@lineNums, {
+  .line-num-@{value} {
+    -webkit-line-clamp: @value; // 用来限制在一个块元素显示的文本的行数
+    display: -webkit-box; // 将对象作为弹性伸缩盒模型显示
+    -webkit-box-orient: vertical; //设置或检查伸缩盒对象的子元素的排列方式
+    text-overflow: ellipsis; // 在多行文本的情况下，用...隐藏超出范围的文本
+    word-break: break-all;
+    overflow: hidden;
+  }
+})

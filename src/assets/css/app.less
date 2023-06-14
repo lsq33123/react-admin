@@ -1,5 +1,7 @@
 /** @format */
 @import './define.less';
+@import './flex.less';
+@import './short.less';
 
 * {
   box-sizing: border-box;
@@ -27,37 +29,18 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #ddd
+  background-color: #ddd;
 }
 
 ::-webkit-scrollbar-thumb:active {
-  background-color: #ccc
+  background-color: #ccc;
 }
 
-.container-body {
+.container-wrap {
   width: 100%;
   height: 100%;
-  padding:15px;
+  padding: 15px;
   overflow: auto;
   // margin: 20px;
   // background-color: white;
-}
-.flex-between {
-  @flex-between();
-}
-.flex-center {
-  @flex-center();
-}
-
-.tool-input-w-200 {
-  width: 200px !important;
-}
-.tool-input-w-150 {
-  width: 150px !important;
-}
-.tool-input-w-100 {
-  width: 100px !important;
-}
-.tool-datepacker-w-230 {
-  width: 230px !important;
 }

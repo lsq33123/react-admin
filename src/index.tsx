@@ -13,6 +13,10 @@ import '@/assets/css/app.less'
 import {Watermark} from 'antd'
 import {getStore} from '@/utils/store'
 
+//分辨率适配
+import {adaptation} from './adapter'
+adaptation()
+
 const Root = () => {
   return (
     <Store>

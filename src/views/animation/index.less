@@ -4,23 +4,28 @@
   width: 100%;
   padding: 20px;
   background-color: #fff;
+
   .flex {
     display: flex;
+
     &-center {
       justify-content: center;
       align-items: center;
     }
   }
+
   .item-body {
     border: 1px solid #eee;
     border-collapse: collapse;
     min-height: 200px;
   }
-  .item-body + .item-body {
+
+  .item-body+.item-body {
     border-left: 0px;
   }
 }
-// ==============
+
+/** ============== */
 .script-bf-box {
   width: 100px;
   height: 300px;
@@ -33,7 +38,7 @@
   background: hotpink;
 }
 
-// ==============
+/** ============== */
 .c {
   position: absolute;
   left: 0;
@@ -52,15 +57,16 @@
 }
 
 .back {
-  // background-image: url(https://images.unsplash.com/photo-1544511916-0148ccdeb877?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1901&q=80i&auto=format&fit=crop);
+  /** background-image: url(https://images.unsplash.com/photo-1544511916-0148ccdeb877?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1901&q=80i&auto=format&fit=crop); */
   background-image: url(../../assets/images/avatar.jpg);
 }
 
 .front {
-  // background-image: url(https://images.unsplash.com/photo-1540206395-68808572332f?ixlib=rb-1.2.1&w=1181&q=80&auto=format&fit=crop);
+  /** background-image: url(https://images.unsplash.com/photo-1540206395-68808572332f?ixlib=rb-1.2.1&w=1181&q=80&auto=format&fit=crop); */
   background-image: url(../../assets/images/pic1.jpg);
 }
-// ==============
+
+/** ============== */
 .draggable-main {
   margin: 0;
   padding: 0;
@@ -81,7 +87,7 @@
   height: 240px;
 }
 
-.content-body > div {
+.content-body>div {
   position: absolute;
   width: 320px;
   height: 90px;
@@ -98,20 +104,23 @@
   letter-spacing: 2px;
 }
 
-.content-body > div:nth-child(1) {
+.content-body>div:nth-child(1) {
   background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
 }
-.content-body > div:nth-child(2) {
+
+.content-body>div:nth-child(2) {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 }
-.content-body > div:nth-child(3) {
+
+.content-body>div:nth-child(3) {
   background: linear-gradient(135deg, #5ee7df 0%, #b490ca 100%);
 }
-.content-body > div:nth-child(4) {
+
+.content-body>div:nth-child(4) {
   background: linear-gradient(135deg, #c3cfe2 0%, #c3cfe2 100%);
 }
 
-// ==============
+/** ============== */
 
 .trails-main {
   position: relative;
@@ -137,8 +146,8 @@
   overflow: hidden;
 }
 
-.trails-text > div {
+.trails-text>div {
   overflow: hidden;
 }
 
-// ==============
+/** ============== */

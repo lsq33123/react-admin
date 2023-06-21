@@ -3,6 +3,7 @@
 import React from 'react'
 import './index.less'
 import DocModel from '@/components/DocModel'
+import CodeHighlighter from '@/components/CodeHighlighter'
 import {Card, Space, Divider, Switch} from 'antd'
 import Index1 from './index1'
 import Index2 from './index2'
@@ -11,13 +12,16 @@ import Index4 from './index4'
 import Index5 from './index5'
 import Index6 from './index6'
 
+import {codeArr as codeArr1} from './index1/code'
+
 const PageView: React.FC = props => {
   const [cards, setCards] = React.useState<any[]>([
     {
       key: 'part1',
       href: '#part1',
-      title: '相机',
+      title: '模拟flex布局',
       component: <Index1 />,
+      codeArr: codeArr1,
     },
     {
       key: 'part2',
@@ -77,7 +81,15 @@ const PageView: React.FC = props => {
             {item.component}
             {item.showCode && (
               <>
-                <Divider>Text</Divider>
+                <Divider>Code</Divider>
+                {item.codeArr &&
+                  item.codeArr.map((code, index) => {
+                    return (
+                      <CodeHighlighter key={index} codeType={code.codeStyle}>
+                        {code.code}
+                      </CodeHighlighter>
+                    )
+                  })}
               </>
             )}
           </Card>

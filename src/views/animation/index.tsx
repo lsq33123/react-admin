@@ -9,7 +9,7 @@ import './index.less'
 import Animat1 from './animat1'
 import Animat2 from './animat2'
 import Animat3 from './animat3'
-// import Animat4 from './animat4'
+import Animat4 from './animat4'
 import Animat5 from './animat5'
 
 interface IProps {
@@ -17,10 +17,17 @@ interface IProps {
 }
 
 const PageViewAnimat: React.FC<IProps> = props => {
-  const action = useSpring({opacity: 1, from: {opacity: 0}, reset: true})
-  const action2 = useSpring({x: 100, from: {x: 0}, reset: true})
-  const action3 = useSpring({number: 1, from: {number: 0}, reset: true})
+  const action = useSpring({
+    opacity: 1,
+    from: {opacity: 0},
+    reset: true,
+    config: {duration: 1000},
+    loop: {reverse: true},
+  })
+  const action2 = useSpring({x: 100, from: {x: 0}, reset: true, loop: {reverse: true}})
+  const action3 = useSpring({number: 10000, from: {number: 0}, reset: true})
   const action4 = useSpring({
+    // loop: true,
     number: 1,
     from: {number: 0},
     reset: true,
@@ -38,22 +45,26 @@ const PageViewAnimat: React.FC<IProps> = props => {
     <div id="PageViewAnimation">
       <Row>
         <Col span={8} className="flex-cc item-body">
-          <animated.div style={action}> 6666666666</animated.div>
+          <animated.div style={action}>
+            <span style={{fontSize: '22px', fontWeight: 'bold'}}> 加载时，1s内显示,循环</span>
+          </animated.div>
         </Col>
         <Col span={8} className="flex-cc item-body">
-          <animated.svg strokeDashoffset={action2.x}>
-            <path d="..." />
-          </animated.svg>
+          <animated.span style={{fontSize: '22px', fontWeight: 'bold'}}>{action3.number}</animated.span>
         </Col>
         <Col span={8} className="flex-cc item-body">
-          <animated.span>{action3.number}</animated.span>
+          <animated.div style={action2}>
+            <span style={{fontSize: '22px', fontWeight: 'bold'}}> 移动</span>
+          </animated.div>
         </Col>
         <Col span={8} className="flex-cc item-body">
           <animated.span>{action4.number}</animated.span>
         </Col>
+
         <Col span={8} className="flex-cc item-body">
           <Animat1 />
         </Col>
+
         <Col span={8} className="flex-cc item-body">
           <Animat2 />
         </Col>
@@ -61,7 +72,7 @@ const PageViewAnimat: React.FC<IProps> = props => {
           <Animat3 />
         </Col>
         <Col span={8} className="flex-cc item-body">
-          {/* <Animat4 items={'Lorem ipsum dolor sit'.split(' ')} /> */}
+          <Animat4 />
         </Col>
         <Col span={8} className="flex-cc item-body">
           <Animat5 />

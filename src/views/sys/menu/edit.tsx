@@ -242,7 +242,7 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
 
           <Col span={12}>
             <Form.Item name="order_num" label="显示排序" rules={[{required: true}]}>
-              <InputNumber min={0} max={99} style={{width: '100%'}} />
+              <InputNumber min={0} max={999} style={{width: '100%'}} />
             </Form.Item>
           </Col>
 

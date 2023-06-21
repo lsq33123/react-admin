@@ -24,7 +24,7 @@ const PageViewAnimat5: React.FC = props => {
           <animated.div
             key={items[index]}
             className="trails-text"
-            style={{...rest, transform: (x as any).interpolate(x => `translate3d(0,${x}px,0)`)}}>
+            style={{...rest, transform: (x as any).to(x => `translate3d(0,${x}px,0)`)}}>
             <animated.div style={{height}}>{items[index]}</animated.div>
           </animated.div>
         ))}

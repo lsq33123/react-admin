@@ -10,6 +10,8 @@ header.header {
   justify-content: space-between;
   height: @headerHeight;
   align-items: center;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 
   .trigger {
     font-size: 18px;
@@ -123,13 +125,18 @@ aside.sider {
   }
 }
 
+main.ant-layout-content {
+  min-height: calc(100vh - @headerHeight);
+  overflow: auto;
+}
+
 #toolbar-right {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
   // text-align: right;
   height: 100%;
-  width: 200px;
+  width: 300px;
   padding: 0 20px 0 0;
   // cursor: pointer;
 }

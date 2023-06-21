@@ -3,6 +3,7 @@
 import React from 'react'
 import TagView from './tag-view'
 import Global from './global'
+import Setting from './setting'
 interface IProps {
   children?: any
   //props:any
@@ -11,7 +12,9 @@ interface IProps {
 const StoreView: React.FC<IProps> = props => {
   return (
     <Global.Provider>
-      <TagView.Provider>{props.children}</TagView.Provider>
+      <Setting.Provider>
+        <TagView.Provider>{props.children}</TagView.Provider>
+      </Setting.Provider>
     </Global.Provider>
   )
 }

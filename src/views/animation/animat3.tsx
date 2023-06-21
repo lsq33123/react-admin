@@ -15,11 +15,8 @@ const PageViewAnimat3: React.FC<IProps> = props => {
   })
   return (
     <div onClick={() => set(state => !state)}>
-      <animated.div className="c back" style={{opacity: opacity.interpolate((o: any) => 1 - o), transform}} />
-      <animated.div
-        className="c front"
-        style={{opacity, transform: transform.interpolate(t => `${t} rotateX(180deg)`)}}
-      />
+      <animated.div className="c back" style={{opacity: opacity.to((o: any) => 1 - o), transform}} />
+      <animated.div className="c front" style={{opacity, transform: transform.to(t => `${t} rotateX(180deg)`)}} />
     </div>
   )
 }

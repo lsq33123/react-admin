@@ -23,6 +23,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.2",
     "react-spring": "^9.7.1",
+    "react-syntax-highlighter": "^15.5.0",
     "stats.js": "^0.17.0",
     "three": "^0.152.2",
     "unstated-next": "^1.1.0"

@@ -2,15 +2,23 @@
 
 import React from 'react'
 import * as THREE from 'three'
+import gsap from 'gsap'
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
 import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader'
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
+import {labelRenderer as labelRenderer2D, tag as tag2D} from '../utils/tag2D.js'
+import * as Stats from 'stats.js'
+import * as utils from './utils'
+import * as anim from './animate'
+import './index.less'
 interface IProps {
   //props:any
 }
 
 const PageViewPart1: React.FC<IProps> = props => {
   const threeDomRef = React.useRef<HTMLDivElement>(null)
+  const statsRef = React.createRef<HTMLDivElement>()
+  let car: any = null
   const init = () => {
     const threeDomCurrent: any = threeDomRef.current
     const scene = new THREE.Scene() // 场景
@@ -35,7 +43,7 @@ const PageViewPart1: React.FC<IProps> = props => {
     scene.add(ambientLight)
 
     const directionalLight = new THREE.DirectionalLight('rgb(253,253,253)') // 6、添加平行光
-    directionalLight.position.set(100, 100, -10)
+    directionalLight.position.set(100, 100, 70)
     directionalLight.castShadow = true
     directionalLight.intensity = 2
     directionalLight.shadow.mapSize.width = 2048
@@ -78,20 +86,6 @@ const PageViewPart1: React.FC<IProps> = props => {
       cubeTexture.encoding = THREE.sRGBEncoding
       scene.background = cubeTexture
     }
-    addSkyBox(2)
-
-    var sphereGeo = new THREE.SphereGeometry(16, 40, 40) //创建球体
-    var sphereMat = new THREE.MeshLambertMaterial({
-      //创建材料
-      color: 0x0000ff,
-      wireframe: false,
-    })
-    var sphereMesh = new THREE.Mesh(sphereGeo, sphereMat) //创建球体网格模型
-    sphereMesh.position.set(5, 30, 0) //设置球的坐标
-    sphereMesh.castShadow = true //允许投射阴影
-    sphereMesh.receiveShadow = true //允许接收阴影
-    scene.add(sphereMesh) //将球体添加到场景
-
     const loaderModel = () => {
       const loader = new GLTFLoader()
       const dracoLoader = new DRACOLoader()
@@ -102,8 +96,7 @@ const PageViewPart1: React.FC<IProps> = props => {
       loader.load(
         '/threejs/models/park1/glb/city-v1.glb',
         gltf => {
-          gltf.scene.castShadow = true // 产生阴影
-          gltf.scene.receiveShadow = true // 接收阴影
+          utils.openCastShadow(gltf.scene) // 产生阴影
           scene.add(gltf.scene)
         },
         xhr => {
@@ -119,10 +112,10 @@ const PageViewPart1: React.FC<IProps> = props => {
           gltf.scene.rotateY(Math.PI)
           gltf.scene.position.set(16, 0, -25)
           gltf.scene.scale.set(0.2, 0.2, 0.2)
-          gltf.scene.castShadow = true // 产生阴影
-          gltf.scene.receiveShadow = true // 接收阴影
+          utils.openCastShadow(gltf.scene) // 产生阴影
           gltf.scene.name = '办公大厅'
           scene.add(gltf.scene)
+          scene.add(utils.createLabel(gltf.scene)) // 添加标签
         },
         xhr => {
           // console.log(((xhr.loaded / xhr.total) * 100).toFixed(2) + '% loaded')
@@ -136,8 +129,7 @@ const PageViewPart1: React.FC<IProps> = props => {
         gltf.scene.rotateY(-Math.PI / 2)
         gltf.scene.position.set(4, -10, -35)
         gltf.scene.scale.set(2.7, 2.7, 2.7)
-        gltf.scene.castShadow = true // 产生阴影
-        gltf.scene.receiveShadow = true // 接收阴影
+        // utils.openCastShadow(gltf.scene) // 产生阴影
         gltf.scene.name = '广告牌'
 
         let video = document.createElement('video')
@@ -180,16 +172,25 @@ const PageViewPart1: React.FC<IProps> = props => {
         gltf.scene.rotateY(-Math.PI / 2)
         gltf.scene.position.set(16, 12, 5)
         gltf.scene.scale.set(0.3, 0.3, 0.3)
-        gltf.scene.castShadow = true // 产生阴影
-        gltf.scene.receiveShadow = true // 接收阴影
+        utils.openCastShadow(gltf.scene) // 产生阴影
         gltf.scene.name = '无人机'
+        gltf.scene.add(utils.createLabel(gltf.scene, false))
         scene.add(gltf.scene)
+
+        gsap.to(gltf.scene.position, {
+          duration: 10, // 动画持续时间
+          x: gltf.scene.position.x + 10,
+          y: gltf.scene.position.y + 2,
+          z: gltf.scene.position.z + 7,
+          repeat: -1, // 无限循环
+          yoyo: true, // 往返运动
+          ease: 'Expo.inOut', // 缓动函数
+        })
       })
 
       loader.load('/threejs/models/park1/glb/ren.glb', gltf => {
         gltf.scene.position.set(13, 0, 15)
-        gltf.scene.castShadow = true // 产生阴影
-        gltf.scene.receiveShadow = true // 接收阴影
+        utils.openCastShadow(gltf.scene) // 产生阴影
         gltf.scene.name = '人'
         scene.add(gltf.scene)
       })
@@ -198,35 +199,62 @@ const PageViewPart1: React.FC<IProps> = props => {
         gltf.scene.rotateY(Math.PI / 2)
         gltf.scene.position.set(-16, 0, 0)
         gltf.scene.scale.set(0.7, 0.7, 0.7)
-        gltf.scene.castShadow = true // 产生阴影
-        gltf.scene.receiveShadow = true // 接收阴影
+        utils.openCastShadow(gltf.scene) // 产生阴影
         gltf.scene.name = '实验楼'
         scene.add(gltf.scene)
+        scene.add(utils.createLabel(gltf.scene)) // 添加标签
       })
 
       loader.load('/threejs/models/park1/gltf/car13.gltf', gltf => {
+        car = gltf.scene
         gltf.scene.position.set(11.5, 0, 18)
         gltf.scene.scale.set(1, 1, 1)
-        gltf.scene.castShadow = true // 产生阴影
-        gltf.scene.receiveShadow = true // 接收阴影
+        utils.openCastShadow(gltf.scene) // 产生阴影
         gltf.scene.name = '快递车'
+        gltf.scene.add(utils.createLabel(gltf.scene, false))
         scene.add(gltf.scene)
       })
       loader.load('/threejs/models/park1/tree_animate/scene.gltf', gltf => {
         gltf.scene.position.set(8, 0, 26)
         gltf.scene.scale.set(0.08, 0.08, 0.08)
-        gltf.scene.castShadow = true // 产生阴影
-        gltf.scene.receiveShadow = true // 接收阴影
+        utils.openCastShadow(gltf.scene) // 产生阴影
         gltf.scene.name = '树'
         scene.add(gltf.scene)
       })
     }
-    loaderModel()
+
+    addSkyBox(2) //添加天空盒子
+    loaderModel() //加载模型
+    let {curve, curveObject} = utils.makeCurve(scene) //添加汽车行驶路线
+    scene.add(curveObject)
+
+    const stats = new Stats() // 9、添加性能监控
+    stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
+    stats.dom.style.position = 'unset'
+    statsRef.current!.appendChild(stats.dom)
+
+    const stats2 = new Stats() // 9、添加性能监控
+    stats2.showPanel(1) // 0: fps, 1: ms, 2: mb, 3+: custom
+    stats2.dom.style.position = 'unset'
+    statsRef.current!.appendChild(stats2.dom)
+
+    const stats3 = new Stats() // 9、添加性能监控
+    stats3.showPanel(2) // 0: fps, 1: ms, 2: mb, 3+: custom
+    stats3.dom.style.position = 'unset'
+    statsRef.current!.appendChild(stats3.dom)
+
     var control = new OrbitControls(camera, renderer.domElement)
     const animate = () => {
       requestAnimationFrame(animate)
       control.update()
+      stats.update()
+      stats2.update()
+      stats3.update()
+      anim.moveOnCurve({scene, car, curve}) // 汽车沿着曲线移动 使汽车动起来
       renderer.render(scene, camera)
+      if (threeDomCurrent) {
+        labelRenderer2D(threeDomCurrent).render(scene, camera)
+      }
     }
     animate()
 
@@ -242,10 +270,11 @@ const PageViewPart1: React.FC<IProps> = props => {
   }, [])
 
   return (
-    <>
-      <div ref={threeDomRef} style={{width: '100%', height: 'calc(100vh - 64px)'}}></div>
+    <div className="threejs-park-1-wrap">
+      <div ref={statsRef} style={{position: 'absolute', left: '0', top: '0', zIndex: 1}}></div>
+      <div ref={threeDomRef} style={{width: '100%', height: '100%'}}></div>
       <video id="videoContainer" style={{display: 'none'}}></video>
-    </>
+    </div>
   )
 }
 export default PageViewPart1

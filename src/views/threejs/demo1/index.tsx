@@ -21,24 +21,24 @@ interface IProps {
 
 const PageView: React.FC<IProps> = props => {
   const items = [
-    // {
-    //   key: 'part0',
-    //   href: '#part0',
-    //   title: '画一条线',
-    //   component: <Index0 />,
-    // },
-    // {
-    //   key: 'part1',
-    //   href: '#part1',
-    //   title: '绘制一个心型',
-    //   component: <Index1 />,
-    // },
-    // {
-    //   key: 'part2',
-    //   href: '#part2',
-    //   title: '阴影投影',
-    //   component: <Index2 />,
-    // },
+    {
+      key: 'part0',
+      href: '#part0',
+      title: '画一条线',
+      component: <Index0 />,
+    },
+    {
+      key: 'part1',
+      href: '#part1',
+      title: '绘制一个心型',
+      component: <Index1 />,
+    },
+    {
+      key: 'part2',
+      href: '#part2',
+      title: '阴影投影',
+      component: <Index2 />,
+    },
     {
       key: 'part3',
       href: '#part3',

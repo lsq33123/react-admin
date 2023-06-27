@@ -31,7 +31,7 @@ const PageViewIndex: React.FC<IProps> = props => {
     const material = new THREE.MeshBasicMaterial({
       // 5.1 创建基础网格材质
       color: 0x00ff00, // 绿色
-      wireframe: true, //是否将几何体渲染为线框，默认值为false（即渲染为平面多边形）
+      wireframe: false, //是否将几何体渲染为线框，默认值为false（即渲染为平面多边形）
     })
     const cube = new THREE.Mesh(geometry, material) // 6、创建网格模型（mesh）
     scene.add(cube) // 7、将网格模型添加到场景中
@@ -45,7 +45,7 @@ const PageViewIndex: React.FC<IProps> = props => {
     var sphereGeometry = new THREE.SphereGeometry(1, 20, 20)
     var sphereMaterial = new THREE.MeshLambertMaterial({
       color: 0x7777ff, // 球体颜色
-      wireframe: true, //是否将几何体渲染为线框，默认值为false（即渲染为平面多边形）
+      wireframe: false, //是否将几何体渲染为线框，默认值为false（即渲染为平面多边形）
     })
     var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
     sphere.position.set(4, 0, 0)
@@ -57,7 +57,7 @@ const PageViewIndex: React.FC<IProps> = props => {
     var cylinderMat = new THREE.MeshLambertMaterial({
       //创建材料
       color: 0xff6600, //设置颜色
-      wireframe: true,
+      wireframe: false,
     })
     //创建圆柱体网格模型
     var cylinderMesh = new THREE.Mesh(cylinderGeo, cylinderMat)
@@ -69,6 +69,18 @@ const PageViewIndex: React.FC<IProps> = props => {
     spotLight.position.set(100, 1000, 1000)
     spotLight.castShadow = true // 聚光灯光源投射阴影
     scene.add(spotLight)
+
+    // var planeGeo = new THREE.PlaneGeometry(200, 200, 10, 10) //创建平面
+    // var planeMat = new THREE.MeshLambertMaterial({
+    //   //创建材料
+    //   color: 0xffffff,
+    //   wireframe: false,
+    // })
+    // var planeMesh = new THREE.Mesh(planeGeo, planeMat) //创建网格模型
+    // planeMesh.position.set(-10, -10, 0) //设置平面的坐标
+    // planeMesh.rotation.x = -0.5 * Math.PI //将平面绕X轴逆时针旋转90度
+    // planeMesh.receiveShadow = true //允许接收阴影
+    // scene.add(planeMesh) //将平面添加到场景中
 
     // 加入一个环境光源
     var ambientLight = new THREE.AmbientLight(0x0c0c0c)

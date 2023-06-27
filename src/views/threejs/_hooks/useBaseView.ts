@@ -70,7 +70,7 @@ export default function useBaseView({
     if (isSpotLight) {
       spotLight = new THREE.SpotLight(0xffffff) // 6、添加聚光灯光源
       spotLight.position.set(100, 1000, 1000)
-      spotLight.castShadow = true
+      // spotLight.castShadow = true // 开启阴影
       scene.add(spotLight)
     }
     if (isAxisHelper) {

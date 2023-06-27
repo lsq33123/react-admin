@@ -32,6 +32,11 @@ module.exports = {
     // publicPath: '/',
     historyApiFallback: true, //用于如果找不到界面就返回默认首页
     // disableHostCheck: true
+    headers: {
+      // 用于解决webpack-dev-server热更新时，浏览器控制台报错：Content Encoding Error
+      //解决threejs加载gltf模型时，浏览器无法获取模型数据总大小的问题
+      'Content-Encoding': 'none',
+    },
     client: {
       overlay: false
     }

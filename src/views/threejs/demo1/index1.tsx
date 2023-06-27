@@ -12,10 +12,10 @@ const PageViewIndex: React.FC<IProps> = props => {
   const init = () => {
     const threeDomCurrent: any = threeDomRef.current
     const scene = new THREE.Scene() // 场景
-    scene.background = new THREE.Color(0xaaaaaa)
+    // scene.background = new THREE.Color(0xaaaaaa)
     const camera = new THREE.PerspectiveCamera(75, threeDomCurrent.clientWidth / threeDomCurrent.clientHeight, 1, 1000)
 
-    camera.position.set(-29, 12, 80) // 相机位置
+    camera.position.set(20, 12, 80) // 相机位置
     camera.lookAt(0, 0, 0) // 相机焦点
 
     const renderer = new THREE.WebGLRenderer() // 渲染器

@@ -7,7 +7,7 @@ import {Card} from 'antd'
 import Index0 from './index0'
 import Index1 from './index1'
 import Index2 from './index2'
-// import Index3 from './index3'
+import Index3 from './index3'
 // import Index4 from './index4'
 // import Index5 from './index5'
 // import Index6 from './index6'
@@ -21,30 +21,30 @@ interface IProps {
 
 const PageView: React.FC<IProps> = props => {
   const items = [
-    {
-      key: 'part0',
-      href: '#part0',
-      title: '画一条线',
-      component: <Index0 />,
-    },
-    {
-      key: 'part1',
-      href: '#part1',
-      title: '绘制一个心型',
-      component: <Index1 />,
-    },
+    // {
+    //   key: 'part0',
+    //   href: '#part0',
+    //   title: '画一条线',
+    //   component: <Index0 />,
+    // },
+    // {
+    //   key: 'part1',
+    //   href: '#part1',
+    //   title: '绘制一个心型',
+    //   component: <Index1 />,
+    // },
     // {
     //   key: 'part2',
     //   href: '#part2',
-    //   title: '模拟太阳系',
+    //   title: '阴影投影',
     //   component: <Index2 />,
     // },
-    // {
-    //   key: 'part3',
-    //   href: '#part3',
-    //   title: '性能监控',
-    //   component: <Index3 />,
-    // },
+    {
+      key: 'part3',
+      href: '#part3',
+      title: 'gltf模型阴影投影',
+      component: <Index3 />,
+    },
     // {
     //   key: 'part4',
     //   href: '#part4',

@@ -15,4 +15,39 @@
     font-size: 16px;
     padding: 4px 10px;
   }
+
+  .ctrl-wrap {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    // padding: 15px;
+    box-sizing: border-box;
+
+    .ctrl-wrap-list {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      border-radius: 4px;
+      opacity: 0.9;
+      border: 1px solid #14171c;
+      background: linear-gradient(0deg, #1e202a 0%, #0d1013 100%);
+      display: flex;
+      flex-direction: column;
+
+      .ctrl-item {
+        padding: 5px 10px;
+        box-sizing: border-box;
+        list-style: none;
+        cursor: pointer;
+        border: 1px solid #313642;
+        border-radius: 2px;
+        float: left;
+        margin: 5px;
+        position: relative;
+        min-width: 70px;
+        max-width: 150px;
+        color: #fbfbfb;
+      }
+    }
+  }
 }

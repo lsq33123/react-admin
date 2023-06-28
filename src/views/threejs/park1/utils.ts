@@ -50,13 +50,16 @@ export const createLabel = (mesh: THREE.Mesh, absolute = true) => {
 }
 
 
-export const makeCurve = (scene: THREE.Scene) => {
+export const makeCurveCar = (scene: THREE.Scene) => {
   let curve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(20, 0, 18),
     new THREE.Vector3(11.5, 0, 18),
     new THREE.Vector3(11.5, 0, 34),
     new THREE.Vector3(35, 0, 34),
     new THREE.Vector3(35, 0, 31),
     new THREE.Vector3(11.5, 0, 31),
+    new THREE.Vector3(11.5, 0, 18),
+    new THREE.Vector3(20, 0, 18),
   ]);
   curve.curveType = "catmullrom"; //设置曲线类型
   curve.closed = true;//设置是否闭环 默认为false
@@ -72,7 +75,35 @@ export const makeCurve = (scene: THREE.Scene) => {
   const curveObject = new THREE.Line(geometry, material);
   // curveObject.position.y = 3
   return {
-    curve,
-    curveObject
+    curveCar: curve,
+    curveObjectCar: curveObject
+  }
+}
+
+export const makeCurveMan = (scene: THREE.Scene) => {
+  let curve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(13, 0, 15),
+    new THREE.Vector3(-3, 0, 15),
+    new THREE.Vector3(13, 0, 15),
+    new THREE.Vector3(13, 0, 0),
+    new THREE.Vector3(20, 0, 0),
+    new THREE.Vector3(13, 0, 0),
+  ]);
+  curve.curveType = "catmullrom"; //设置曲线类型
+  curve.closed = true;//设置是否闭环 默认为false
+  curve.tension = 0; //设置线的张力，0为无弧度折线 1为圆弧 默认0.5
+  // 为曲线添加材质在场景中显示出来，不显示也不会影响运动轨迹，相当于一个Helper
+  //getPoints是基类Curve的方法，返回一个vector3对象作为元素组成的数组
+  const points = curve.getPoints(100);//分段数100，返回101个顶点
+  // setFromPoints方法从points中提取数据改变几何体的顶点属性vertices
+  const geometry = new THREE.BufferGeometry().setFromPoints(points);
+  const material = new THREE.LineBasicMaterial({
+    color: 0xff0000,
+  });
+  const curveObject = new THREE.Line(geometry, material);
+  // curveObject.position.y = 3
+  return {
+    curveCarMan: curve,
+    curveObjectCarMan: curveObject
   }
 }

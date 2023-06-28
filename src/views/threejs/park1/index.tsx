@@ -19,18 +19,24 @@ const PageViewPart1: React.FC<IProps> = props => {
   const threeDomRef = React.useRef<HTMLDivElement>(null)
   const statsRef = React.createRef<HTMLDivElement>()
   let car: any = null
+  let man: any = null
+  let CameraInitPosition: any = new THREE.Vector3(17, 10, 52)
+  const isDriverView = React.useRef<boolean>(false)
+  const control = React.useRef<any>(null)
+  const cameraRef = React.useRef<any>(null)
+  const [autoRotate, setAutoRotate] = React.useState<boolean>(false)
   const init = () => {
     const threeDomCurrent: any = threeDomRef.current
     const scene = new THREE.Scene() // 场景
-    const camera = new THREE.PerspectiveCamera(
+    cameraRef.current = new THREE.PerspectiveCamera(
       75,
       threeDomCurrent.clientWidth / threeDomCurrent.clientHeight,
       0.1,
       1000,
     )
 
-    camera.position.set(17, 10, 52) // 相机位置
-    camera.lookAt(0, 0, 0) // 相机焦点
+    cameraRef.current.position.set(17, 10, 52) // 相机位置
+    cameraRef.current.lookAt(0, 0, 0) // 相机焦点
 
     const renderer = new THREE.WebGLRenderer() // 渲染器
     renderer.shadowMap.enabled = true // 阴影
@@ -189,6 +195,7 @@ const PageViewPart1: React.FC<IProps> = props => {
       })
 
       loader.load('/threejs/models/park1/glb/ren.glb', gltf => {
+        man = gltf.scene
         gltf.scene.position.set(13, 0, 15)
         utils.openCastShadow(gltf.scene) // 产生阴影
         gltf.scene.name = '人'
@@ -225,8 +232,10 @@ const PageViewPart1: React.FC<IProps> = props => {
 
     addSkyBox(2) //添加天空盒子
     loaderModel() //加载模型
-    let {curve, curveObject} = utils.makeCurve(scene) //添加汽车行驶路线
-    scene.add(curveObject)
+    let {curveCar, curveObjectCar} = utils.makeCurveCar(scene) //添加汽车行驶路线
+    let {curveCarMan, curveObjectCarMan} = utils.makeCurveMan(scene) //添加汽车行驶路线
+    scene.add(curveObjectCar)
+    scene.add(curveObjectCarMan)
 
     const stats = new Stats() // 9、添加性能监控
     stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -243,24 +252,25 @@ const PageViewPart1: React.FC<IProps> = props => {
     stats3.dom.style.position = 'unset'
     statsRef.current!.appendChild(stats3.dom)
 
-    var control = new OrbitControls(camera, renderer.domElement)
+    control.current = new OrbitControls(cameraRef.current, renderer.domElement)
     const animate = () => {
       requestAnimationFrame(animate)
-      control.update()
+      control.current.update()
       stats.update()
       stats2.update()
       stats3.update()
-      anim.moveOnCurve({scene, car, curve}) // 汽车沿着曲线移动 使汽车动起来
-      renderer.render(scene, camera)
+      anim.moveOnCurve({scene, camera: cameraRef.current, car, curve: curveCar, isDriverView}) // 汽车沿着曲线移动 使汽车动起来
+      // anim.moveOnCurve({scene, car: man, curve: curveCarMan}) // 人沿着曲线移动 使汽车动起来
+      renderer.render(scene, cameraRef.current)
       if (threeDomCurrent) {
-        labelRenderer2D(threeDomCurrent).render(scene, camera)
+        labelRenderer2D(threeDomCurrent).render(scene, cameraRef.current)
       }
     }
     animate()
 
     window.addEventListener('resize', () => {
-      camera.aspect = threeDomCurrent.clientWidth / threeDomCurrent.clientHeight
-      camera.updateProjectionMatrix()
+      cameraRef.current.aspect = threeDomCurrent.clientWidth / threeDomCurrent.clientHeight
+      cameraRef.current.updateProjectionMatrix()
       renderer.setSize(threeDomCurrent.clientWidth, threeDomCurrent.clientHeight)
     })
   }
@@ -269,11 +279,86 @@ const PageViewPart1: React.FC<IProps> = props => {
     init()
   }, [])
 
+  const onAutoRotate = () => {
+    control.current.autoRotate = !control.current.autoRotate
+    setAutoRotate(pre => !pre)
+  }
+
+  const onViewReset = () => {
+    isDriverView.current = false
+    setAutoRotate(false)
+    control.current.autoRotate = false
+    gsap.to(cameraRef.current.position, {
+      // x: CameraInitPosition.x,
+      // y: CameraInitPosition.y,
+      // z: CameraInitPosition.z,
+      x: 17,
+      y: 10,
+      z: 52,
+      duration: 2,
+      ease: 'power1.inOut',
+      onComplete: () => {},
+    })
+    gsap.to(control.current.target, {
+      x: 0,
+      y: 0,
+      z: 0,
+      duration: 2,
+      ease: 'power1.inOut',
+      onComplete: () => {},
+    })
+  }
+
+  const onViewAd = () => {
+    isDriverView.current = false
+    setAutoRotate(false)
+    control.current.autoRotate = false
+    gsap.to(cameraRef.current.position, {
+      x: 4,
+      y: 25,
+      z: -10,
+      duration: 2,
+      ease: 'power1.inOut',
+      onComplete: () => {},
+    })
+    gsap.to(control.current.target, {
+      x: 4,
+      y: 25,
+      z: -30,
+      duration: 2,
+      ease: 'power1.inOut',
+      onComplete: () => {},
+    })
+  }
+  const onViewDriver = () => {
+    if (!isDriverView.current === false) {
+      cameraRef.current.position.set(17, 10, 52) // 相机位置
+      cameraRef.current.lookAt(0, 0, 0) // 相机焦点
+    }
+    isDriverView.current = !isDriverView.current
+  }
+
   return (
     <div className="threejs-park-1-wrap">
       <div ref={statsRef} style={{position: 'absolute', left: '0', top: '0', zIndex: 1}}></div>
       <div ref={threeDomRef} style={{width: '100%', height: '100%'}}></div>
       <video id="videoContainer" style={{display: 'none'}}></video>
+      <div className="ctrl-wrap">
+        <div className="ctrl-wrap-list">
+          <div className="ctrl-item" onClick={onViewReset}>
+            场景重置
+          </div>
+          <div className="ctrl-item" onClick={onAutoRotate}>
+            {autoRotate ? '停止旋转' : '自动旋转'}
+          </div>
+          <div className="ctrl-item" onClick={onViewAd}>
+            广告视角
+          </div>
+          <div className="ctrl-item" onClick={onViewDriver}>
+            司机视角
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

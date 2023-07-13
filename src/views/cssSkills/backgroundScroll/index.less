@@ -1,0 +1,124 @@
+/** @format */
+@import '@/assets/css/define.less';
+
+#PageViewAnimationCss {
+  width: 100%;
+  height: calc(100vh - @headerHeight);
+  padding: 15px;
+  //
+  display: flex;
+  overflow: auto;
+
+
+
+  .side-div {
+    width: 250px;
+    flex-shrink: 0;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+
+    .ant-menu-light.ant-menu-root.ant-menu-inline {
+      border-inline-end: 0px
+    }
+  }
+
+  .right-div {
+    width: 100%;
+    height: calc(100vh - @headerHeight - 30px);
+    margin-left: 15px;
+  }
+
+
+  .demo-index1 {
+    display: flex;
+    flex-direction: column;
+
+    .g-wrap {
+      background: #000;
+      text-align: center;
+      height: 400px;
+
+      p {
+        font-size: 30px;
+        font-weight: bold;
+        height: 100%;
+        max-width: 800px;
+        width: 800px;
+        color: transparent;
+        background: linear-gradient(-4deg, transparent, transparent 25%, #ffb6ff, #b344ff, transparent 75%, transparent);
+        background-size: 100% 400%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        /* 背景剪裁 */
+        background-position: center 0;
+        animation: scroll 10s linear infinite alternate;
+      }
+    }
+
+    @keyframes scroll {
+      0% {
+        background-position: center 0;
+      }
+
+      100% {
+        background-position: center 100%;
+      }
+    }
+  }
+
+  .demo-index2 {
+    display: flex;
+
+
+    .g-wrap {
+      background: #000;
+      position: fixed;
+      top: 75px;
+      left: 500px;
+      display: flex;
+      width: 70%;
+      height: 700px;
+      justify-content: center;
+      align-items: center;
+
+      .text {
+        position: relative;
+        width: 800px;
+        font-size: 30px;
+        color: #fff;
+        background: #000;
+        overflow: hidden;
+      }
+
+      .bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 300vh;
+        background: linear-gradient(-3deg, #000, #000 25%, #ffb6ff, #b344ff, #000 75%, #000);
+        mix-blend-mode: darken;
+      }
+    }
+
+    .g-scroll {
+      position: relative;
+      width: 100%;
+      height: 300vw;
+    }
+  }
+
+  .demo-index3 {
+
+    height: 2500vh;
+    background: #000;
+
+    canvas {
+      position: fixed;
+      width: calc(100vw - 520px);
+      max-height: 80vh;
+    }
+  }
+}

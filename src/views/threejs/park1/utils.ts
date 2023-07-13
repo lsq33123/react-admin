@@ -107,3 +107,40 @@ export const makeCurveMan = (scene: THREE.Scene) => {
     curveObjectCarMan: curveObject
   }
 }
+
+
+export function deepCopy<T>(obj: T): T {
+  if (typeof obj !== 'object' || obj === null) {
+    return obj;
+  }
+
+  let copy: any;
+
+  if (Array.isArray(obj)) {
+    copy = [];
+    for (let i = 0; i < obj.length; i++) {
+      copy[i] = deepCopy(obj[i]);
+    }
+  } else {
+    copy = {};
+    for (const key in obj) {
+      if ((obj as any).hasOwnProperty(key)) {
+        copy[key] = deepCopy(obj[key]);
+      }
+    }
+  }
+
+  return copy
+}
+
+
+export function debounce(func, wait) {
+  let timeOut: any = null;
+  return function (...args) {
+    clearTimeout(timeOut);//一定要清除定时器
+    timeOut = setTimeout(() => {
+      func(...args);
+    }, wait);
+  };
+}
+

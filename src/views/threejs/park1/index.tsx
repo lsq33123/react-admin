@@ -6,6 +6,9 @@ import gsap from 'gsap'
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
 import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader'
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
+import {OutlinePass} from 'three/examples/jsm/postprocessing/OutlinePass.js'
+import {EffectComposer} from 'three/examples/jsm/postprocessing/EffectComposer.js'
+import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass.js'
 import {labelRenderer as labelRenderer2D, tag as tag2D} from '../utils/tag2D.js'
 import * as Stats from 'stats.js'
 import * as utils from './utils'
@@ -20,10 +23,15 @@ const PageViewPart1: React.FC<IProps> = props => {
   const statsRef = React.createRef<HTMLDivElement>()
   let car: any = null
   let man: any = null
-  let CameraInitPosition: any = new THREE.Vector3(17, 10, 52)
+  // let CameraInitPosition: any = new THREE.Vector3(17, 10, 52)
+  const highlightArr = ['广告牌', '实验楼', '树', '快递车', '人', '无人机', '办公大厅']
+  const modelSelect = ['zuoding', 'zuo1', 'zuo2', 'zuo3', 'zuo4', 'zuo5']
+  let selectFloorName: string = ''
   const isDriverView = React.useRef<boolean>(false)
   const control = React.useRef<any>(null)
   const cameraRef = React.useRef<any>(null)
+  const composerRef = React.useRef<any>(null)
+  const outlinePassRef = React.useRef<any>(null)
   const [autoRotate, setAutoRotate] = React.useState<boolean>(false)
   const init = () => {
     const threeDomCurrent: any = threeDomRef.current
@@ -35,7 +43,8 @@ const PageViewPart1: React.FC<IProps> = props => {
       1000,
     )
 
-    cameraRef.current.position.set(17, 10, 52) // 相机位置
+    cameraRef.current.position.set(13, 10, 25) // 相机位置
+    // cameraRef.current.position.set(17, 10, 52) // 相机位置
     cameraRef.current.lookAt(0, 0, 0) // 相机焦点
 
     const renderer = new THREE.WebGLRenderer() // 渲染器
@@ -115,6 +124,7 @@ const PageViewPart1: React.FC<IProps> = props => {
       loader.load(
         '/threejs/models/park1/glb/zuo.glb',
         gltf => {
+          console.log('办公大厅:', gltf.scene)
           gltf.scene.rotateY(Math.PI)
           gltf.scene.position.set(16, 0, -25)
           gltf.scene.scale.set(0.2, 0.2, 0.2)
@@ -154,23 +164,6 @@ const PageViewPart1: React.FC<IProps> = props => {
           transparent: true,
           side: THREE.DoubleSide,
         })
-
-        // gltf.scene.traverse(child => {
-        //   if (child instanceof THREE.Mesh) {
-        //     child.material = new THREE.MeshBasicMaterial({
-        //       map: texture,
-        //       side: THREE.DoubleSide,
-        //     })
-        //   }
-        // })
-
-        //没效果
-        // gltf.scene.material = new THREE.MeshBasicMaterial({
-        //   map: texture,
-        //   transparent: true,
-        //   side: THREE.DoubleSide,
-        // })
-
         scene.add(gltf.scene)
       })
 
@@ -203,6 +196,7 @@ const PageViewPart1: React.FC<IProps> = props => {
       })
 
       loader.load('/threejs/models/park1/gltf/shiyanlou.gltf', gltf => {
+        console.log('实验楼:', gltf.scene)
         gltf.scene.rotateY(Math.PI / 2)
         gltf.scene.position.set(-16, 0, 0)
         gltf.scene.scale.set(0.7, 0.7, 0.7)
@@ -233,9 +227,10 @@ const PageViewPart1: React.FC<IProps> = props => {
     addSkyBox(2) //添加天空盒子
     loaderModel() //加载模型
     let {curveCar, curveObjectCar} = utils.makeCurveCar(scene) //添加汽车行驶路线
-    let {curveCarMan, curveObjectCarMan} = utils.makeCurveMan(scene) //添加汽车行驶路线
+    let {curveCarMan, curveObjectCarMan} = utils.makeCurveMan(scene) //添加人行驶路线
     scene.add(curveObjectCar)
     scene.add(curveObjectCarMan)
+    console.log(scene)
 
     const stats = new Stats() // 9、添加性能监控
     stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -252,6 +247,23 @@ const PageViewPart1: React.FC<IProps> = props => {
     stats3.dom.style.position = 'unset'
     statsRef.current!.appendChild(stats3.dom)
 
+    composerRef.current = new EffectComposer(renderer) // 10、添加后期处理
+    const renderPass = new RenderPass(scene, cameraRef.current)
+    composerRef.current.addPass(renderPass)
+
+    outlinePassRef.current = new OutlinePass(
+      new THREE.Vector2(threeDomCurrent.clientWidth, threeDomCurrent.clientHeight),
+      scene,
+      cameraRef.current,
+    )
+    outlinePassRef.current.edgeStrength = 3 // 边缘强度
+    outlinePassRef.current.edgeGlow = 0.7 // 边缘光
+    outlinePassRef.current.edgeThickness = 1 // 边缘厚度
+    outlinePassRef.current.pulsePeriod = 2 // 闪烁频率
+    outlinePassRef.current.visibleEdgeColor.set('#ffffff') // 可见边缘颜色
+    outlinePassRef.current.hiddenEdgeColor.set('#190a05') // 隐藏边缘颜色
+    composerRef.current.addPass(outlinePassRef.current)
+
     control.current = new OrbitControls(cameraRef.current, renderer.domElement)
     const animate = () => {
       requestAnimationFrame(animate)
@@ -262,6 +274,7 @@ const PageViewPart1: React.FC<IProps> = props => {
       anim.moveOnCurve({scene, camera: cameraRef.current, car, curve: curveCar, isDriverView}) // 汽车沿着曲线移动 使汽车动起来
       // anim.moveOnCurve({scene, car: man, curve: curveCarMan}) // 人沿着曲线移动 使汽车动起来
       renderer.render(scene, cameraRef.current)
+      composerRef.current.render()
       if (threeDomCurrent) {
         labelRenderer2D(threeDomCurrent).render(scene, cameraRef.current)
       }
@@ -273,6 +286,81 @@ const PageViewPart1: React.FC<IProps> = props => {
       cameraRef.current.updateProjectionMatrix()
       renderer.setSize(threeDomCurrent.clientWidth, threeDomCurrent.clientHeight)
     })
+    console.dir(threeDomCurrent)
+    let offsetLeft = threeDomCurrent.parentNode.offsetLeft || 0 // 获取父元素距离左边的距离
+    let offsetTop = threeDomCurrent.parentNode.offsetTop || 0 // 获取父元素距离上边的距离
+    console.log('offsetLeft:', offsetLeft)
+    console.log('offsetTop:', offsetTop)
+    // let offsetLeft = 0 // 获取父元素距离左边的距离
+    // let offsetTop = 0 // 获取父元素距离上边的距离
+
+    const mousemove: any = event => {
+      // threeDomCurrent.addEventListener('click', event => {
+      event.preventDefault()
+      const mouse = new THREE.Vector2()
+      const raycaster = new THREE.Raycaster()
+      mouse.x = ((event.clientX - offsetLeft) / threeDomCurrent.clientWidth) * 2 - 1
+      mouse.y = -((event.clientY - offsetTop) / threeDomCurrent.clientHeight) * 2 + 1
+      raycaster.setFromCamera(mouse, cameraRef.current)
+
+      const intersects = raycaster.intersectObjects(scene.children, true)
+      // 获取需要高亮的mesh
+      const highlightMeshArr = scene.children.filter(item => highlightArr.includes(item.name))
+      const highlightMeshArr2 = scene.children.filter(item => modelSelect.includes(item.name))
+      if (intersects.length > 0) {
+        let object = intersects[0].object
+        for (let mesh of highlightMeshArr) {
+          // 如果当前高亮的mesh在鼠标移入的mesh中
+          if (mesh.name === '办公大厅') {
+            console.log('object:', object)
+            if (modelSelect.includes(object.parent.name)) {
+              selectFloorName = object.parent.name
+              if (mesh.getObjectByName(object.name)) {
+                mesh.getObjectByName(object.parent.name).traverse(child => {
+                  if (child.isMesh) {
+                    child.material = new THREE.MeshPhongMaterial({
+                      color: 'yellow',
+                      transparent: true,
+                      opacity: 0.8,
+                      emissive: child.material.color,
+                      emissiveMap: child.material.map,
+                      emissiveIntensity: 3,
+                    })
+                  }
+                })
+                break
+              }
+            }
+            // 如果当前高亮的mesh不在鼠标移入的mesh中
+            let temparr = modelSelect.filter(item => !item.includes(object.parent.name))
+            // console.log('temparr:', temparr)
+            for (let item of temparr) {
+              // console.log('item:', item)
+              // console.log('mesh.getObjectByName(item):', mesh.getObjectByName(item))
+              // console.log('mesh', mesh)
+              mesh.getObjectByName(item).traverse(function (child) {
+                if (child.isMesh && child.parent.name != selectFloorName) {
+                  child.material = new THREE.MeshPhongMaterial({
+                    color: new THREE.Color('#123ca8'),
+                    transparent: true,
+                    opacity: 0.5,
+                    emissiveMap: child.material.map,
+                  })
+                }
+              })
+            }
+          } else {
+            if (mesh.getObjectByName(object.name)) {
+              outlinePassRef.current.selectedObjects = [mesh]
+              break
+            } else {
+              outlinePassRef.current.selectedObjects = []
+            }
+          }
+        }
+      }
+    }
+    threeDomCurrent.addEventListener('mousemove', utils.debounce(mousemove, 100))
   }
 
   React.useEffect(() => {

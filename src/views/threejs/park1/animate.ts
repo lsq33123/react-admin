@@ -4,7 +4,7 @@ import * as THREE from 'three'
 //汽车沿着曲线移动
 
 let progress = 0; // 物体运动时在运动路径的初始位置，范围0~1
-const velocity = 0.0005; // 影响运动速率的一个值，范围0~1，需要和渲染频率结合计算才能得到真正的速率
+const velocity = 0.0007; // 影响运动速率的一个值，范围0~1，需要和渲染频率结合计算才能得到真正的速率
 const moveOnCurve = ({ scene, camera, car, curve, isDriverView }) => {
   if (curve && car) {
     if (progress <= 1 - velocity) {

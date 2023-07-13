@@ -13,6 +13,7 @@ interface IProps {
   isControls?: boolean,
   isAnimate?: boolean,
   isResize?: boolean,
+  isShadowMap?: boolean,
   //props:any
 }
 
@@ -27,6 +28,7 @@ export default function useBaseView({
   isAutoRender = true, // 是否自动渲染
   isAnimate = true, // 是否开启动画
   isResize = true, // 是否开启窗口自适应
+  isShadowMap = false, // 是否开启阴影
 }: IProps) {
   let scene: THREE.Scene = null
   let camera: THREE.PerspectiveCamera = null
@@ -57,9 +59,10 @@ export default function useBaseView({
     )
     camera.position.set(0, 0, 20) // 设置相机位置
     renderer = new THREE.WebGLRenderer() // 3、创建渲染器
+    isShadowMap && (renderer.shadowMap.enabled = true) //开启阴影
     renderer.setSize(divElement!.clientWidth, divElement!.clientHeight) // 设置渲染器的大小为窗口的内宽度，也就是内容区的宽度
     divElement!.appendChild(renderer.domElement) // 将渲染器的dom元素（canvas元素）添加到指定元素中
-    createModel && createModel(scene) // 4、创建模型
+    createModel && createModel(scene, camera, renderer) // 4、创建模型
 
 
     if (isAmbientLight) {

@@ -1,0 +1,73 @@
+@import '@/assets/css/define.less';
+
+.curriculum-vitae-wrap {
+  position: relative;
+  width: 100%;
+
+  .three-wrap {
+    width: calc(100vw - 210px);
+    height: calc(100vh - @headerHeight);
+    position: fixed;
+  }
+
+  .context-wrap {
+    position: absolute;
+    z-index: 20;
+    width: 100%;
+    color: #cccccc;
+    text-align: center;
+  }
+
+
+
+  .mask-wrap {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 100%;
+    background: rgb(0 0 0 / 40%);
+    flex-direction: column;
+
+    .score-container {
+      color: aliceblue;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      .title {
+        padding-bottom: 30px;
+        font-size: 24px;
+      }
+
+      .score {
+        font-size: 30px;
+        font-weight: bold;
+      }
+
+    }
+
+    .restart {
+      margin-top: 30px;
+      color: aliceblue;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 500px;
+      height: 500px;
+      border: 5px solid rgb(255 255 255 / 5%);
+      border-radius: 20px;
+      background: rgb(0 0 0 / 40%);
+      flex-direction: column;
+    }
+  }
+}

@@ -8,7 +8,7 @@ const EXPIRED_TIME = 60 * 1 //1小时过期
 //获取token
 export const getToken = (body): HttpResponse<any> => request.post('/token/login', body)
 // 获取获取用户信息 及相关权限菜单  user_name为登录账号
-export const getUserInfo = (user_name): HttpResponse<any> => request.get('/users/getUserAdmin/' + user_name)
+export const getUserInfo = (user_name): HttpResponse<any> => request.get('/user/getUserAdmin/' + user_name)
 
 //数据字典===========================================================
 /**获取数据字典数分类*/
@@ -50,14 +50,14 @@ export const updateDataList = body => request.post('/dict/updateDataList', body)
 
 //用户===========================================================
 // 获取用户列表
-export const getUersList = (params): HttpResponse<any> => request.get('/users/getUsersList', { params })
+export const getUersList = (params): HttpResponse<any> => request.get('/user/getUsersList', { params })
 // 新增用户列表
-export const addUersList = (params): HttpResponse<any> => request.post('/users/addUser', params)
+export const addUersList = (params): HttpResponse<any> => request.post('/user/addUser', params)
 // 更新用户账号状态
 export const updateUersStatus = (id, status): HttpResponse<any> =>
-  request.put('/users/updateUserStatus/' + id, { status: status })
+  request.put('/user/updateUserStatus/' + id, { status: status })
 // 更新用户
-export const updateUser = (id, params): HttpResponse<any> => request.put('/users/updateUser/' + id, params)
+export const updateUser = (id, params): HttpResponse<any> => request.put('/user/updateUser/' + id, params)
 
 //角色===========================================================
 // 获取角色列表

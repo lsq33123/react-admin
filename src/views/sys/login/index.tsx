@@ -62,6 +62,17 @@ const PageLogin: React.FC<IProps> = props => {
                 登 录
               </Button>
             </Form.Item>
+            <div className=" input-width quick-login">
+              <Button
+                type="link"
+                onClick={() => {
+                  setStore('user_name', 'tourist')
+                  updateToken(config.touristToken)
+                  navigate('/need/nav/home', {replace: true})
+                }}>
+                直接进入
+              </Button>
+            </div>
           </Form>
         </div>
       </div>

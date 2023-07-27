@@ -4,6 +4,7 @@ import { createContainer } from 'unstated-next'
 import { useState, useEffect } from 'react'
 import { getStore, setStore, removeStoreType } from '@/utils/store'
 import { sysMenus } from '../routes/menus'
+import config from '@/config'
 import * as api from '@/api'
 const globalData = () => {
   const [token, setToken] = useState(getStore('token'))
@@ -20,23 +21,23 @@ const globalData = () => {
     })
 
   useEffect(() => {
-    if (token) {
-      // 初始化 一些用户的相关信息
-      setMenuList(formatMenu(sysMenus)) //初始化路由
-        ; (async () => {
-          const user_name = getStore('user_name')
-          const Info = await api.getUserInfo(user_name)
-          const finalMenu = sysMenus.concat(Info.data.menus || []) //系统菜单  + 权限菜单
-          finalMenu.forEach((item: any) => {
-            //处理数据
-            item.value = item.id
-            item.key = item.id
-            item.title = item.name
-          })
-          // console.log('formatMenu(finalMenu):', formatMenu(finalMenu))
-          setMenuList(formatMenu(finalMenu))
-          setUserInfo(Info.data.user)
-        })()
+    // 初始化 一些用户的相关信息
+    setMenuList(formatMenu(sysMenus)) //初始化路由
+    if (token && token != config.touristToken) {
+      ; (async () => {
+        const user_name = getStore('user_name')
+        const Info = await api.getUserInfo(user_name)
+        const finalMenu = sysMenus.concat(Info.data.menus || []) //系统菜单  + 权限菜单
+        finalMenu.forEach((item: any) => {
+          //处理数据
+          item.value = item.id
+          item.key = item.id
+          item.title = item.name
+        })
+        // console.log('formatMenu(finalMenu):', formatMenu(finalMenu))
+        setMenuList(formatMenu(finalMenu))
+        setUserInfo(Info.data.user)
+      })()
     }
   }, [token])
 

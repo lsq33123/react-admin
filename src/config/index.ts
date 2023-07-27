@@ -17,5 +17,6 @@ if (process.env.NODE_ENV === 'production') {
 export default {
   baseUrl,
   title,
-  systemName: '资料管理'
+  systemName: '资料管理',
+  touristToken: 'QWERTYUIOPASDFGHJKLZXCVBNM'
 }

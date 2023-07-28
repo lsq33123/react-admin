@@ -1,4 +1,6 @@
 /** @format */
+
+import { sysMenus as menu1 } from './menus1'
 /**
  * 系统必备菜单
  * 也可写写到数据库
@@ -64,5 +66,6 @@ export const sysMenus = [
     visible: 1, //菜单状态（0显示 1隐藏）
     status: 0, //菜单状态（0正常 1停用）
     remark: '',
-  }
+  },
+  ...menu1,
 ]

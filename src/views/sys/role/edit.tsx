@@ -48,6 +48,9 @@ const PageViewRoleEdit: React.FC<IProps> = props => {
         //保存
         if (props.isEdit) {
           const formData = (form.getFieldValue as any)()
+          if (formData.menu_ids) {
+            formData.menu_ids = formData.menu_ids.split(',')
+          }
           api.updateRole(formData.role_id, formData).then(res => {
             message.success('更新成功')
             props.onOk()

@@ -15,30 +15,30 @@ interface IProps {
 
 const PageView: React.FC<IProps> = props => {
   const items = [
-    // {
-    //   key: 'part1',
-    //   href: '#part1',
-    //   title: '文字省略(CSS)',
-    //   component: <Index1 />,
-    // },
-    // {
-    //   key: 'part2',
-    //   href: '#part2',
-    //   title: '文字省略(Antd)',
-    //   component: <Index2 />,
-    // },
-    // {
-    //   key: 'part3',
-    //   href: '#part3',
-    //   title: '文字中间省略(Antd)',
-    //   component: <Index3 />,
-    // },
-    // {
-    //   key: 'part4',
-    //   href: '#part4',
-    //   title: '文字动态省略(手写)',
-    //   component: <Index4 />,
-    // },
+    {
+      key: 'part1',
+      href: '#part1',
+      title: '文字省略(CSS)',
+      component: <Index1 />,
+    },
+    {
+      key: 'part2',
+      href: '#part2',
+      title: '文字省略(Antd)',
+      component: <Index2 />,
+    },
+    {
+      key: 'part3',
+      href: '#part3',
+      title: '文字中间省略(Antd)',
+      component: <Index3 />,
+    },
+    {
+      key: 'part4',
+      href: '#part4',
+      title: '文字动态省略(手写)',
+      component: <Index4 />,
+    },
     {
       key: 'part5',
       href: '#part5',

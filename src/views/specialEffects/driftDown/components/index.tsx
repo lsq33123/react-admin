@@ -2,6 +2,11 @@
 
 import React, {useEffect, useImperativeHandle, useRef} from 'react'
 import './index.less'
+// import '@/assets/css/font-awesome-4.7.0/less/font-awesome.less'
+import '@/assets/css/fontawesome-free-6.4.0-web/less/fontawesome.less'
+import '@/assets/css/fontawesome-free-6.4.0-web/less/brands.less'
+import '@/assets/css/fontawesome-free-6.4.0-web/less/regular.less'
+import '@/assets/css/fontawesome-free-6.4.0-web/less/solid.less'
 import Layer from './Layer'
 
 interface IProps {

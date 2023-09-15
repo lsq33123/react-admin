@@ -16,6 +16,7 @@ interface IProps {
 
 const PageViewSnow: React.FC<IProps> = props => {
   const sign: any = useRef(1) //标记 是否可以创建循环
+  const currTypeNum: any = useRef(props.initTypeNum)
   let layer1Ref: any = useRef(null)
   let layer2Ref: any = useRef(null)
   let layer3Ref: any = useRef(null)
@@ -37,6 +38,7 @@ const PageViewSnow: React.FC<IProps> = props => {
   })
 
   const setTypeNum = val => {
+    currTypeNum.current = val
     if (val === 999) {
       deleteLayer()
       return
@@ -52,7 +54,7 @@ const PageViewSnow: React.FC<IProps> = props => {
     }
   }
 
-  function createLayer(typeNum = props.initTypeNum) {
+  function createLayer(typeNum = currTypeNum.current) {
     console.log('res:', 'deleteLayer')
     console.log('res:', sign.current)
     if (!sign.current) return
@@ -124,6 +126,10 @@ const PageViewSnow: React.FC<IProps> = props => {
 
   useEffect(() => {
     init()
+    return () => {
+      console.log('清除创建')
+      deleteLayer()
+    }
   }, [])
   return (
     <>

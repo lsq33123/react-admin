@@ -35,7 +35,7 @@ export default class Layer {
   }
 
   addIconFun = () => {
-
+    let wrapEl: any = document.querySelector('.page-view-snow-wrap')
     let $icon: any = document.createElement('span')
     $icon.setAttribute('aria-hidden', 'true')
 
@@ -103,7 +103,7 @@ export default class Layer {
         $icon = document.createElement('span')
         $icon.className = 'fa '
         $icon.innerHTML = this.getRandomName(1)
-        $icon.setAttribute('style', `font-size: ${this.fontSize}px`)
+        $icon.setAttribute('style', `font-size: ${this.fontSize < 20 ? 20 : this.fontSize}px`)
         break;
       case 999: //关  闭
         break;
@@ -130,7 +130,7 @@ export default class Layer {
         // console.log('obj:', obj)
         // obj.target.remove()
         // obj.remove
-        document.querySelector('.page-view-snow-wrap')?.removeChild($icon)
+        if ([...wrapEl.children].includes($icon)) wrapEl.removeChild($icon)
         g1 = null
       },
       // onCompleteParams: ['{self}'],

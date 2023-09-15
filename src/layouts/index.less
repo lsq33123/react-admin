@@ -35,7 +35,8 @@ header.header {
     }
 
     .ant-tabs-tab {
-      background-color: #eee;
+      background-color: #eee !important;
+      border-radius: 0px !important;
 
       &:hover {
         // background-color: #1890ff;
@@ -53,13 +54,17 @@ header.header {
     }
 
     .ant-tabs-tab.ant-tabs-tab-with-remove:hover {
-      padding-left: 15px;
-      padding-right: 15px;
+      padding-left: 12px;
+      padding-right: 10px;
+
+      .ant-tabs-tab-remove {
+        margin-left: 4px !important;
+      }
     }
 
     .ant-tabs-tab.ant-tabs-tab-active,
     .ant-tabs-tab.ant-tabs-tab-with-remove.ant-tabs-tab-active {
-      background: #1890ff;
+      background: #1890ff !important;
 
       .ant-tabs-tab-btn {
         color: #fff !important;

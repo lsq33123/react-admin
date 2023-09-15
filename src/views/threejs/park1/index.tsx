@@ -312,43 +312,43 @@ const PageViewPart1: React.FC<IProps> = props => {
         for (let mesh of highlightMeshArr) {
           // 如果当前高亮的mesh在鼠标移入的mesh中
           if (mesh.name === '办公大厅') {
-            console.log('object:', object)
-            if (modelSelect.includes(object.parent.name)) {
-              selectFloorName = object.parent.name
-              if (mesh.getObjectByName(object.name)) {
-                mesh.getObjectByName(object.parent.name).traverse(child => {
-                  if (child.isMesh) {
-                    child.material = new THREE.MeshPhongMaterial({
-                      color: 'yellow',
-                      transparent: true,
-                      opacity: 0.8,
-                      emissive: child.material.color,
-                      emissiveMap: child.material.map,
-                      emissiveIntensity: 3,
-                    })
-                  }
-                })
-                break
-              }
-            }
-            // 如果当前高亮的mesh不在鼠标移入的mesh中
-            let temparr = modelSelect.filter(item => !item.includes(object.parent.name))
-            // console.log('temparr:', temparr)
-            for (let item of temparr) {
-              // console.log('item:', item)
-              // console.log('mesh.getObjectByName(item):', mesh.getObjectByName(item))
-              // console.log('mesh', mesh)
-              mesh.getObjectByName(item).traverse(function (child) {
-                if (child.isMesh && child.parent.name != selectFloorName) {
-                  child.material = new THREE.MeshPhongMaterial({
-                    color: new THREE.Color('#123ca8'),
-                    transparent: true,
-                    opacity: 0.5,
-                    emissiveMap: child.material.map,
-                  })
-                }
-              })
-            }
+            // console.log('object:', object)
+            // if (modelSelect.includes(object.parent.name)) {
+            //   selectFloorName = object.parent.name
+            //   if (mesh.getObjectByName(object.name)) {
+            //     mesh.getObjectByName(object.parent.name).traverse(child => {
+            //       if (child.isMesh) {
+            //         child.material = new THREE.MeshPhongMaterial({
+            //           color: 'yellow',
+            //           transparent: true,
+            //           opacity: 0.8,
+            //           emissive: child.material.color,
+            //           emissiveMap: child.material.map,
+            //           emissiveIntensity: 3,
+            //         })
+            //       }
+            //     })
+            //     break
+            //   }
+            // }
+            // // 如果当前高亮的mesh不在鼠标移入的mesh中
+            // let temparr = modelSelect.filter(item => !item.includes(object.parent.name))
+            // // console.log('temparr:', temparr)
+            // for (let item of temparr) {
+            //   // console.log('item:', item)
+            //   // console.log('mesh.getObjectByName(item):', mesh.getObjectByName(item))
+            //   // console.log('mesh', mesh)
+            //   mesh.getObjectByName(item).traverse(function (child) {
+            //     if (child.isMesh && child.parent.name != selectFloorName) {
+            //       child.material = new THREE.MeshPhongMaterial({
+            //         color: new THREE.Color('#123ca8'),
+            //         transparent: true,
+            //         opacity: 0.5,
+            //         emissiveMap: child.material.map,
+            //       })
+            //     }
+            //   })
+            // }
           } else {
             if (mesh.getObjectByName(object.name)) {
               outlinePassRef.current.selectedObjects = [mesh]

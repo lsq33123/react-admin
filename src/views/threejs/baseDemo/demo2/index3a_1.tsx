@@ -4,7 +4,7 @@ import React from 'react'
 import * as THREE from 'three'
 import {FontLoader} from 'three/examples/jsm/loaders/FontLoader.js'
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry.js'
-import useBaseView from '../_hooks/useBaseView'
+import useBaseView from '../../_hooks/useBaseView'
 
 const PageViewIndex = props => {
   const threeBaseRef = React.createRef<HTMLDivElement>()
@@ -34,6 +34,7 @@ const PageViewIndex = props => {
 
   return (
     <>
+      <div>1</div>
       <div>未居中</div>
       <div ref={threeBaseRef} style={{width: '100%', height: '400px'}}></div>
     </>

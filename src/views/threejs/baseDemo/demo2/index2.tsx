@@ -2,9 +2,9 @@
 
 import React from 'react'
 import * as THREE from 'three'
-import useBaseView from '../_hooks/useBaseView'
-import {labelRenderer as labelRenderer3D, tag3D, tag3DSprite} from '../utils/tag3D.js'
-import {labelRenderer as labelRenderer2D, tag as tag2D} from '../utils/tag2D.js'
+import useBaseView from '../../_hooks/useBaseView'
+import {labelRenderer as labelRenderer3D, tag3D, tag3DSprite} from '../../utils/tag3D.js'
+import {labelRenderer as labelRenderer2D, tag as tag2D} from '../../utils/tag2D.js'
 interface IProps {
   //props:any
 }

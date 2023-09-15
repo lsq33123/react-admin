@@ -2,7 +2,7 @@
 
 import React from 'react'
 import * as THREE from 'three'
-import useBaseView from '../_hooks/useBaseView'
+import useBaseView from '../../_hooks/useBaseView'
 import {FontLoader} from 'three/examples/jsm/loaders/FontLoader.js'
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry.js'
 interface IProps {

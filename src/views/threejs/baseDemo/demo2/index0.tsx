@@ -2,7 +2,7 @@
 
 import React from 'react'
 import * as THREE from 'three'
-import useBaseView from '../_hooks/useBaseView'
+import useBaseView from '../../_hooks/useBaseView'
 interface IProps {
   //props:any
 }

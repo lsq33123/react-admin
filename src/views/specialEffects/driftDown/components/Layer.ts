@@ -19,7 +19,7 @@ export default class Layer {
   constructor(fontSize: number, speed: number, styleType?: number) {
     this.addIcon = this.addIconFun
     this.speed = speed || 10
-    this.fontSize = fontSize || 14
+    this.fontSize = fontSize || 16
     this.styleType = styleType
 
     let { iconList, iconAll } = getIconList()

@@ -36,6 +36,9 @@ const PageViewJump: React.FC<IProps> = props => {
     <div className="curriculum-vitae-wrap">
       <div ref={threeBaseRef} className="three-wrap"></div>
       <div className="context-wrap">
+        <div style={{textAlign: 'left'}}>
+          <h3>来源：https://github.com/luosijie/threejs-examples</h3>
+        </div>
         <h3>分数：{score}</h3>
         <h3 style={{cursor: 'pointer'}} onClick={() => game!.restart()}>
           重新开始

@@ -74,7 +74,7 @@ module.exports = {
         type: 'javascript/auto'
       },
       {
-        test: /\.(jpg|png|jpeg|gif)$/,
+        test: /\.(jpg|png|jpeg|gif|webp)$/,
         loader: "url-loader",
         options: {
           limit: 5 * 1024,
@@ -117,6 +117,27 @@ module.exports = {
             },
           },
         ],
+      },
+      {
+        test: /\.glsl$/,
+        use: [
+          {
+            loader: "webpack-glsl-loader",
+          },
+        ],
+      },
+      {
+        test: /\.(glb|gltf)$/,
+        use:
+          [
+            {
+              loader: 'file-loader',
+              options:
+              {
+                // outputPath: 'assets/models/'
+              }
+            }
+          ]
       },
     ],
   },

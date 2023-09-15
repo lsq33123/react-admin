@@ -88,3 +88,8 @@ npm run dev
 ###### 2023 年 9 月 14 日 19:04:48
 
 - [x] 更新引入 Font Awesome 6.4.0 图标库
+
+###### 2023 年 9 月 15 日 16:31:40
+
+- [x] 引入 webpack-glsl-loader 解析 glsl 文件
+- [x] ThreeJs 添加迷你小房间 案例

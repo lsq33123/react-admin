@@ -80,7 +80,6 @@ const PageView: React.FC<IProps> = props => {
         {/* {JSON.stringify(currMenuKey)}
         {JSON.stringify(activeSubMenu)} */}
         <Menu
-          theme="dark"
           mode="inline"
           className="menu"
           onClick={handleClick}

@@ -3,15 +3,10 @@
 import { createContainer } from 'unstated-next'
 import { useState, useEffect } from 'react'
 import { getStore, setStore } from '@/utils/store'
+import { settingDefaultData } from '@/config/setting'
 const settingData = () => {
 
-  let settingData = {
-    codeStyle: 'oneDark'
-  }
-
-  let defaultSetting = getStore('setting') || settingData
-
-
+  let defaultSetting: typeof settingDefaultData = getStore('setting') || settingDefaultData
   const [setting, setSetting] = useState(defaultSetting)
 
   useEffect(() => {
@@ -31,6 +26,7 @@ const settingData = () => {
 
   return {
     setting,
+    defaultSetting: settingDefaultData,
     updateSetting,
     resetSetting
   }

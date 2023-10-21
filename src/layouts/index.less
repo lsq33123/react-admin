@@ -64,7 +64,8 @@ header.header {
 
     .ant-tabs-tab.ant-tabs-tab-active,
     .ant-tabs-tab.ant-tabs-tab-with-remove.ant-tabs-tab-active {
-      background: #1890ff !important;
+      // background: #1890ff !important;
+      background: @colorPrimary !important;
 
       .ant-tabs-tab-btn {
         color: #fff !important;
@@ -94,12 +95,12 @@ header.header {
 aside.sider {
   // position: fixed;
   height: 100%;
-  background: @menuBgColor;
+  background: var(--menu-bg-color);
   z-index: 2; // 使侧边栏在头部栏之上 
 
   .logo {
     height: @headerHeight;
-    background: @menuBgColor;
+    background: var(--menu-bg-color);
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -112,23 +113,23 @@ aside.sider {
 
   .scroller-menu {
     height: calc(100vh - @headerHeight) !important;
-    background-color: @menuBgColor;
+    background-color: var(--menu-bg-color);
   }
 
   .menu {
     height: calc(100vh - @headerHeight);
   }
 
-  .ant-menu {
-    &.ant-menu-dark {
-      // 菜单背景颜色
-      background-color: @menuBgColor;
+  // .ant-menu {
+  //   &.ant-menu-dark {
+  //     // 菜单背景颜色
+  //     background-color: var(--menu-bg-color);
 
-      & .ant-menu-inline.ant-menu-sub {
-        background-color: @menuBgColor;
-      }
-    }
-  }
+  //     & .ant-menu-inline.ant-menu-sub {
+  //       background-color: var(--menu-bg-color);
+  //     }
+  //   }
+  // }
 }
 
 main.ant-layout-content {

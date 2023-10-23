@@ -102,7 +102,7 @@ const PageView: React.FC<IProps> = props => {
             if (isShowMenu(item) && item.children?.length) {
               return (
                 <SubMenu
-                  key={item.perms}
+                  // key={item.perms}
                   title={
                     <span>
                       {/* <MenuOutlined /> */}
@@ -117,7 +117,11 @@ const PageView: React.FC<IProps> = props => {
                         return (
                           <Menu.Item key={ele.perms} icon={getIcon(ele.icon)}>
                             <span>
-                              <a href={getUrl(ele.path)} target="_blank" rel="noopener noreferrer">
+                              <a
+                                href={getUrl(ele.path)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="ant-menu-item-a">
                                 {ele.menu_name}
                               </a>
                             </span>

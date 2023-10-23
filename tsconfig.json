@@ -20,6 +20,7 @@
     "noImplicitReturns": false,
     "moduleResolution": "node",
     "baseUrl": "./",
+    "outDir": "./",
     "paths": {
       "tslib": [
         "path/to/node_modules/tslib/tslib.d.ts"
@@ -36,6 +37,8 @@
     "src/**/*"
   ],
   "exclude": [
+    "node_modules",
+    "dist",
     "src/config/*",
     "src/views/threejs/utils/*"
   ]

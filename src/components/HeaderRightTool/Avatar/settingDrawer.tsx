@@ -6,7 +6,7 @@ import './index.less'
 import {CheckOutlined} from '@ant-design/icons'
 import type {ColorPickerProps} from 'antd'
 import Setting from '@/store/setting'
-import less from 'less'
+import useThemeCss from '@/hooks/useThemeCss'
 interface IProps {
   //props:any
   isShow: boolean
@@ -15,21 +15,7 @@ interface IProps {
 
 const PageViewSettingDrawer: React.FC<IProps> = props => {
   const {setting, updateSetting} = Setting.useContainer()
-
-  // 修改变量的值
-  function updateLessVariable(variableName, value) {
-    const styleSheet: any = document.styleSheets[0]
-    // 查找要修改的变量规则
-    let variableRule
-    for (const rule of styleSheet.cssRules) {
-      console.log('rule.selectorText:', rule.selectorText)
-      if (rule.selectorText === ':root') {
-        variableRule = rule
-        break
-      }
-    }
-    variableRule?.style.setProperty(variableName, value)
-  }
+  // 通过静态方法获取
 
   const [options, setOptions] = useState<ColorPickerProps>({
     presets: [
@@ -45,19 +31,7 @@ const PageViewSettingDrawer: React.FC<IProps> = props => {
     onChange: color => {
       console.log('color:', color.toHexString())
       updateSetting('colorPrimary', color.toHexString())
-      less.modifyVars({
-        '@colorPrimary': color.toHexString(),
-        '@color-primary': color.toHexString(),
-        '@colorPrimaryff': color.toHexString(),
-        '@menuBgColor': color.toHexString(),
-        '--menuBg-color': color.toHexString(),
-      })
-      console.log('less:', less)
-      // updateLessVariable('colorPrimary', color.toHexString())
-      // updateLessVariable('orange', color.toHexString())
-      updateLessVariable('menuBgColor', color.toHexString())
-      updateLessVariable('--menuBg-color', color.toHexString())
-      document.body.style.setProperty('--menu-bg-color', color.toHexString())
+      useThemeCss(color.toHexString()).setThemeAttr()
     },
   })
 

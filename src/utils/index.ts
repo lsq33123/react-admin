@@ -56,4 +56,3 @@ export function copyText(text: string): Promise<any> {
   })
 }
 
-

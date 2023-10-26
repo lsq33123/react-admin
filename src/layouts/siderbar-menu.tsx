@@ -102,7 +102,7 @@ const PageView: React.FC<IProps> = props => {
             if (isShowMenu(item) && item.children?.length) {
               return (
                 <SubMenu
-                  // key={item.perms}
+                  key={item.perms}
                   title={
                     <span>
                       {/* <MenuOutlined /> */}

@@ -15,13 +15,20 @@ import Setting from '@/store/setting'
 import useThemeCss from '@/hooks/useThemeCss'
 
 const SettingApp = () => {
-  const {setting, defaultSetting} = Setting.useContainer()
+  const {setting, defaultSetting, globalToken} = Setting.useContainer()
 
   useEffect(() => {
     if (setting.colorPrimary && setting.colorPrimary !== defaultSetting.colorPrimary) {
       useThemeCss(setting.colorPrimary).setThemeAttr()
     }
   }, [setting])
+
+  const getAlgorithm = (arr: Array<string>) => {
+    if (!arr.length) return []
+    return arr.map((item: any) => {
+      return theme[item]
+    })
+  }
 
   return (
     <ConfigProvider
@@ -31,11 +38,17 @@ const SettingApp = () => {
         token: {
           colorPrimary: setting.colorPrimary || defaultSetting.colorPrimary,
         },
-        algorithm: theme[setting.algorithm || defaultSetting.algorithm],
+        algorithm: getAlgorithm(setting.algorithm || defaultSetting.algorithm),
         components: {
           Menu: {
             collapsedWidth: 60,
             collapsedIconSize: 20,
+          },
+          Button: {
+            algorithm: true, // 启用算法
+            colorLink: setting.colorPrimary || defaultSetting.colorPrimary, // 显示bug？ 不配置不生效
+            colorLinkHover: globalToken.colorPrimaryBorderHover,
+            colorLinkActive: globalToken.colorPrimaryActive,
           },
         },
       }}>

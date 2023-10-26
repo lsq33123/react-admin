@@ -37,6 +37,8 @@ const SettingApp = () => {
       theme={{
         token: {
           colorPrimary: setting.colorPrimary || defaultSetting.colorPrimary,
+          borderRadius: setting.borderRadius || defaultSetting.borderRadius,
+          // colorBgContainer: 'transparent',
         },
         algorithm: getAlgorithm(setting.algorithm || defaultSetting.algorithm),
         components: {

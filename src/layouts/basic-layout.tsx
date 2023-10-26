@@ -16,7 +16,7 @@ interface IProps {
 const PageView: React.FC<IProps> = props => {
   const [collapsed, setCollapsed] = useState(false)
   return (
-    <Layout style={{overflow: 'hidden', height: '100vh', background: '#f1f3f7'}}>
+    <Layout className="layout-main">
       <Layout.Sider className="sider" trigger={null} collapsible collapsed={collapsed}>
         <SiderBarLogo collapsed={collapsed} />
         <SiderBarMenu />

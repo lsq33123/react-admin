@@ -1,12 +1,13 @@
 /** @format */
 
-import {Button, ColorPicker, Drawer, Switch} from 'antd'
-import React, {useState} from 'react'
+import {Button, ColorPicker, Drawer, Slider, Switch} from 'antd'
+import React, {useRef, useState} from 'react'
 import './index.less'
 import {CheckOutlined} from '@ant-design/icons'
 import type {ColorPickerProps} from 'antd'
 import Setting from '@/store/setting'
 import useThemeCss from '@/hooks/useThemeCss'
+import {debounce} from '@/utils'
 interface IProps {
   //props:any
   isShow: boolean
@@ -15,8 +16,10 @@ interface IProps {
 
 const PageViewSettingDrawer: React.FC<IProps> = props => {
   const {setting, updateSetting} = Setting.useContainer()
-  // 通过静态方法获取
+  const [opacity, setOpacity] = useState(setting.bgOpacity)
+  const [borderRadius, setBorderRadius] = useState(setting.borderRadius)
 
+  // 通过静态方法获取
   const [options, setOptions] = useState<ColorPickerProps>({
     presets: [
       {
@@ -59,6 +62,21 @@ const PageViewSettingDrawer: React.FC<IProps> = props => {
     }
   }
 
+  const debounceSetOpacity = useRef(
+    //使用useRef保存函数 保证函数不会被重复创建
+    debounce(opacity => {
+      console.log('opacity:', opacity)
+      updateSetting('bgOpacity', opacity)
+    }, 500),
+  )
+  const debounceSetBorderRadius = useRef(
+    //使用useRef保存函数 保证函数不会被重复创建
+    debounce(borderRadius => {
+      console.log('borderRadius:', borderRadius)
+      updateSetting('borderRadius', borderRadius)
+    }, 500),
+  )
+
   return (
     <Drawer open={props.isShow} title="设置" placement="right" width={300} onClose={props.onClose}>
       <div className="setting-drawer-wrap">
@@ -89,6 +107,38 @@ const PageViewSettingDrawer: React.FC<IProps> = props => {
             <div className="setting-switch-wrap">
               <div>紧凑排列</div>
               <Switch onChange={setCompactAlgorithm} />
+            </div>
+          </div>
+          <div className="setting-item-content">
+            <div className="setting-switch-wrap">
+              <div>背景透明度</div>
+              <Slider
+                value={opacity}
+                step={0.1}
+                max={1}
+                min={0}
+                style={{width: '150px'}}
+                onChange={val => {
+                  setOpacity(val)
+                  debounceSetOpacity.current(val)
+                }}
+              />
+            </div>
+          </div>
+          <div className="setting-item-content">
+            <div className="setting-switch-wrap">
+              <div>组件圆角</div>
+              <Slider
+                value={borderRadius}
+                step={1}
+                max={20}
+                min={0}
+                style={{width: '150px'}}
+                onChange={val => {
+                  setBorderRadius(val)
+                  debounceSetBorderRadius.current(val)
+                }}
+              />
             </div>
           </div>
         </div>

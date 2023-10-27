@@ -41,18 +41,14 @@ const SettingApp = () => {
           colorBgContainer: setting.colorBgContainer,
           colorBgElevated: setting.colorBgElevated,
           colorBgLayout: setting.colorBgLayout,
+          colorLink: setting.colorPrimary,
+          colorInfo: setting.colorPrimary,
         },
         algorithm: getAlgorithm(setting.algorithm),
         components: {
           Menu: {
             collapsedWidth: 60,
             collapsedIconSize: 20,
-          },
-          Button: {
-            algorithm: true, // 启用算法
-            colorLink: setting.colorPrimary, // 显示bug？ 不配置不生效
-            colorLinkHover: globalToken.colorPrimaryBorderHover,
-            colorLinkActive: globalToken.colorPrimaryActive,
           },
         },
       }}>

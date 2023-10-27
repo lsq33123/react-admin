@@ -44,3 +44,37 @@
   // margin: 20px;
   // background-color: white;
 }
+
+//解决弹窗底部按钮不跟随主题颜色变化 
+// https://ant-design.antgroup.com/components/modal-cn#modalmethod
+.ant-modal {
+  .ant-modal-footer {
+    .ant-btn {
+      border-radius: var(--border-radius);
+    }
+
+    .ant-btn-primary {
+      background-color: var(--color-primary) px;
+
+      &:hover {
+        background-color: var(--color-primary-hover)
+      }
+
+      &:active {
+        background-color: var(--color-primary-active)
+      }
+    }
+
+    .ant-btn-default {
+      &:hover {
+        color: var(--color-primary);
+        border-color: var(--color-primary)
+      }
+
+      &:active {
+        color: var(--color-primary-active);
+        border-color: var(--color-primary-active)
+      }
+    }
+  }
+}

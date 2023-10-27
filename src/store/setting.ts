@@ -8,8 +8,8 @@ import { theme } from 'antd'
 const { getDesignToken } = theme
 
 const settingData = () => {
-
-  let defaultSetting: typeof settingDefaultData = getStore('setting') || settingDefaultData
+  let settingStore = getStore('setting')
+  let defaultSetting: typeof settingDefaultData = { ...settingDefaultData, ...settingStore }
   const [setting, setSetting] = useState(defaultSetting)
 
   useEffect(() => {

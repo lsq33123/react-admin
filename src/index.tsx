@@ -36,11 +36,13 @@ const SettingApp = () => {
       componentSize="middle"
       theme={{
         token: {
-          colorPrimary: setting.colorPrimary || defaultSetting.colorPrimary,
-          borderRadius: setting.borderRadius || defaultSetting.borderRadius,
-          // colorBgContainer: 'transparent',
+          colorPrimary: setting.colorPrimary,
+          borderRadius: setting.borderRadius,
+          colorBgContainer: setting.colorBgContainer,
+          colorBgElevated: setting.colorBgElevated,
+          colorBgLayout: setting.colorBgLayout,
         },
-        algorithm: getAlgorithm(setting.algorithm || defaultSetting.algorithm),
+        algorithm: getAlgorithm(setting.algorithm),
         components: {
           Menu: {
             collapsedWidth: 60,
@@ -48,7 +50,7 @@ const SettingApp = () => {
           },
           Button: {
             algorithm: true, // 启用算法
-            colorLink: setting.colorPrimary || defaultSetting.colorPrimary, // 显示bug？ 不配置不生效
+            colorLink: setting.colorPrimary, // 显示bug？ 不配置不生效
             colorLinkHover: globalToken.colorPrimaryBorderHover,
             colorLinkActive: globalToken.colorPrimaryActive,
           },

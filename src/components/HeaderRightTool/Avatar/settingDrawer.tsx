@@ -1,6 +1,6 @@
 /** @format */
 
-import {Button, ColorPicker, Drawer, Slider, Switch} from 'antd'
+import {ColorPicker, Drawer, Slider, Switch} from 'antd'
 import React, {useRef, useState} from 'react'
 import './index.less'
 import {CheckOutlined} from '@ant-design/icons'
@@ -17,7 +17,7 @@ interface IProps {
 const PageViewSettingDrawer: React.FC<IProps> = props => {
   const {setting, updateSetting} = Setting.useContainer()
   const [opacity, setOpacity] = useState(setting.bgOpacity)
-  const [borderRadius, setBorderRadius] = useState(setting.borderRadius)
+  const [borderRadius, setBorderRadius] = useState(setting.theme.token!.borderRadius)
 
   // 通过静态方法获取
   const [options, setOptions] = useState<ColorPickerProps>({
@@ -33,47 +33,50 @@ const PageViewSettingDrawer: React.FC<IProps> = props => {
     ],
     onChange: color => {
       console.log('color:', color.toHexString())
-      updateSetting('colorPrimary', color.toHexString())
-      useThemeCss(color.toHexString()).setThemeAttr()
+      updateSetting({theme: {token: {colorPrimary: color.toHexString()}}})
+      useThemeCss().setThemeAttr()
     },
   })
 
   const onClickAlgorithm = (type: 'light' | 'dark') => {
     if (type === 'light' && !setting.algorithm.includes('defaultAlgorithm')) {
-      updateSetting('algorithm', ['defaultAlgorithm', ...setting.algorithm.filter(item => item !== 'darkAlgorithm')])
+      updateSetting({
+        algorithm: ['defaultAlgorithm', ...setting.algorithm.filter(item => item !== 'darkAlgorithm')],
+      })
     } else if (type === 'dark' && !setting.algorithm.includes('darkAlgorithm')) {
-      updateSetting('algorithm', ['darkAlgorithm', ...setting.algorithm.filter(item => item !== 'defaultAlgorithm')])
+      updateSetting({
+        algorithm: ['darkAlgorithm', ...setting.algorithm.filter(item => item !== 'defaultAlgorithm')],
+      })
     }
   }
 
   const setCompactAlgorithm = val => {
     if (val) {
-      updateSetting(
-        'algorithm',
-        setting.algorithm.indexOf('defaultAlgorithm') > -1
-          ? ['compactAlgorithm', ...setting.algorithm.filter(item => item !== 'defaultAlgorithm')]
-          : ['compactAlgorithm', ...setting.algorithm],
-      )
+      updateSetting({
+        algorithm:
+          setting.algorithm.indexOf('defaultAlgorithm') > -1
+            ? ['compactAlgorithm', ...setting.algorithm.filter(item => item !== 'defaultAlgorithm')]
+            : ['compactAlgorithm', ...setting.algorithm],
+      })
     } else {
-      updateSetting(
-        'algorithm',
-        setting.algorithm.filter(item => item !== 'compactAlgorithm'),
-      )
+      let algorithm = setting.algorithm.filter(item => item !== 'compactAlgorithm')
+      updateSetting({
+        algorithm: algorithm.length ? algorithm : ['defaultAlgorithm'],
+      })
     }
   }
 
   const debounceSetOpacity = useRef(
     //使用useRef保存函数 保证函数不会被重复创建
     debounce(opacity => {
-      console.log('opacity:', opacity)
-      updateSetting('bgOpacity', opacity)
+      updateSetting({bgOpacity: opacity})
     }, 500),
   )
   const debounceSetBorderRadius = useRef(
     //使用useRef保存函数 保证函数不会被重复创建
     debounce(borderRadius => {
-      console.log('borderRadius:', borderRadius)
-      updateSetting('borderRadius', borderRadius)
+      // console.log('borderRadius:', borderRadius)
+      updateSetting({theme: {token: {borderRadius}}})
     }, 500),
   )
 

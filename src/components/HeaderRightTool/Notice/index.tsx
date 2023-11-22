@@ -14,7 +14,7 @@ const PageView: React.FC<IProps> = props => {
   const {setting} = Setting.useContainer()
   const navigate = useNavigate()
   return (
-    <Badge color={setting.colorPrimary} count={props.number} offset={[-10, 0]} size="small">
+    <Badge color={setting.theme.token!.colorPrimary} count={props.number} offset={[-10, 0]} size="small">
       <BellOutlined className="notice-tip" onClick={() => navigate('/need/sys/notice', {replace: true})} />
     </Badge>
   )

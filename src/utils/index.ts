@@ -1,5 +1,5 @@
 /* eslint-disable  */
-
+import { theme } from 'antd'
 
 /**
  * @param {Function} func
@@ -44,3 +44,43 @@ export function copyText(text: string): Promise<any> {
   })
 }
 
+// 格式化配置
+export const formatThemeSetting = setting => {
+  const getAlgorithm = (arr: Array<string>) => {
+    if (!arr.length) return []
+    return arr.map((item: any) => {
+      return theme[item]
+    })
+  }
+  let temp = { ...setting.theme, algorithm: getAlgorithm(setting.algorithm) }
+  temp.token = {
+    ...temp.token,
+    colorBgLayout: temp.token.colorBgLayout,
+    colorLink: temp.token.colorPrimary,
+    colorInfo: temp.token.colorPrimary,
+  }
+  return temp
+}
+
+
+/**
+ * 
+ * @param obj1 
+ * @param obj2 
+ * @returns 
+ */
+export function mergeObjects(obj1, obj2) {
+  let mergedObj = {};
+  if (obj2 instanceof Array) {
+    mergedObj = obj2
+  } else {
+    mergedObj = Object.assign({}, obj1, obj2);
+  }
+  // 递归处理嵌套对象
+  Object.keys(mergedObj).forEach((key) => {
+    if (typeof mergedObj[key] === "object" && obj1[key] && obj2[key]) {
+      mergedObj[key] = mergeObjects(obj1[key], obj2[key]);
+    }
+  });
+  return mergedObj;
+}

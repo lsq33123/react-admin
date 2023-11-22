@@ -1,6 +1,6 @@
 /** @format */
 
-import React, {useEffect} from 'react'
+import React from 'react'
 import {createRoot} from 'react-dom/client'
 import {ConfigProvider} from 'antd'
 import Store from '@/store'
@@ -9,49 +9,16 @@ import 'dayjs/locale/zh-cn'
 import 'antd/dist/reset.css'
 import App from './app'
 import '@/assets/css/app.less'
-import {Watermark, theme} from 'antd'
+import {Watermark} from 'antd'
 import {getStore} from '@/utils/store'
 import Setting from '@/store/setting'
-import useThemeCss from '@/hooks/useThemeCss'
 
 const SettingApp = () => {
-  const {setting, defaultSetting, globalToken} = Setting.useContainer()
-
-  useEffect(() => {
-    if (setting.colorPrimary && setting.colorPrimary !== defaultSetting.colorPrimary) {
-      useThemeCss(setting.colorPrimary).setThemeAttr()
-    }
-  }, [setting])
-
-  const getAlgorithm = (arr: Array<string>) => {
-    if (!arr.length) return []
-    return arr.map((item: any) => {
-      return theme[item]
-    })
-  }
+  const {themeSetting} = Setting.useContainer()
+  // console.log('SettingApp:', themeSetting)
 
   return (
-    <ConfigProvider
-      locale={zhCN}
-      componentSize="middle"
-      theme={{
-        token: {
-          colorPrimary: setting.colorPrimary,
-          borderRadius: setting.borderRadius,
-          colorBgContainer: setting.colorBgContainer,
-          colorBgElevated: setting.colorBgElevated,
-          colorBgLayout: setting.colorBgLayout,
-          colorLink: setting.colorPrimary,
-          colorInfo: setting.colorPrimary,
-        },
-        algorithm: getAlgorithm(setting.algorithm),
-        components: {
-          Menu: {
-            collapsedWidth: 60,
-            collapsedIconSize: 20,
-          },
-        },
-      }}>
+    <ConfigProvider locale={zhCN} componentSize="middle" theme={themeSetting}>
       <Watermark content={getStore('user_name')} gap={[200, 200]}>
         <App />
       </Watermark>

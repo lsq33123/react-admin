@@ -30,7 +30,7 @@ const CodeStyle: React.FC<IProps> = props => {
   }, [setting.codeStyle])
 
   const handleMenuClick: MenuProps['onClick'] = e => {
-    updateSetting('codeStyle', e.key)
+    updateSetting({codeStyle: e.key})
   }
 
   return (

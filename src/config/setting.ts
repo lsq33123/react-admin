@@ -25,6 +25,7 @@ export const settingDefaultData: IsettingDefaultData = {
     components: {
       Menu: {
         collapsedWidth: 60,
+        dropdownWidth: 160,
         collapsedIconSize: 20,
       },
     },

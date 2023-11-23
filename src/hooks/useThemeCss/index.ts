@@ -20,6 +20,7 @@ const useThemeCss = (config?: ThemeConfig) => {
   const globalToken = getDesignToken(config)
 
   const setThemeAttr = () => {
+    console.log('globalToken:', globalToken)
     setGlobalCss({
       // '--color-menu-bg': '#ffffff',
       '--color-primary': globalToken.colorPrimary,
@@ -30,6 +31,8 @@ const useThemeCss = (config?: ThemeConfig) => {
       '--color-primary-text-hover': globalToken.colorPrimaryTextHover,
       '--color-bg-base': globalToken.colorBgBase,
       '--color-bg-container': globalToken.colorBgContainer,
+      //这个属性不知道为什么没有变化 bug?
+      '--color-bg-layout': globalToken.colorBgBase === '#000' ? '#000' : globalToken.colorBgLayout,
       '--color-bg-elevated': globalToken.colorBgElevated,
       '--color-text-base': globalToken.colorTextBase,
       '--color-text': globalToken.colorText,
@@ -39,6 +42,8 @@ const useThemeCss = (config?: ThemeConfig) => {
       '--color-border-secondary': globalToken.colorBorderSecondary,
       '--box-shadow': globalToken.boxShadow,
       '--box-shadow-secondary': globalToken.boxShadowSecondary,
+      '--box-shadow-tertiary': globalToken.boxShadowTertiary,
+      // '--box-shadow-card': (globalToken as any).boxShadowCard,
       '--border-radius': globalToken.borderRadius,
     })
   }

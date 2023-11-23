@@ -1,4 +1,7 @@
 /** @format */
+.ant-layout {
+  background-color: var(--color-bg-layout);
+}
 
 .layout-main {
   overflow: hidden;
@@ -35,7 +38,7 @@ header.header {
   justify-content: space-between;
   height: var(--header-height);
   align-items: center;
-  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
   z-index: 1;
 
   .trigger {
@@ -124,6 +127,7 @@ aside.sider {
   height: 100%;
   background: var(--color-bg-container);
   z-index: 2; // 使侧边栏在头部栏之上 
+  box-shadow: 2px 0 8px 0 rgba(29, 35, 41, .05);
 
   .logo {
     height: var(--header-height);
@@ -143,9 +147,15 @@ aside.sider {
     background-color: var(--color-bg-base);
   }
 
-  // .menu {
-  //   height: calc(100vh - var(--header-height));
-  // }
+  .menu {
+    // height: calc(100vh - var(--header-height));
+    height: auto;
+    min-height: calc(100vh - var(--header-height));
+
+    &.ant-menu-light {
+      border: 0px;
+    }
+  }
 
 
 

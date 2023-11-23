@@ -48,7 +48,7 @@ const PageView: React.FC<IProps> = props => {
           style={{
             width: 150,
             height: 50,
-            border: '1px solid #ebedf1',
+            border: '1px solid var(--border-color)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

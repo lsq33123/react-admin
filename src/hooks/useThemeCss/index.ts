@@ -39,6 +39,7 @@ const useThemeCss = (config?: ThemeConfig) => {
       '--color-text-secondary': globalToken.colorTextSecondary,
       '--color-text-tertiary': globalToken.colorTextTertiary,
       '--color-text-quaternary': globalToken.colorTextQuaternary,
+      '--color-border': globalToken.colorBorder,
       '--color-border-secondary': globalToken.colorBorderSecondary,
       '--box-shadow': globalToken.boxShadow,
       '--box-shadow-secondary': globalToken.boxShadowSecondary,

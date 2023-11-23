@@ -30,7 +30,7 @@
 header.header {
   position: sticky;
   top: 0px;
-  background-color: var(--color-bg-base);
+  background-color: var(--color-bg-container);
   display: flex;
   justify-content: space-between;
   height: var(--header-height);
@@ -122,12 +122,12 @@ header.header {
 aside.sider {
   // position: fixed;
   height: 100%;
-  background: var(--color-menu-bg);
+  background: var(--color-bg-container);
   z-index: 2; // 使侧边栏在头部栏之上 
 
   .logo {
     height: var(--header-height);
-    background: var(--color-menu-bg);
+    background: var(--color-bg-container);
     font-size: 20px;
     font-weight: bold;
     color: var(--color-text);
@@ -140,12 +140,12 @@ aside.sider {
 
   .scroller-menu {
     height: calc(100vh - var(--header-height)) !important;
-    background-color: var(--color-menu-bg);
+    background-color: var(--color-bg-base);
   }
 
-  .menu {
-    height: calc(100vh - var(--header-height));
-  }
+  // .menu {
+  //   height: calc(100vh - var(--header-height));
+  // }
 
 
 
@@ -153,10 +153,10 @@ aside.sider {
   // .ant-menu {
   //   &.ant-menu-dark {
   //     // 菜单背景颜色
-  //     background-color: var(--color-menu-bg) !important;
+  //     background-color: var(--color-bg-base) !important;
 
   //     & .ant-menu-inline.ant-menu-sub {
-  //       background-color: var(--color-menu-bg) !important;
+  //       background-color: var(--color-bg-base) !important;
   //     }
   //   }
   // }
@@ -169,7 +169,7 @@ aside.sider {
   }
 
   .ant-menu-sub {
-    background-color: var(--color-menu-bg) !important;
+    background-color: var(--color-bg-base) !important;
 
     .ant-menu-item {
       &:hover {

@@ -56,6 +56,7 @@ export const formatThemeSetting = setting => {
   temp.token = {
     ...temp.token,
     colorBgLayout: temp.token.colorBgLayout,
+    borderRadiusLG: temp.token.borderRadius,
     colorLink: temp.token.colorPrimary,
     colorInfo: temp.token.colorPrimary,
   }

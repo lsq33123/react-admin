@@ -39,7 +39,7 @@ const PageViewPie: React.FC<IProps> = props => {
   }, 0)
 
   const options = {
-    backgroundColor: bgColor,
+    backgroundColor: '', //设置无背景色
     color: color,
     // tooltip: {
     //     trigger: 'item'
@@ -157,13 +157,7 @@ const PageViewPie: React.FC<IProps> = props => {
   }
 
   return (
-    <div
-      style={{
-        width: '100%',
-        height: '360px',
-        backgroundColor: '#fff',
-        padding: '20px',
-      }}>
+    <div className="home-chart-wrap">
       <Chart key="echartLine" style={{width: '100%', height: '320px'}} option={options}></Chart>
     </div>
   )

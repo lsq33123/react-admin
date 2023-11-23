@@ -36,6 +36,10 @@
   background-color: #ccc;
 }
 
+html {
+  background: var(--color-bg-container);
+}
+
 .container-wrap {
   width: 100%;
   height: 100%;
@@ -48,9 +52,19 @@
 //解决弹窗底部按钮不跟随主题颜色变化 
 // https://ant-design.antgroup.com/components/modal-cn#modalmethod
 .ant-modal {
+  .ant-modal-content {
+    background-color: var(--color-bg-elevated);
+    border-radius: calc(var(--border-radius) * 1px);
+  }
+
+  .ant-modal-title {
+    background: var(--color-bg-elevated);
+    color: var(--color-text)
+  }
+
   .ant-modal-footer {
     .ant-btn {
-      border-radius: var(--border-radius);
+      border-radius: calc(var(--border-radius) * 1px);
     }
 
     .ant-btn-primary {
@@ -66,6 +80,9 @@
     }
 
     .ant-btn-default {
+      background: var(--color-bg-elevated);
+      color: var(--color-text);
+
       &:hover {
         color: var(--color-primary);
         border-color: var(--color-primary)
@@ -76,5 +93,11 @@
         border-color: var(--color-primary-active)
       }
     }
+
+
   }
 }
+
+// .ant-select-dropdown {
+//   background: var(--color-bg-elevated);
+// }

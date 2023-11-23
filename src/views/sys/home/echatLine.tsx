@@ -15,6 +15,7 @@ const PageViewLine: React.FC<IProps> = props => {
   const dateFeild = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
   const title = ['访客人数', '访客次数']
   const options = {
+    backgroundColor: '', //设置无背景色
     title: {
       text: '数量',
     },
@@ -78,14 +79,8 @@ const PageViewLine: React.FC<IProps> = props => {
   }
 
   return (
-    <div
-      style={{
-        width: '100%',
-        height: '360px',
-        backgroundColor: '#fff',
-        padding: '20px',
-      }}>
-      <Chart key="echartLine" style={{width: '100%', height: '360px'}} option={options}></Chart>
+    <div className="home-chart-wrap">
+      <Chart key="echartLine" style={{width: '100%', height: '320px'}} option={options}></Chart>
     </div>
   )
 }

@@ -4,6 +4,7 @@
 
 import * as React from 'react'
 import * as echarts from 'echarts'
+import Setting from '@/store/setting'
 
 /**
  * 参数列表
@@ -30,6 +31,7 @@ interface ChartProps {
 }
 
 const Chart = (props: ChartProps): React.ReactElement => {
+  const {setting} = Setting.useContainer()
   // 挂载节点
   let chartDom: any = null
 
@@ -48,9 +50,10 @@ const Chart = (props: ChartProps): React.ReactElement => {
         zlevel: 0,
       })
     }
+    let theme = setting.algorithm.includes('darkAlgorithm') ? 'dark' : 'light'
 
     // 获取实例对象
-    let instance = echarts.getInstanceByDom(chartDom) || echarts.init(chartDom)
+    let instance = echarts.getInstanceByDom(chartDom) || echarts.init(chartDom, theme)
 
     // 大小自适应
     const resize = (): void => instance.resize()

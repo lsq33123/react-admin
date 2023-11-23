@@ -21,7 +21,7 @@ const useThemeCss = (config?: ThemeConfig) => {
 
   const setThemeAttr = () => {
     setGlobalCss({
-      '--color-menu-bg': '#ffffff',
+      // '--color-menu-bg': '#ffffff',
       '--color-primary': globalToken.colorPrimary,
       '--color-primary-bg': globalToken.colorPrimaryBg,
       '--color-primary-hover': globalToken.colorPrimaryHover,
@@ -29,6 +29,16 @@ const useThemeCss = (config?: ThemeConfig) => {
       '--color-primary-bg-hover': globalToken.colorPrimaryBgHover,
       '--color-primary-text-hover': globalToken.colorPrimaryTextHover,
       '--color-bg-base': globalToken.colorBgBase,
+      '--color-bg-container': globalToken.colorBgContainer,
+      '--color-bg-elevated': globalToken.colorBgElevated,
+      '--color-text-base': globalToken.colorTextBase,
+      '--color-text': globalToken.colorText,
+      '--color-text-secondary': globalToken.colorTextSecondary,
+      '--color-text-tertiary': globalToken.colorTextTertiary,
+      '--color-text-quaternary': globalToken.colorTextQuaternary,
+      '--color-border-secondary': globalToken.colorBorderSecondary,
+      '--box-shadow': globalToken.boxShadow,
+      '--box-shadow-secondary': globalToken.boxShadowSecondary,
       '--border-radius': globalToken.borderRadius,
     })
   }

@@ -9,8 +9,8 @@ interface IProps {
 
 const PageViewRadar: React.FC<IProps> = props => {
   // 指定图表的配置项和数据
-  var option = (option = {
-    backgroundColor: '#fff',
+  var option = {
+    backgroundColor: '', //设置无背景色
     tooltip: {
       trigger: 'item',
       backgroundColor: 'rgba(0,0,250,0.2)',
@@ -26,7 +26,7 @@ const PageViewRadar: React.FC<IProps> = props => {
       splitArea: {
         show: true,
         areaStyle: {
-          color: '#fff',
+          // color: '#fff',
         },
       },
       axisLine: {
@@ -38,7 +38,7 @@ const PageViewRadar: React.FC<IProps> = props => {
       axisName: {
         // (圆外的标签)雷达图每个指示器名称的配置项。
         formatter: '{value}',
-        fontSize: 10,
+        fontSize: 12,
         color: '#333',
       },
     },
@@ -90,15 +90,9 @@ const PageViewRadar: React.FC<IProps> = props => {
         },
       ],
     },
-  })
+  }
   return (
-    <div
-      style={{
-        width: '100%',
-        height: '360px',
-        backgroundColor: '#fff',
-        padding: '20px',
-      }}>
+    <div className="home-chart-wrap">
       <Chart key="echartBar" style={{width: '100%', height: '320px'}} option={option}></Chart>
     </div>
   )

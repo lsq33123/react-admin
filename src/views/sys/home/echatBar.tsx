@@ -17,6 +17,7 @@ const PageViewBar: React.FC<IProps> = props => {
   // var data4 = [9, 30, 9, 60, 70, 20, 59]
   var datacity = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
   var option = {
+    backgroundColor: '', //设置无背景色
     color: ['#388BFF', '#05C3FA', '#F6931C', '#FFD52E'],
     tooltip: {
       trigger: 'axis',
@@ -97,13 +98,7 @@ const PageViewBar: React.FC<IProps> = props => {
     ],
   }
   return (
-    <div
-      style={{
-        width: '100%',
-        height: '360px',
-        backgroundColor: '#fff',
-        padding: '20px',
-      }}>
+    <div className="home-chart-wrap">
       <Chart key="echartBar" style={{width: '100%', height: '320px'}} option={option}></Chart>
     </div>
   )

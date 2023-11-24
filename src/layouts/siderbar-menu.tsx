@@ -30,7 +30,7 @@ const PageView: React.FC<IProps> = props => {
     icon && icon[val]
       ? React.createElement(icon && icon[val], {
           style: {
-            fontSize: '14px',
+            fontSize: '16px',
           },
         })
       : null
@@ -57,7 +57,6 @@ const PageView: React.FC<IProps> = props => {
         res.push(item)
       }
     })
-    console.log('res:', res)
     return res
   }
 

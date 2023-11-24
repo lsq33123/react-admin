@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const PageViewAvatarMenu: React.FC<IProps> = props => {
-  const [visible, setVisible] = React.useState(true)
+  const [visible, setVisible] = React.useState(false)
   const {logout} = Global.useContainer()
   const {delAllView} = TagView.useContainer()
   const navigate = useNavigate()

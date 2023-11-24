@@ -20,7 +20,6 @@ const useThemeCss = (config?: ThemeConfig) => {
   const globalToken = getDesignToken(config)
 
   const setThemeAttr = () => {
-    console.log('globalToken:', globalToken)
     setGlobalCss({
       // '--color-menu-bg': '#ffffff',
       '--color-primary': globalToken.colorPrimary,

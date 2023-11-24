@@ -5,7 +5,7 @@ import {Layout, Menu} from 'antd'
 import {Link, useNavigate, useLocation} from 'react-router-dom'
 import {Scrollbars} from 'react-custom-scrollbars-2'
 // import {menus} from '@/store/menus'
-import {arrayToTree} from '@/utils/array'
+// import {arrayToTree} from '@/utils/array'
 import {getStore, setStore} from '@/utils/store'
 import Global from '@/store/global'
 import TagView from '@/store/tag-view'
@@ -26,14 +26,47 @@ const PageView: React.FC<IProps> = props => {
   const location = useLocation()
   const routeUrl = location.pathname
 
+  const getIcon = val =>
+    icon && icon[val]
+      ? React.createElement(icon && icon[val], {
+          style: {
+            fontSize: '14px',
+          },
+        })
+      : null
+
+  const isShowMenu = (item: any) => !parseInt(item.visible) && !parseInt(item.status)
+
+  const getUrl = (url: string) => (url.indexOf('http') > -1 ? url : 'https://' + url)
+
+  const arrayToTree = (data: Array<any>, pid: any, key = 'id', pkey = 'parentId'): Array<any> => {
+    if (!Array.isArray(data) || !data.length) return []
+    let res: Array<any> = []
+    data.forEach(item => {
+      if (item[pkey] === pid) {
+        item.key = item.perms
+        item.icon = getIcon(item.icon)
+        item.label = item.menu_name
+        if (item.is_frame === 2) {
+          item.url = getUrl(item.path)
+        } else {
+          item.url = getMenuPath(item.is_frame, item.path)
+        }
+        let childrenItem = arrayToTree(data, item[key], key, pkey)
+        if (childrenItem.length) item.children = childrenItem
+        res.push(item)
+      }
+    })
+    console.log('res:', res)
+    return res
+  }
+
   useEffect(() => {
-    // console.log('menuList:', menuList)
     let menuListTemp = menuList.filter(item => isShowMenu(item))
     setMenusTree(arrayToTree(menuListTemp, 0, 'menu_id', 'parent_id'))
   }, [menuList])
 
   useEffect(() => {
-    // console.log('routeUrl:', routeUrl)
     if (routeUrl === '/need/nav/home') {
       setCurrMenuKey('home')
     } else {
@@ -51,53 +84,6 @@ const PageView: React.FC<IProps> = props => {
   const onOpenChange = keyArr => {
     setActiveSubMenu(keyArr)
     setStore('activeSubMenu', keyArr)
-  }
-
-  const getIcon = val =>
-    icon && icon[val]
-      ? React.createElement(icon && icon[val], {
-          style: {
-            fontSize: '14px',
-          },
-        })
-      : null
-
-  const isShowMenu = (item: any) => !parseInt(item.visible) && !parseInt(item.status)
-
-  const getUrl = (url: string) => (url.indexOf('http') > -1 ? url : 'https://' + url)
-
-  const getMenuItem = () => {
-    if (!menusTree.length) return []
-    return menusTree.map((item, index) => {
-      if (item.children?.length) {
-        return {
-          ...item,
-          key: item.perms,
-          icon: getIcon(item.icon),
-          label: item.menu_name,
-          children: item.children.map(ele => {
-            return {
-              ...ele,
-              key: ele.perms,
-              icon: getIcon(ele.icon),
-              label: ele.menu_name,
-              url: getMenuPath(ele.is_frame, ele.path),
-            }
-          }),
-        }
-      }
-
-      // 没有父节点的菜单
-      if (!item.children?.length) {
-        return {
-          ...item,
-          key: item.perms,
-          icon: getIcon(item.icon),
-          label: item.menu_name,
-          url: getMenuPath(item.is_frame, item.path),
-        }
-      }
-    })
   }
 
   const onClickMenuItem = ({item, key, keyPath, domEvent}) => {
@@ -119,7 +105,7 @@ const PageView: React.FC<IProps> = props => {
             onOpenChange={onOpenChange}
             selectedKeys={currMenuKey}
             openKeys={activeSubMenu}
-            items={getMenuItem()}
+            items={menusTree}
             onClick={onClickMenuItem}
           />
         )}

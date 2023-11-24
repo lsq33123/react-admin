@@ -29,7 +29,7 @@ const PageViewLine: React.FC<IProps> = props => {
     grid: {
       left: '3%',
       right: '4%',
-      bottom: 40,
+      bottom: 20,
       containLabel: true,
     },
     xAxis: {

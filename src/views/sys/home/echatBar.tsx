@@ -28,7 +28,7 @@ const PageViewBar: React.FC<IProps> = props => {
     },
     grid: {
       //图表的位置
-      top: '5%',
+      top: '8%',
       left: '3%',
       right: '4%',
       bottom: '15%',

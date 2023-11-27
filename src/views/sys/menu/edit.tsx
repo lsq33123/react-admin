@@ -229,13 +229,13 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
         <Row>
           <Col span={12}>
             <Form.Item name="path" label="路由地址" rules={[{required: true}]}>
-              <Input placeholder="以/开头"></Input>
+              <Input placeholder="以/开头(外链填url)"></Input>
             </Form.Item>
           </Col>
           {menuType ? (
             <Col span={12}>
               <Form.Item name="component" label="组件路径" rules={[{required: true}]}>
-                <Input placeholder="以/开头"></Input>
+                <Input placeholder="以/开头(外链填/)"></Input>
               </Form.Item>
             </Col>
           ) : null}

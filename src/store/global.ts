@@ -14,9 +14,9 @@ const globalData = () => {
   const formatMenu = (arr: Array<any> = []): Array<any> =>
     arr.map((item: any) => {
       //处理数据
-      item.value = item.id
-      item.key = item.id
-      item.title = item.name
+      item.value = item.menu_id
+      item.key = item.menu_id
+      // item.title = item.menu_name
       return item
     })
 
@@ -30,9 +30,9 @@ const globalData = () => {
         const finalMenu = sysMenus.concat(Info.data.menus || []) //系统菜单  + 权限菜单
         finalMenu.forEach((item: any) => {
           //处理数据
-          item.value = item.id
-          item.key = item.id
-          item.title = item.name
+          item.value = item.menu_id
+          item.key = item.menu_id
+          // item.title = item.menu_name
         })
         // console.log('formatMenu(finalMenu):', formatMenu(finalMenu))
         setMenuList(formatMenu(finalMenu))

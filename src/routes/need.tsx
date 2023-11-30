@@ -24,7 +24,14 @@ const PageViewNeed: React.FC = () => {
   }
   useEffect(() => {
     if (menuList?.length) {
-      addView({pathname: location.pathname, state: {title: getViewName(location.pathname, menuList)}})
+      addView({
+        pathname: location.pathname,
+        search: location.search,
+        state: {
+          ...location.state,
+          title: getViewName(location.pathname, menuList),
+        },
+      })
     }
   }, [menuList, location.pathname])
 

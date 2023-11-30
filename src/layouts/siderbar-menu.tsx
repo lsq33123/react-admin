@@ -10,6 +10,7 @@ import {getStore, setStore} from '@/utils/store'
 import Global from '@/store/global'
 import TagView from '@/store/tag-view'
 import * as icon from '@ant-design/icons'
+import {objectToQueryString} from '@/utils'
 // import {VideoCameraOutlined, UserOutlined, MenuOutlined, UploadOutlined} from '@ant-design/icons'
 interface IProps {
   //props:any
@@ -90,7 +91,8 @@ const PageView: React.FC<IProps> = props => {
     if (item.props.is_frame === 2) {
       window.open(item.props.path)
     } else {
-      navigate(item.props.url)
+      let queryString = item.props.params ? objectToQueryString(eval('(' + item.props.params + ')'), true) : ''
+      navigate(item.props.url + (queryString ? '?' + queryString : ''))
     }
   }
 

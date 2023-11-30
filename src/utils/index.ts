@@ -84,3 +84,37 @@ export function mergeObjects(obj1, obj2) {
   });
   return mergedObj;
 }
+
+/**
+ *  对象转换为浏览器可识别的查询字符串
+ *  @param {Object} obj
+ * */
+export function objectToQueryString(obj, encode = true) {
+  let queryString = '';
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      if (queryString !== '') {
+        queryString += '&';
+      }
+      if (encode) {
+        queryString += encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]);
+      } else {
+        queryString += key + '=' + obj[key];
+      }
+    }
+  }
+  return queryString;
+}
+
+/**
+ * 浏览器可识别的查询字符串转换为对象
+ * @param {String} queryString
+ * */
+export function queryStringToObject(queryString) {
+  const params = new URLSearchParams(queryString);
+  const obj = {};
+  for (let [key, value] of params.entries()) {
+    obj[key] = value;
+  }
+  return obj;
+}

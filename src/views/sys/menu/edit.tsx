@@ -75,6 +75,7 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
       visible: !props.isEdit ? 0 : '',
       order_num: !props.isEdit ? 0 : '',
       status: !props.isEdit ? 0 : '',
+      params_type: !props.isEdit ? 1 : '',
     },
   }
 
@@ -236,6 +237,25 @@ const PageViewMenuEdit: React.FC<IProps> = props => {
             <Col span={12}>
               <Form.Item name="component" label="组件路径" rules={[{required: true}]}>
                 <Input placeholder="以/开头(外链填/)"></Input>
+              </Form.Item>
+            </Col>
+          ) : null}
+
+          {menuType ? (
+            <Col span={12}>
+              <Form.Item name="params" label="携带参数">
+                <Input placeholder="例如{xxx:'123'}"></Input>
+              </Form.Item>
+            </Col>
+          ) : null}
+
+          {menuType ? (
+            <Col span={12}>
+              <Form.Item name="params_type" label="携带位置" rules={[{required: true}]}>
+                <Radio.Group>
+                  <Radio value={1}>地址栏</Radio>
+                  <Radio value={2}>路由</Radio>
+                </Radio.Group>
               </Form.Item>
             </Col>
           ) : null}

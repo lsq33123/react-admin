@@ -30,7 +30,7 @@ const PageView: React.FC<IProps> = props => {
           <ToolbarTabs />
           <ToolbarRight />
         </Layout.Header>
-        <Layout.Content className="content">{props.children}</Layout.Content>
+        <Layout.Content className="main-content">{props.children}</Layout.Content>
       </Layout>
     </Layout>
   )

@@ -32,6 +32,7 @@ const globalData = () => {
           //处理数据
           item.value = item.menu_id
           item.key = item.menu_id
+
           // item.title = item.menu_name
         })
         // console.log('formatMenu(finalMenu):', formatMenu(finalMenu))

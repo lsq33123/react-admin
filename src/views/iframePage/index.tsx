@@ -9,13 +9,12 @@ interface IProps {
 
 const IframePage: React.FC<IProps> = props => {
   const [url, setUrl] = useState('')
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
   const location = useLocation()
   const width = '100%'
   const height = '100%'
 
   useEffect(() => {
-    console.log('location:', location)
     let queryString = location.search.split('?')[1]
     let searchObj: any = queryStringToObject(queryString)
     console.log('res:', queryStringToObject(queryString))
@@ -24,7 +23,7 @@ const IframePage: React.FC<IProps> = props => {
 
   const onLoad = val => {
     //console.log('valFn:', val)
-    setLoading(false)
+    // setLoading(false)
   }
 
   return (

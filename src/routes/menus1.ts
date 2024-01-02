@@ -35,5 +35,20 @@ export const sysMenus = [
     status: 0, //菜单状态（0正常 1停用）
     remark: '',
   },
+  {
+    menu_id: 10002,
+    parent_id: 10000,
+    perms: 'AntDesign',
+    menu_name: 'Ant Design - React',
+    order_num: 1,
+    path: 'https://ant-design.antgroup.com/components/button-cn',
+    component: '',
+    icon: 'AntDesignOutlined',
+    is_frame: 2, //权限验证 0需要 1不需要 2外链
+    menu_type: 1, //菜单类型（0目录 1菜单）
+    visible: 0, //菜单状态（0显示 1隐藏）
+    status: 0, //菜单状态（0正常 1停用）
+    remark: '',
+  },
 
 ]

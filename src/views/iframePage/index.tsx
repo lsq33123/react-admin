@@ -27,7 +27,7 @@ const IframePage: React.FC<IProps> = props => {
   }
 
   return (
-    <div style={{height: 'calc(100vh - var(--header-height)  - 4px)'}}>
+    <div style={{height: 'calc(100vh - var(--header-height))', fontSize: '0px'}}>
       <iframe src={url} width={width} height={height} frameBorder="0" onLoad={onLoad}></iframe>
     </div>
   )

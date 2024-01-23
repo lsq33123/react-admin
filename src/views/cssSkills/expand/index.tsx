@@ -8,6 +8,7 @@ import Index1 from './index1'
 import Index2 from './index2'
 import Index3 from './index3'
 import Index4 from './index4'
+import Index41 from './index41'
 import Index5 from './index5'
 interface IProps {
   //props:any
@@ -37,7 +38,14 @@ const PageView: React.FC<IProps> = props => {
       key: 'part4',
       href: '#part4',
       title: '文字动态省略(手写)',
+
       component: <Index4 />,
+    },
+    {
+      key: 'part41',
+      href: '#part41',
+      title: '文字展开和收起(多行 手写)',
+      component: <Index41 />,
     },
     {
       key: 'part5',
